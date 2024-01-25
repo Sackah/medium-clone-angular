@@ -1,0 +1,29 @@
+<section class="login-form">
+  <header>
+    <h1>Sign In</h1>
+    <p>Need an account?</p>
+  </header>
+  <form (submit)="handleSubmit()" [formGroup]="form">
+    @if(errors){
+      <div class="error">Error here</div>
+    }
+
+    <input type="text" placeholder="Email" formControlName="email"/>
+    @if(emailErrors !== ''){
+      <div class="error">{{emailErrors}}</div>
+    }
+
+    <input type="password" placeholder="Password" formControlName="password"/>
+    @if(passwordErrors !== ''){
+      <div class="error">{{passwordErrors}}</div>
+    }
+
+    @if(isSubmitting){
+      <button disabled>
+        Signing In <mc-button-spinner></mc-button-spinner>
+      </button>
+    } @else{
+      <button>Sign In</button>
+    }
+  </form>
+</section>
