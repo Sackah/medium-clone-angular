@@ -18,7 +18,7 @@ export class LoginService {
         userDetails,
         this.headers
       )
-      .pipe(catchError((error) => this.onError(error)));
+      // .pipe(catchError((error) => this.onError(error)));
   }
 
   /**

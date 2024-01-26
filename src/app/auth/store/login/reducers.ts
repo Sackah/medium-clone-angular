@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { LoginState } from '../../../shared/types/auth.types';
-import { login } from './actions';
+import { loginActions } from './actions';
 
 const initialState: LoginState = {
   isSubmitting: false,
@@ -12,13 +12,13 @@ const loginFeature = createFeature({
   name: 'auth',
   reducer: createReducer(
     initialState,
-    on(login.login, (state, action) => ({ ...state, isSubmitting: true })),
-    on(login.loginSuccess, (state, action) => ({
+    on(loginActions.login, (state) => ({ ...state, isSubmitting: true })),
+    on(loginActions.loginSuccess, (state, action) => ({
       ...state,
       user: action.user,
       errors: null,
     })),
-    on(login.loginFailure, (state, action) => ({
+    on(loginActions.loginFailure, (state, action) => ({
       ...state,
       isSubmitting: false,
       errors: action,

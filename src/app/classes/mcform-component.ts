@@ -1,12 +1,13 @@
 import {Subscription} from "rxjs";
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {FormGroup} from "@angular/forms";
+import {BackendErrors} from "../shared/types/auth.types";
 
 @Component({ template: '', standalone: true })
 export class MCFormComponent implements OnInit, OnDestroy{
   subscriptions?: Subscription[];
 
-  form!: FormGroup<any>;
+  form!: FormGroup;
 
   constructor() {
   }

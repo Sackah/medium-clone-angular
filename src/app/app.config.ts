@@ -5,7 +5,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideStore, provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { loginFeatureKey, loginReducer } from './auth/store/login/reducers';
-
+import * as loginEffects from './auth/store/login/effects';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -14,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(),
     provideState(loginFeatureKey, loginReducer),
+    provideEffects(loginEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

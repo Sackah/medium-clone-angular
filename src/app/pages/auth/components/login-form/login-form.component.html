@@ -5,7 +5,9 @@
   </header>
   <form (submit)="handleSubmit()" [formGroup]="form">
     @if(errors){
-      <div class="error">Error here</div>
+      <mc-backend-errors
+        [errors]="errors"
+      ></mc-backend-errors>
     }
 
     <input type="text" placeholder="Email" formControlName="email"/>
