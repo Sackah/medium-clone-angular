@@ -6,7 +6,7 @@ import {
 } from '../../../shared/types/auth.types';
 
 export const loginActions = createActionGroup({
-  source: 'auth',
+  source: 'login',
   events: {
     Login: props<LoginUserDetails>(),
     LoginSuccess: props<LoginUserResponse>(),

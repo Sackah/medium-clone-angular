@@ -22,4 +22,8 @@ export class TokenService {
   set(token: string){
     localStorage.setItem(this.tokenName, token);
   }
+
+  clear(){
+    localStorage.removeItem(this.tokenName);
+  }
 }

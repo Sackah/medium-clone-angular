@@ -1,7 +1,7 @@
 <section class="login-form">
   <header>
     <h1>Sign In</h1>
-    <p>Need an account?</p>
+    <a [routerLink]="['/register']">Need an account?</a>
   </header>
   <form (submit)="handleSubmit()" [formGroup]="form">
     @if(errors){
@@ -21,11 +21,11 @@
     }
 
     @if(isSubmitting){
-      <button disabled>
+      <button type="button" disabled>
         Signing In <mc-button-spinner></mc-button-spinner>
       </button>
     } @else{
-      <button>Sign In</button>
+      <button type="submit">Sign In</button>
     }
   </form>
 </section>

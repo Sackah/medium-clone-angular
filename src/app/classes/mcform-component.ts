@@ -32,6 +32,20 @@ export class MCFormComponent implements OnInit, OnDestroy{
     if(control?.invalid && (control.dirty || control.touched)){
       if(control.hasError("required")){
         return 'This field is required';
+      } else if(control.hasError("minlength")){
+        return 'Password should be at least 8 characters';
+      }
+    }
+    return '';
+  }
+
+  get userNameErrors(){
+    const control = this.form.get("username");
+    if(control?.invalid && (control.dirty || control.touched)){
+      if(control.hasError("required")){
+        return 'This field is required';
+      } else if (control.hasError("minlength")){
+        return 'Username must be at least 4 characters';
       }
     }
     return '';

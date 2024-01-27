@@ -33,3 +33,15 @@ export interface BackendErrors{
 /**
  *  Sign up
  */
+export interface SignUpUserDetails{
+  user: {
+    username: string;
+    email: string;
+    password: string;
+  }
+}
+
+export interface SignUpUserResponse extends LoginUserResponse{}
+
+export interface SignUpState extends LoginState{}
+

@@ -1,0 +1,69 @@
+@import '../../../variables.scss';
+
+section.signup-form, section.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  header{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 10px;
+
+    h1{
+      font-size: $size-9;
+      color: $grey-3;
+      line-height: 4rem;
+      font-weight: 400;
+    }
+    a{
+      font-size: $size-3;
+      color: $main-green;
+      text-decoration: none;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+  form{
+    margin: 0 auto;
+    min-width: 500px;
+
+    input{
+      display: block;
+      margin-top: 10px;
+      color: $grey-2;
+      padding: 12px 24px;
+      border-radius: .25rem;
+      border: 1px solid rgb(0 0 0 / 15%);
+      width: 100%;
+      font-size: $size-5;
+
+      &:focus{
+        outline: 1px solid $main-green;
+      }
+    }
+
+    button{
+      font-size: $size-5;
+      padding: .75rem 1.5rem;
+      border-radius: .3rem;
+      border: none;
+      background: $main-green;
+      color: $light;
+      cursor: pointer;
+      float: right;
+      margin-top: 10px;
+
+      &:disabled{
+        opacity: 0.5;
+      }
+    }
+
+    .error{
+      color: red;
+    }
+  }
+}
+
+

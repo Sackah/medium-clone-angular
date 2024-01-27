@@ -5,6 +5,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {CommonModule} from "@angular/common";
 import {BackendErrors, LoginUserDetails} from "../../../../shared/types/auth.types";
 import {BackendErrorsComponent} from "../backend-errors/backend-errors.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'mc-login-form',
@@ -13,10 +14,11 @@ import {BackendErrorsComponent} from "../backend-errors/backend-errors.component
     ButtonSpinnerComponent,
     ReactiveFormsModule,
     CommonModule,
-    BackendErrorsComponent
+    BackendErrorsComponent,
+    RouterLink
   ],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss'
+  styleUrls: ['./login-form.component.scss', '../../styles/auth.styles.scss']
 })
 export class LoginFormComponent extends MCFormComponent{
   @Input() errors: BackendErrors | null = null;

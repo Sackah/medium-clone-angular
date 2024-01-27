@@ -1,1 +1,8 @@
-<p>signup-page works!</p>
+<div class="login page">
+  <mc-login-nav></mc-login-nav>
+  <mc-signup-form
+    (userDetails)="handleSignUp($event)"
+    [errors]="signUpState.errors"
+    [isSubmitting]="signUpState.isSubmitting"
+  ></mc-signup-form>
+</div>

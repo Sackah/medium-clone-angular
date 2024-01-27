@@ -2,38 +2,39 @@ import {createEffect, Actions, ofType} from "@ngrx/effects";
 import {inject} from "@angular/core";
 import {catchError, map, of, switchMap, tap} from "rxjs";
 import {Router} from "@angular/router";
-import {loginActions} from "./actions";
-import {LoginService} from "../../services/login.service";
+import {signUpActions} from "./actions";
+import {SignupService} from "../../services/signup.service";
 import {TokenService} from "../../../shared/services/token.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CurrentUserService} from "../../../shared/services/current-user.service";
 
-export const loginEffects = createEffect(
+
+export const signUpEffects = createEffect(
   (
     actions$ = inject(Actions),
-    loginService = inject(LoginService),
+    signUpService = inject(SignupService),
     tokenService = inject(TokenService),
     currentUserService = inject(CurrentUserService)
   )=>{
     return actions$.pipe(
-      ofType(loginActions.login),
+      ofType(signUpActions.signUp),
       switchMap((userDetails)=>{
-        return loginService.post(userDetails).pipe(
+        return signUpService.post(userDetails).pipe(
           map((response)=>{
             tokenService.set(response.user.token);
             currentUserService.setCurrentUser(response.user);
-            return loginActions.loginSuccess(response);
+            return signUpActions.signUpSuccess(response);
           }),
           catchError((error: HttpErrorResponse)=>{
             if(error.status === 0){
               return of(
-                loginActions.loginFailure({
+                signUpActions.signUpFailure({
                   Network: ["Error. Check connectivity and try again"]
                 })
               )
             }
             return of(
-              loginActions.loginFailure(error.error.errors)
+              signUpActions.signUpFailure(error.error.errors)
             );
           })
         );
@@ -43,16 +44,16 @@ export const loginEffects = createEffect(
   {functional: true}
   );
 
-export const redirectAfterLogin = createEffect(
-   (actions$ = inject(Actions), router = inject(Router))=>{
+export const redirectAfterSignUp = createEffect(
+  (actions$ = inject(Actions), router = inject(Router))=>{
     return actions$.pipe(
-      ofType(loginActions.loginSuccess),
+      ofType(signUpActions.signUpSuccess),
       tap({
         next: () => {
           router.navigateByUrl('/').then().catch(e=>console.error(e));
         }
       })
     );
-    },
-    {functional: true, dispatch: false}
+  },
+  {functional: true, dispatch: false}
 );

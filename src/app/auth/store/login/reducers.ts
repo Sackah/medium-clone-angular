@@ -9,7 +9,7 @@ const initialState: LoginState = {
 };
 
 const loginFeature = createFeature({
-  name: 'auth',
+  name: 'login',
   reducer: createReducer(
     initialState,
     on(loginActions.login, (state) => ({ ...state, isSubmitting: true })),
@@ -17,6 +17,7 @@ const loginFeature = createFeature({
       ...state,
       user: action.user,
       errors: null,
+      isSubmitting: false
     })),
     on(loginActions.loginFailure, (state, action) => ({
       ...state,
