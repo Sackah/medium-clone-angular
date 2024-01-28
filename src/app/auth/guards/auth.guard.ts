@@ -1,16 +1,19 @@
 import {inject} from "@angular/core";
-import {TokenService} from "../../shared/services/token.service";
 import {Router} from "@angular/router";
+import {CurrentUserService} from "../../shared/services/current-user.service";
 
 export const AuthGuard = async () => {
-  const tokenService = inject(TokenService);
+  const currentUserService = inject(CurrentUserService);
   const router = inject(Router);
-  const token = tokenService.get();
 
-  if (token) {
-    return true;
-  } else {
-    await router.navigateByUrl('/login');
-    return false;
-  }
+  currentUserService.user.subscribe({
+    next: async (user)=>{
+      if (user.isLoggedIn) {
+        return true;
+      } else {
+        await router.navigateByUrl('/login');
+        return false;
+      }
+    }
+  })
 };

@@ -1,9 +1,14 @@
-import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {User} from "../types/auth.types";
-import {HttpClient} from "@angular/common/http";
-import {TokenService} from "./token.service";
-import {environment} from "../../../environments/environment.development";
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../types/auth.types';
+import { HttpClient } from '@angular/common/http';
+import { TokenService } from './token.service';
+import { environment } from '../../../environments/environment.development';
+
+interface UserData {
+  data: User | null;
+  isLoggedIn: boolean;
+}
 
 /**
  * @class CurrentUserService - This service is the single source of truth for the current
@@ -15,38 +20,56 @@ import {environment} from "../../../environments/environment.development";
  * @method clearCurrentUser - Method to remove the current user
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CurrentUserService {
-  private userDataSource = new BehaviorSubject<User | null>(null)
+  private userDataSource = new BehaviorSubject<UserData>({
+    data: null,
+    isLoggedIn: false,
+  });
   user = this.userDataSource.asObservable();
 
   http = inject(HttpClient);
   tokenService = inject(TokenService);
 
-  constructor() { }
+  constructor() {}
 
-  fetchCurrentUser(){
+  fetchCurrentUser() {
     const token = this.tokenService.get();
-    if(token){
+    if (token) {
       this.http.get<User>(`${environment.BaseUrl}/user`).subscribe({
-        next: (user)=>{
-          this.userDataSource.next(user);
+        next: (user) => {
+          this.userDataSource.next({
+            data: user,
+            isLoggedIn: true,
+          });
         },
-        error: ()=>{
-          this.userDataSource.next(null);
-        }
-      })
+        error: () => {
+          this.userDataSource.next({
+            data: null,
+            isLoggedIn: false,
+          });
+        },
+      });
     } else {
-      this.userDataSource.next(null);
+      this.userDataSource.next({
+        data: null,
+        isLoggedIn: false,
+      });
     }
   }
 
-  setCurrentUser(user: User){
-    this.userDataSource.next(user);
+  setCurrentUser(user: User) {
+    this.userDataSource.next({
+      data: user,
+      isLoggedIn: true,
+    });
   }
 
-  clearCurrentUser(){
-    this.userDataSource.next(null);
+  clearCurrentUser() {
+    this.userDataSource.next({
+      data: null,
+      isLoggedIn: false,
+    });
   }
 }
