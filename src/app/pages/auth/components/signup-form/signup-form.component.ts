@@ -16,7 +16,7 @@ import {ButtonSpinnerComponent} from "../../../../shared/components/loaders/butt
     ButtonSpinnerComponent
   ],
   templateUrl: './signup-form.component.html',
-  styleUrls: ['../../styles/auth.styles.scss']
+  styleUrls: ['../../../../shared/styles/forms.styles.scss']
 })
 export class SignupFormComponent extends MCFormComponent {
   @Input() errors: BackendErrors | null = null;

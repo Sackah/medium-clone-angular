@@ -1,6 +1,6 @@
-@import '../../../variables.scss';
+@import '../../variables.scss';
 
-section.signup-form, section.login-form {
+section.signup-form, section.login-form, section.settings-form {
   display: flex;
   flex-direction: column;
   justify-content: center;

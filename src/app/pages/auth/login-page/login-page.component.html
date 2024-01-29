@@ -1,8 +1,9 @@
 <div class="login page">
   <mc-login-nav></mc-login-nav>
   <mc-login-form
-   (userDetails)="handleLogin($event)"
-   [errors]="loginState.errors"
-   [isSubmitting]="loginState.isSubmitting"
+    (userDetails)="handleLogin($event)"
+    [errors]="loginState.errors"
+    [isSubmitting]="loginState.isSubmitting"
   ></mc-login-form>
+  <mc-footer></mc-footer>
 </div>

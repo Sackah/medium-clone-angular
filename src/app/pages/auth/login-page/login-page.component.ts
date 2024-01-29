@@ -6,18 +6,20 @@ import {LoginState, LoginUserDetails} from "../../../shared/types/auth.types";
 import {combineLatest} from "rxjs";
 import {selectErrors, selectIsSubmitting} from "../../../auth/store/login/reducers";
 import {McPage} from "../../../classes/mc-page";
+import {FooterComponent} from "../../../shared/components/footer/footer.component";
 
 @Component({
   selector: 'mc-login-page',
   standalone: true,
   imports: [
     LoginNavComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    FooterComponent
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
-export class LoginPageComponent extends McPage{
+export class LoginPageComponent extends McPage {
   public loginState: Omit<LoginState, 'user'> = {
     isSubmitting: false,
     errors: null,
@@ -30,11 +32,11 @@ export class LoginPageComponent extends McPage{
   override ngOnInit() {
     super.ngOnInit();
     const loginStateSubscription = this.loginState$.subscribe({
-      next: (state)=>{
-          this.loginState.isSubmitting = state[0];
-          this.loginState.errors = state[1];
+      next: (state) => {
+        this.loginState.isSubmitting = state[0];
+        this.loginState.errors = state[1];
       },
-      error: (err)=>{
+      error: (err) => {
         this.loginState.errors = err
       }
     })
@@ -42,7 +44,7 @@ export class LoginPageComponent extends McPage{
     this.subscriptions.push(loginStateSubscription);
   }
 
-  handleLogin($event: LoginUserDetails){
+  handleLogin($event: LoginUserDetails) {
     this.store.dispatch(loginActions.login($event))
   }
 }

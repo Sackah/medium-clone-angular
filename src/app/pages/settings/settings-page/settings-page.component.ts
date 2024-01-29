@@ -8,13 +8,15 @@ import {selectErrors, selectIsSubmitting} from "../store/reducers";
 import {updateUserActions} from "../store/actions";
 import {TokenService} from "../../../shared/services/token.service";
 import {Router} from "@angular/router";
+import {FooterComponent} from "../../../shared/components/footer/footer.component";
 
 @Component({
   selector: 'mc-settings-page',
   standalone: true,
   imports: [
     HomeNavComponent,
-    SettingsFormComponent
+    SettingsFormComponent,
+    FooterComponent
   ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss'

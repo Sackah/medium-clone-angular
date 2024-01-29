@@ -16,7 +16,7 @@ import {UpdateUserDetails} from "../../../../shared/types/update-user.types";
     ReactiveFormsModule
   ],
   templateUrl: './settings-form.component.html',
-  styleUrls: ['../../../auth/styles/auth.styles.scss']
+  styleUrls: ['../../../../shared/styles/forms.styles.scss']
 })
 export class SettingsFormComponent extends MCFormComponent {
   @Input() user!: User;

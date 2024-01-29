@@ -18,7 +18,7 @@ import {RouterLink} from "@angular/router";
     RouterLink
   ],
   templateUrl: './login-form.component.html',
-  styleUrls: ['../../styles/auth.styles.scss']
+  styleUrls: ['../../../../shared/styles/forms.styles.scss']
 })
 export class LoginFormComponent extends MCFormComponent {
   @Input() errors: BackendErrors | null = null;

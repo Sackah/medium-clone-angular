@@ -1,27 +1,28 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router, RouterOutlet} from '@angular/router';
-import {FooterComponent} from "./shared/components/footer/footer.component";
 import {CurrentUserService} from "./shared/services/current-user.service";
 import {Subscription} from "rxjs";
 import {ButtonSpinnerComponent} from "./shared/components/loaders/page-spinner.component";
+import {TokenService} from "./shared/services/token.service";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FooterComponent, ButtonSpinnerComponent],
+  imports: [CommonModule, RouterOutlet, ButtonSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
   currentUserService = inject(CurrentUserService);
+  tokenService = inject(TokenService);
   pending = signal(false);
   subscriptions: Subscription[] = [];
   router = inject(Router);
 
   constructor() {
     window.addEventListener('beforeunload', () => {
-      localStorage.setItem('lastRoute', this.router.url);
+      this.tokenService.setRoute(this.router.url);
     });
   }
 
@@ -29,12 +30,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.pending.set(true)
     this.subscriptions.push(this.currentUserService.fetchCurrentUser().subscribe({
       next: () => {
-        const lastRoute = localStorage.getItem("lastRoute");
+        const lastRoute = this.tokenService.getRoute();
         this.router.navigateByUrl(`${lastRoute}`).then();
         this.pending.set(false);
       },
       error: () => {
         this.pending.set(false);
+        this.tokenService.clearAll();
       },
       complete: () => {
         this.pending.set(false);
@@ -45,7 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
     window.removeEventListener('beforeunload', () => {
-      localStorage.setItem('lastRoute', this.router.url);
+      this.tokenService.setRoute(this.router.url);
     });
   }
 }
