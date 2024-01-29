@@ -1,6 +1,6 @@
 /*** fonts ***/
 $font-logo: titillium web, sans-serif;
-$font-1: source sans pro,sans-serif;
+$font-1: source sans pro, sans-serif;
 
 /*** font sizes ***/
 $size-1: 0.75rem;
@@ -24,8 +24,37 @@ $dark: #000;
 $dark-1: rgb(0 0 0 / 80%);
 
 // grey
+$grey-1: #f3f3f3;
 $grey-2: #55595c;
 $grey-3: #373a3c;
+$grey-4: #bbb;
+$grey-5: #aaa;
 
 // green
-$main-green: #5cb85c !default;;
+$main-green: #5cb85c !default;
+
+// red
+$red-1: #b85c5c;
+
+// Functions
+@function light-comp($color) {
+  $complement: complement($color);
+  $light-complement: lighten($complement, 30%);
+  @return $light-complement;
+}
+
+
+// mixins
+@mixin logo {
+  font-size: 1.5rem;
+  margin-right: 2rem;
+  color: $main-green;
+  font-family: $font-logo;
+  cursor: pointer;
+}
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

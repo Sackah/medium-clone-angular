@@ -1,0 +1,28 @@
+@import '../../../variables.scss';
+
+.settings.page {
+  flex-direction: column;
+
+  section {
+    padding-top: 20px;
+    border-top: 1px solid rgb(0 0 0 / 15%);
+    @include center;
+    justify-content: flex-start;
+    width: 500px;
+    margin: 20px auto 0 auto;
+
+    button {
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+      font-size: $size-3;
+      color: $red-1;
+      border: 1px solid $red-1;
+      cursor: pointer;
+
+      &:hover {
+        color: light-comp($red-1);
+        background: $red-1;
+      }
+    }
+  }
+}

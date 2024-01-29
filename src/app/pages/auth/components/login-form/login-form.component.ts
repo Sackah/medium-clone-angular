@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ButtonSpinnerComponent} from "../../../../shared/components/loaders/button-spinner.component";
 import {MCFormComponent} from "../../../../classes/mcform-component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -18,9 +18,9 @@ import {RouterLink} from "@angular/router";
     RouterLink
   ],
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss', '../../styles/auth.styles.scss']
+  styleUrls: ['../../styles/auth.styles.scss']
 })
-export class LoginFormComponent extends MCFormComponent{
+export class LoginFormComponent extends MCFormComponent {
   @Input() errors: BackendErrors | null = null;
   @Input() isSubmitting: boolean = false;
   @Output() userDetails = new EventEmitter<LoginUserDetails>();
@@ -34,8 +34,8 @@ export class LoginFormComponent extends MCFormComponent{
   }
 
 
-  handleSubmit(){
-    if(this.form.valid){
+  handleSubmit() {
+    if (this.form.valid) {
       this.userDetails.emit({user: this.form.value});
     }
   }

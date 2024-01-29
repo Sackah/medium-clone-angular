@@ -1,11 +1,11 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { User } from '../types/auth.types';
-import { HttpClient } from '@angular/common/http';
-import { TokenService } from './token.service';
-import { environment } from '../../../environments/environment.development';
+import {inject, Injectable} from '@angular/core';
+import {BehaviorSubject, catchError, of, tap} from 'rxjs';
+import {LoginUserResponse, User} from '../types/auth.types';
+import {HttpClient} from '@angular/common/http';
+import {TokenService} from './token.service';
+import {environment} from '../../../environments/environment.development';
 
-interface UserData {
+export interface UserData {
   data: User | null;
   isLoggedIn: boolean;
 }
@@ -23,39 +23,41 @@ interface UserData {
   providedIn: 'root',
 })
 export class CurrentUserService {
+  http = inject(HttpClient);
+  tokenService = inject(TokenService);
   private userDataSource = new BehaviorSubject<UserData>({
     data: null,
     isLoggedIn: false,
   });
   user = this.userDataSource.asObservable();
 
-  http = inject(HttpClient);
-  tokenService = inject(TokenService);
-
-  constructor() {}
+  constructor() {
+  }
 
   fetchCurrentUser() {
     const token = this.tokenService.get();
     if (token) {
-      this.http.get<User>(`${environment.BaseUrl}/user`).subscribe({
-        next: (user) => {
+      return this.http.get<LoginUserResponse>(`${environment.BaseUrl}/user`).pipe(
+        tap((res) => {
           this.userDataSource.next({
-            data: user,
+            data: res.user,
             isLoggedIn: true,
           });
-        },
-        error: () => {
+        }),
+        catchError(() => {
           this.userDataSource.next({
             data: null,
             isLoggedIn: false,
           });
-        },
-      });
+          return of(null);
+        })
+      );
     } else {
       this.userDataSource.next({
         data: null,
         isLoggedIn: false,
       });
+      return of(null);
     }
   }
 

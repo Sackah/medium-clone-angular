@@ -1,9 +1,12 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {HomePageComponent} from "./pages/home/home-page/home-page.component";
 import {LoginPageComponent} from "./pages/auth/login-page/login-page.component";
-import {AuthGuard} from "./auth/guards/auth.guard";
-import {LoginGuard} from "./auth/guards/login.guard";
 import {SignupPageComponent} from "./pages/auth/signup-page/signup-page.component";
+import {ProfilePageComponent} from "./pages/profile/profile-page/profile-page.component";
+import {EditorPageComponent} from "./pages/new-article/editor-page/editor-page.component";
+import {SettingsPageComponent} from "./pages/settings/settings-page/settings-page.component";
+import {LoginGuard} from "./auth/guards/login.guard";
+import {AuthGuard} from "./auth/guards/auth.guard";
 
 export const routes: Routes = [
   {
@@ -18,6 +21,27 @@ export const routes: Routes = [
   },
   {
     path: 'register',
-    component: SignupPageComponent
+    component: SignupPageComponent,
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'profile',
+    children: [
+      {
+        path: ':userName',
+        component: ProfilePageComponent
+      }
+    ],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'editor',
+    component: EditorPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsPageComponent,
+    canActivate: [AuthGuard]
   }
 ];

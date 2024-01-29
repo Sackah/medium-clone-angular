@@ -1,0 +1,21 @@
+@import '../../../variables.scss';
+
+footer {
+  position: absolute;
+  bottom: 0;
+  background: $grey-1;
+  width: 100%;
+  padding: 16px 10%;
+  font-size: $size-3;
+  color: $grey-4;
+
+  a {
+    text-decoration: none;
+    color: $main-green;
+
+    &.logo {
+      @include logo;
+      font-size: $size-4;
+    }
+  }
+}

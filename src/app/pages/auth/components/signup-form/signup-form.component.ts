@@ -16,9 +16,9 @@ import {ButtonSpinnerComponent} from "../../../../shared/components/loaders/butt
     ButtonSpinnerComponent
   ],
   templateUrl: './signup-form.component.html',
-  styleUrls: ['./signup-form.component.scss', '../../styles/auth.styles.scss']
+  styleUrls: ['../../styles/auth.styles.scss']
 })
-export class SignupFormComponent extends MCFormComponent{
+export class SignupFormComponent extends MCFormComponent {
   @Input() errors: BackendErrors | null = null;
   @Input() isSubmitting: boolean = false;
   @Output() userDetails = new EventEmitter<SignUpUserDetails>();
@@ -32,9 +32,9 @@ export class SignupFormComponent extends MCFormComponent{
     })
   }
 
-  handleSubmit(){
+  handleSubmit() {
     console.log(this.form.value);
-    if(this.form.valid){
+    if (this.form.valid) {
       this.userDetails.emit({user: this.form.value});
     }
   }

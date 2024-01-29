@@ -1,35 +1,38 @@
 @import '../../../variables.scss';
 
-section.signup-form, section.login-form{
+section.signup-form, section.login-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  header{
+  header {
     text-align: center;
     margin-top: 40px;
     margin-bottom: 10px;
 
-    h1{
+    h1 {
       font-size: $size-9;
       color: $grey-3;
       line-height: 4rem;
       font-weight: 400;
     }
-    a{
+
+    a {
       font-size: $size-3;
       color: $main-green;
       text-decoration: none;
-      &:hover{
+
+      &:hover {
         text-decoration: underline;
       }
     }
   }
-  form{
+
+  form {
     margin: 0 auto;
     min-width: 500px;
 
-    input{
+    input, textarea {
       display: block;
       margin-top: 10px;
       color: $grey-2;
@@ -38,13 +41,14 @@ section.signup-form, section.login-form{
       border: 1px solid rgb(0 0 0 / 15%);
       width: 100%;
       font-size: $size-5;
+      font-family: $font-1;
 
-      &:focus{
+      &:focus {
         outline: 1px solid $main-green;
       }
     }
 
-    button{
+    button {
       font-size: $size-5;
       padding: .75rem 1.5rem;
       border-radius: .3rem;
@@ -55,12 +59,12 @@ section.signup-form, section.login-form{
       float: right;
       margin-top: 10px;
 
-      &:disabled{
+      &:disabled {
         opacity: 0.5;
       }
     }
 
-    .error{
+    .error {
       color: red;
     }
   }
