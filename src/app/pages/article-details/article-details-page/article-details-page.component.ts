@@ -7,6 +7,8 @@ import {FooterComponent} from "../../../shared/components/footer/footer.componen
 import {HomeNavComponent} from "../../home/components/home-nav/home-nav.component";
 import {ProfileBannerComponent} from "../../profile/components/profile-banner/profile-banner.component";
 import {ArticleBannerComponent} from "../components/article-banner/article-banner.component";
+import {PageSpinnerComponent} from "../../../shared/components/loaders/page-spinner.component";
+import {ErrorPageComponent} from "../../../shared/pages/error-page/error-page.component";
 
 @Component({
   selector: 'app-article-details-page',
@@ -15,7 +17,9 @@ import {ArticleBannerComponent} from "../components/article-banner/article-banne
     FooterComponent,
     HomeNavComponent,
     ProfileBannerComponent,
-    ArticleBannerComponent
+    ArticleBannerComponent,
+    PageSpinnerComponent,
+    ErrorPageComponent
   ],
   templateUrl: './article-details-page.component.html',
   styleUrl: './article-details-page.component.scss'

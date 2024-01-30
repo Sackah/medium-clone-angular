@@ -1,8 +1,17 @@
 <div class="article-details page">
   <mc-home-nav></mc-home-nav>
-  <mc-article-banner
-    [article]="articleSig().data?.article"
-    [user]="user"
-  ></mc-article-banner>
+  @if (articleSig().pending) {
+    <mc-page-spinner></mc-page-spinner>
+  } @else if (articleSig().error) {
+    <mc-error-page
+      [error]="articleSig().error!"
+      (refetch)="fetchArticle()"
+    ></mc-error-page>
+  } @else {
+    <mc-article-banner
+      [article]="articleSig().data?.article"
+      [user]="user"
+    ></mc-article-banner>
+  }
   <mc-footer></mc-footer>
 </div>

@@ -15,6 +15,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include lg {
+      width: 80%;
+    }
+    @include breakpoint-height-max(700px) {
+      width: 80%;
+    }
 
     ul {
       list-style-type: none;

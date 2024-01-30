@@ -2,8 +2,11 @@
   <mc-home-nav></mc-home-nav>
   <mc-editor-form
     (newArticle)="postArticle($event)"
+    [article]="article"
     [errors]="articleState.errors"
     [isSubmitting]="articleState.isSubmitting"
   ></mc-editor-form>
-  <mc-footer></mc-footer>
+  <footer>
+    <mc-footer></mc-footer>
+  </footer>
 </div>

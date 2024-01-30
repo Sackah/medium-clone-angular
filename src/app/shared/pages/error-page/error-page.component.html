@@ -1,0 +1,6 @@
+<section class="error page">
+  <mc-backend-errors
+    [errors]="error"
+  ></mc-backend-errors>
+  <p (click)="refetch.emit(true)">Click here to retry</p>
+</section>

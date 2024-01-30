@@ -3,13 +3,13 @@ import {CommonModule} from '@angular/common';
 import {Router, RouterOutlet} from '@angular/router';
 import {CurrentUserService} from "./shared/services/current-user.service";
 import {Subscription} from "rxjs";
-import {ButtonSpinnerComponent} from "./shared/components/loaders/page-spinner.component";
+import {PageSpinnerComponent} from "./shared/components/loaders/page-spinner.component";
 import {TokenService} from "./shared/services/token.service";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ButtonSpinnerComponent],
+  imports: [CommonModule, RouterOutlet, PageSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {HomeNavComponent} from "../../home/components/home-nav/home-nav.component";
 import {FooterComponent} from "../../../shared/components/footer/footer.component";
 import {EditorFormComponent} from "../components/editor-form/editor-form.component";
@@ -7,6 +7,8 @@ import {McPage} from "../../../classes/mc-page";
 import {combineLatest} from "rxjs";
 import {selectErrors, selectIsSubmitting} from "../store/reducers";
 import {newArticleActions} from "../store/actions";
+import {EditArticleService} from "../../article-details/services/edit-article.service";
+import {Article} from "../../../shared/types/main.types";
 
 @Component({
   selector: 'mc-editor-page',
@@ -24,6 +26,8 @@ export class EditorPageComponent extends McPage {
     isSubmitting: false,
     errors: null
   }
+  editArticleService = inject(EditArticleService);
+  article: Article | null = null;
   private articleState$ = combineLatest([
     this.store.select(selectIsSubmitting),
     this.store.select(selectErrors)
@@ -45,8 +49,15 @@ export class EditorPageComponent extends McPage {
         this.articleState.errors = err;
       }
     })
+    const articleServiceSubscription = this.editArticleService.data.subscribe({
+      next: (article) => {
+        if (article) {
+          this.article = article
+        }
+      }
+    })
 
-    this.subscriptions.push(articleStateSubscription);
+    this.subscriptions.push(articleStateSubscription, articleServiceSubscription);
   }
 
   postArticle($event: NewArticleDetails) {

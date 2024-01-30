@@ -121,6 +121,6 @@ import {Component} from '@angular/core';
 }
 `
 })
-export class ButtonSpinnerComponent {
+export class PageSpinnerComponent {
 
 }

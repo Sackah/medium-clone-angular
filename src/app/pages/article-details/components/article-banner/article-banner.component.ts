@@ -1,6 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {User} from "../../../../shared/types/auth.types";
 import {Article} from "../../../../shared/types/main.types";
+import {formatDate} from "../../../../utils/format-date";
+import {EditArticleService} from "../../services/edit-article.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'mc-article-banner',
@@ -12,4 +15,20 @@ import {Article} from "../../../../shared/types/main.types";
 export class ArticleBannerComponent {
   @Input() user?: User;
   @Input() article?: Article;
+  router = inject(Router);
+  editArticleService = inject(EditArticleService);
+
+  formatDate(date: string | undefined) {
+    if (date) {
+      return formatDate(date);
+    }
+    return null
+  }
+
+  async handleEditArticle() {
+    if (this.article) {
+      this.editArticleService.edit(this.article);
+      await this.router.navigateByUrl('/editor');
+    }
+  }
 }

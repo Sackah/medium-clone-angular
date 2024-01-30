@@ -1,13 +1,20 @@
 <section>
-  <div class="img">
-    <img [src]="user?.image" alt="">
-  </div>
-  <h1>{{ user?.username }}</h1>
-  @if (article) {
-    @if (article.author.username === user?.username) {
-      <p>Can edit</p>
-    } @else {
-      <p>Cannot edit</p>
+  <h1>{{ article?.title }}</h1>
+  <div class="article-meta">
+    <div class="img">
+      <img [src]="article?.author?.image" alt="">
+    </div>
+    <summary>
+      <h3>{{ article?.author?.username }}</h3>
+      <p>{{ formatDate(article?.createdAt) }}</p>
+    </summary>
+    @if (article) {
+      @if (article.author.username === user?.username) {
+        <span>
+          <button class="edit" (click)="handleEditArticle()">Edit Article</button>
+          <button class="delete">Delete Article</button>
+        </span>
+      }
     }
-  }
+  </div>
 </section>

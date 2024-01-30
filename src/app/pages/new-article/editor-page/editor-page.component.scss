@@ -1,0 +1,9 @@
+.editor.page {
+  footer {
+    @media only screen and (max-height: 700px) {
+      display: block;
+      position: relative;
+      margin-top: 80px;
+    }
+  }
+}

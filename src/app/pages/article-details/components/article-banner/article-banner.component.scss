@@ -3,48 +3,87 @@
 section {
   @include center;
   flex-direction: column;
+  align-items: flex-start;
   background: $dark-2;
   padding: 32px 20%;
   color: $light;
   margin-bottom: 40px;
-
-  div.img {
-    width: 100px;
-    height: 100px;
-
-    img {
-      @include image;
-    }
+  @include lg {
+    padding: 32px 10%;
+  }
+  @include breakpoint-height-max(700px) {
+    padding: 32px 10%;
   }
 
   h1 {
     font-weight: 700;
-    font-size: 1.5rem;
-    margin: 1rem 0;
+    font-size: 2.8rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
   }
 
-  p {
-
-  }
-
-  span {
+  .article-meta {
+    margin-top: 1rem;
+    height: calc($size-3 + $size-2);
+    gap: 10px;
     @include center;
-    justify-content: flex-end;
-    width: 60%;
 
-    button {
+    summary {
+      display: block;
+
+      h3 {
+        font-size: $size-3;
+        font-weight: 500;
+      }
+
+      p {
+        font-size: $size-2;
+        color: $grey-4;
+        font-weight: 300;
+      }
+    }
+
+    div.img {
+      width: calc($size-3 + $size-2);
+      height: calc($size-3 + $size-2);
+
+      img {
+        @include image;
+      }
+    }
+
+    span {
       @include center;
-      padding: .25rem .5rem;
-      font-size: $size-2;
-      border-radius: .2rem;
-      gap: 10px;
-      border: 1px solid $grey-6;
-      color: $grey-6;
-      cursor: pointer;
+      margin-left: 20px;
+      gap: 5px;
 
-      &:hover {
-        color: light-comp($grey-6);
-        background: $grey-6;
+      button {
+        @include center;
+        padding: .25rem .5rem;
+        font-size: $size-2;
+        border-radius: .2rem;
+        gap: 10px;
+        cursor: pointer;
+        background: transparent;
+
+        &.edit {
+          color: $grey-7;
+          border: 1px solid $grey-7;
+
+          &:hover {
+            color: light-comp($grey-7);
+            background: $grey-7;
+          }
+        }
+
+        &.delete {
+          color: $red-1;
+          border: 1px solid $red-1;
+
+          &:hover {
+            color: light-comp($red-1);
+            background: $red-1;
+          }
+        }
       }
     }
   }
