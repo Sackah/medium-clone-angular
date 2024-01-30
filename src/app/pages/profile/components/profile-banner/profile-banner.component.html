@@ -1,0 +1,12 @@
+<section>
+  <div class="img">
+    <img [src]="user.image" alt="">
+  </div>
+  <h1>{{ user.username }}</h1>
+  <span>
+    <button (click)="navigate()">
+      <img alt="" src="assets/settings.svg">
+      Edit Profile Settings
+    </button>
+  </span>
+</section>

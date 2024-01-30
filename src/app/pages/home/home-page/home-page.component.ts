@@ -3,6 +3,7 @@ import {LoginNavComponent} from "../../auth/components/login-nav/login-nav.compo
 import {FeedComponent} from "../../feed/feed/feed.component";
 import {HomeNavComponent} from "../components/home-nav/home-nav.component";
 import {FooterComponent} from "../../../shared/components/footer/footer.component";
+import {McPage} from "../../../classes/mc-page";
 
 @Component({
   selector: 'mc-home-page',
@@ -16,6 +17,9 @@ import {FooterComponent} from "../../../shared/components/footer/footer.componen
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
-export class HomePageComponent {
-
+export class HomePageComponent extends McPage {
+  constructor() {
+    super();
+    this.setTitle("Home");
+  }
 }

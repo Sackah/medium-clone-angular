@@ -1,0 +1,13 @@
+<section>
+  <div class="img">
+    <img [src]="user?.image" alt="">
+  </div>
+  <h1>{{ user?.username }}</h1>
+  @if (article) {
+    @if (article.author.username === user?.username) {
+      <p>Can edit</p>
+    } @else {
+      <p>Cannot edit</p>
+    }
+  }
+</section>

@@ -7,7 +7,6 @@ import {combineLatest} from "rxjs";
 import {selectErrors, selectIsSubmitting} from "../store/reducers";
 import {updateUserActions} from "../store/actions";
 import {TokenService} from "../../../shared/services/token.service";
-import {Router} from "@angular/router";
 import {FooterComponent} from "../../../shared/components/footer/footer.component";
 
 @Component({
@@ -23,7 +22,6 @@ import {FooterComponent} from "../../../shared/components/footer/footer.componen
 })
 export class SettingsPageComponent extends McPage {
   tokenService = inject(TokenService);
-  router = inject(Router);
   public settingsState: Omit<UpdateUserState, 'user'> = {
     isSubmitting: false,
     errors: null
@@ -32,6 +30,11 @@ export class SettingsPageComponent extends McPage {
     this.store.select(selectIsSubmitting),
     this.store.select(selectErrors)
   ])
+
+  constructor() {
+    super();
+    this.setTitle("Settings")
+  }
 
   override ngOnInit() {
     super.ngOnInit();

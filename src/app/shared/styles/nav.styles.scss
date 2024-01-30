@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@import '../../styles/main.scss';
 
 .navbar {
   width: 100%;
@@ -42,10 +42,7 @@
             height: 24px;
 
             img {
-              object-fit: cover;
-              background: center;
-              width: 100%;
-              height: 100%;
+              @include image;
             }
           }
         }

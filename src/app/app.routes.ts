@@ -7,6 +7,7 @@ import {EditorPageComponent} from "./pages/new-article/editor-page/editor-page.c
 import {SettingsPageComponent} from "./pages/settings/settings-page/settings-page.component";
 import {LoginGuard} from "./auth/guards/login.guard";
 import {AuthGuard} from "./auth/guards/auth.guard";
+import {ArticleDetailsPageComponent} from "./pages/article-details/article-details-page/article-details-page.component";
 
 export const routes: Routes = [
   {
@@ -43,5 +44,14 @@ export const routes: Routes = [
     path: 'settings',
     component: SettingsPageComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'article',
+    children: [
+      {
+        path: ':articleSlug',
+        component: ArticleDetailsPageComponent
+      }
+    ]
   }
 ];

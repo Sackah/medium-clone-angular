@@ -1,4 +1,9 @@
 <div class="editor page">
   <mc-home-nav></mc-home-nav>
+  <mc-editor-form
+    (newArticle)="postArticle($event)"
+    [errors]="articleState.errors"
+    [isSubmitting]="articleState.isSubmitting"
+  ></mc-editor-form>
   <mc-footer></mc-footer>
 </div>

@@ -29,6 +29,11 @@ export class LoginPageComponent extends McPage {
     this.store.select(selectErrors),
   ])
 
+  constructor() {
+    super();
+    this.setTitle("Login")
+  }
+
   override ngOnInit() {
     super.ngOnInit();
     const loginStateSubscription = this.loginState$.subscribe({

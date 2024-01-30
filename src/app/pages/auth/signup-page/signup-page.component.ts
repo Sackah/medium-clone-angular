@@ -29,6 +29,12 @@ export class SignupPageComponent extends McPage {
     this.store.select(selectErrors)
   ])
 
+  constructor() {
+    super();
+    this.setTitle("Sign Up")
+  }
+
+
   override ngOnInit() {
     super.ngOnInit();
     const signUpStateSubscription = this.signUpState$.subscribe({
