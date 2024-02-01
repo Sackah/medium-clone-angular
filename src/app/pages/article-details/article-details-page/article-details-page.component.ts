@@ -31,12 +31,11 @@ export class ArticleDetailsPageComponent extends McPage {
 
   constructor() {
     super();
-    this.route.params.subscribe({
-      next: (params) => {
-        console.log(params['articleSlug']); //-> this in the format /whatever
-        this.articleSlug = params['articleSlug'];
-      }
-    })
+    this.fetchRouteParameters();
+  }
+
+  override ngOnInit() {
+    super.ngOnInit();
     this.setTitle("Details");
     this.fetchArticle();
   }
@@ -50,6 +49,15 @@ export class ArticleDetailsPageComponent extends McPage {
       },
       error: (err) => {
         errorSignal(this.articleSig, err);
+      }
+    })
+  }
+
+  fetchRouteParameters() {
+    this.route.params.subscribe({
+      next: (params) => {
+        console.log(params['articleSlug']); //-> this in the format /whatever
+        this.articleSlug = params['articleSlug'];
       }
     })
   }

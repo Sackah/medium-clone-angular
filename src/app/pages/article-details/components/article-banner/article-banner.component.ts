@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 export class ArticleBannerComponent {
   @Input() user?: User;
   @Input() article?: Article;
+  @Input() slug: string = '';
   router = inject(Router);
   editArticleService = inject(EditArticleService);
 
@@ -27,7 +28,7 @@ export class ArticleBannerComponent {
 
   async handleEditArticle() {
     if (this.article) {
-      this.editArticleService.edit(this.article);
+      this.editArticleService.edit(this.article, this.slug);
       await this.router.navigateByUrl('/editor');
     }
   }

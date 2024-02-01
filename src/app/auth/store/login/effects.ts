@@ -1,4 +1,4 @@
-import {createEffect, Actions, ofType} from "@ngrx/effects";
+import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {inject} from "@angular/core";
 import {catchError, map, of, switchMap, tap} from "rxjs";
 import {Router} from "@angular/router";
@@ -14,21 +14,27 @@ export const loginEffects = createEffect(
     loginService = inject(LoginService),
     tokenService = inject(TokenService),
     currentUserService = inject(CurrentUserService)
-  )=>{
+  ) => {
     return actions$.pipe(
       ofType(loginActions.login),
-      switchMap((userDetails)=>{
+      switchMap((userDetails) => {
         return loginService.post(userDetails).pipe(
-          map((response)=>{
+          map((response) => {
             tokenService.set(response.user.token);
             currentUserService.setCurrentUser(response.user);
             return loginActions.loginSuccess(response);
           }),
-          catchError((error: HttpErrorResponse)=>{
-            if(error.status === 0){
+          catchError((error: HttpErrorResponse) => {
+            if (error.status === 0) {
               return of(
                 loginActions.loginFailure({
                   Network: ["Error. Check connectivity and try again"]
+                })
+              )
+            } else if (error.status === 500) {
+              return of(
+                loginActions.loginFailure({
+                  Server: ["Cannot be reached. Please try later"]
                 })
               )
             }
@@ -41,18 +47,18 @@ export const loginEffects = createEffect(
     );
   },
   {functional: true}
-  );
+);
 
 export const redirectAfterLogin = createEffect(
-   (actions$ = inject(Actions), router = inject(Router))=>{
+  (actions$ = inject(Actions), router = inject(Router)) => {
     return actions$.pipe(
       ofType(loginActions.loginSuccess),
       tap({
         next: () => {
-          router.navigateByUrl('/').then().catch(e=>console.error(e));
+          router.navigateByUrl('/').then().catch(e => console.error(e));
         }
       })
     );
-    },
-    {functional: true, dispatch: false}
+  },
+  {functional: true, dispatch: false}
 );

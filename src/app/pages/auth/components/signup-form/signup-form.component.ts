@@ -33,7 +33,6 @@ export class SignupFormComponent extends MCFormComponent {
   }
 
   handleSubmit() {
-    console.log(this.form.value);
     if (this.form.valid) {
       this.userDetails.emit({user: this.form.value});
     }

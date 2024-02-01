@@ -25,6 +25,10 @@ export class McPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.subscribeToCurrentUser();
+  }
+
+  subscribeToCurrentUser() {
     const currentUserSubscription = this.currentUserService.user.subscribe({
       next: (user) => {
         user.data ? this.user = user.data : null;

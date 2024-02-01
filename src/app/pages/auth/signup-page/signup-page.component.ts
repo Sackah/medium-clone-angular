@@ -31,12 +31,15 @@ export class SignupPageComponent extends McPage {
 
   constructor() {
     super();
-    this.setTitle("Sign Up")
   }
-
-
+  
   override ngOnInit() {
     super.ngOnInit();
+    this.setTitle("Sign Up");
+    this.subscribeToSignUpState();
+  }
+
+  subscribeToSignUpState() {
     const signUpStateSubscription = this.signUpState$.subscribe({
       next: (state) => {
         this.signUpState.isSubmitting = state[0];

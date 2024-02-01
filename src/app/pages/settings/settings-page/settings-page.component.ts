@@ -38,6 +38,10 @@ export class SettingsPageComponent extends McPage {
 
   override ngOnInit() {
     super.ngOnInit();
+    this.subscribeToSettingsState();
+  }
+
+  subscribeToSettingsState() {
     const settingsStateSubscription = this.settingsState$.subscribe({
       next: (state) => {
         this.settingsState.isSubmitting = state[0];

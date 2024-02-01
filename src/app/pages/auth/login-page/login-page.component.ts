@@ -31,11 +31,15 @@ export class LoginPageComponent extends McPage {
 
   constructor() {
     super();
-    this.setTitle("Login")
   }
 
   override ngOnInit() {
     super.ngOnInit();
+    this.setTitle("Login")
+    this.subscribeToLoginState();
+  }
+
+  subscribeToLoginState() {
     const loginStateSubscription = this.loginState$.subscribe({
       next: (state) => {
         this.loginState.isSubmitting = state[0];

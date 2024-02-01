@@ -12,6 +12,15 @@ export interface NewArticleDetails {
   }
 }
 
+export interface EditArticleDetails {
+  article: {
+    title?: string;
+    description?: string;
+    body?: string;
+    tagList?: string[]
+  }
+}
+
 export interface NewArticleResponse {
   article: Article;
 }
