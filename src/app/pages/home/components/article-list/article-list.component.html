@@ -1,0 +1,11 @@
+@for (article of articles; track $index) {
+    <div class="article-preview">
+      <div class="article-meta">
+        <span class="details">
+  
+        </span>
+        <span class="likes"></span>
+      </div>
+      <a [routerLink]="['/article', article.slug]"></a>
+    </div>
+  }

@@ -6,9 +6,21 @@
   </section>
   <main>
     <section>
-      <mc-feed
+      <mc-feed-header
         (feedChange)="fetchFeed($event)"
-      ></mc-feed>
+      ></mc-feed-header>
+      @if (articleSignal().pending) {
+        <div>Loading...</div>
+      } @else if (articleSignal().error) {
+        <!-- <mc-error-page
+          [error]="articleSignal().error!"
+          (refetch)="fetchFeed()"
+        ></mc-error-page> -->
+      } @else {
+        <mc-article-list
+          [articles]="articleSignal().data?.articles!"
+        ></mc-article-list>
+      }
       <!--TODO: change hardcoded total to res.articlesCount-->
       <mc-pagination
         (changePage)="changePage($event)"

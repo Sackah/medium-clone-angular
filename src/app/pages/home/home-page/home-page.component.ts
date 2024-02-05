@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { LoginNavComponent } from '../../auth/components/login-nav/login-nav.component';
-import { FeedComponent } from '../components/feed/feed.component';
 import { HomeNavComponent } from '../components/home-nav/home-nav.component';
 import { FooterComponent } from '../../../shared/components/footer/footer.component';
 import { MCPage } from '../../../classes/mc-page';
@@ -13,19 +12,22 @@ import {
   newSignal,
   pendSignal,
 } from '../../../utils/signal-factory';
+import { FeedHeaderComponent } from "../components/feed-header/feed-header.component";
+import { ArticleListComponent } from "../components/article-list/article-list.component";
 
 @Component({
-  selector: 'mc-home-page',
-  standalone: true,
-  imports: [
-    LoginNavComponent,
-    FeedComponent,
-    HomeNavComponent,
-    FooterComponent,
-    PaginationComponent,
-  ],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
+    selector: 'mc-home-page',
+    standalone: true,
+    templateUrl: './home-page.component.html',
+    styleUrl: './home-page.component.scss',
+    imports: [
+        LoginNavComponent,
+        HomeNavComponent,
+        FooterComponent,
+        PaginationComponent,
+        FeedHeaderComponent,
+        ArticleListComponent
+    ]
 })
 export class HomePageComponent extends MCPage {
   currentPage = 1;
@@ -52,7 +54,7 @@ export class HomePageComponent extends MCPage {
           .fetch(this.articleLimit, this.currentPage * 10 - 10)
           .subscribe({
             next: (articles) => {
-              completeSignal(this.articleSignal, articles);
+              completeSignal<AllArticles>(this.articleSignal, articles);
             },
             error: (error) => {
               errorSignal(this.articleSignal, error);
