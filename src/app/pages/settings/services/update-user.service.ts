@@ -1,28 +1,12 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment.development";
 import {UpdateUserDetails, UpdateUserResponse} from "../../../shared/types/update-user.types";
+import { MCService } from '../../../classes/mc-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UpdateUserService {
-  private http = inject(HttpClient);
-
-  constructor() {
-  }
-
-  /**
-   * Returns standard headers
-   * @returns {HttpHeaders}
-   */
-  private get headers() {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-  }
+export class UpdateUserService extends MCService {
 
   post(userDetails: UpdateUserDetails) {
     return this.http
@@ -32,4 +16,5 @@ export class UpdateUserService {
         this.headers
       )
   }
+
 }

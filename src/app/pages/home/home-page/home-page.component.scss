@@ -25,7 +25,13 @@
     }
   }
 
-  article {
+  main {
     @include center;
+
+    section {
+      @include center;
+      flex-direction: column;
+      width: 60%;
+    }
   }
 }

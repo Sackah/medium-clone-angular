@@ -1,28 +1,12 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment.development';
 import {LoginUserDetails, LoginUserResponse} from '../../shared/types/auth.types';
+import { MCService } from '../../classes/mc-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
-  private http = inject(HttpClient);
-
-  constructor() {
-  }
-
-  /**
-   * Returns standard headers
-   * @returns {HttpHeaders}
-   */
-  private get headers() {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-  }
+export class LoginService extends MCService{
 
   post(userDetails: LoginUserDetails) {
     return this.http
@@ -32,6 +16,5 @@ export class LoginService {
         this.headers
       )
   }
-
 
 }

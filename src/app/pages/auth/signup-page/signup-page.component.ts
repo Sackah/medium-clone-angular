@@ -1,41 +1,43 @@
-import {Component} from '@angular/core';
-import {LoginNavComponent} from "../components/login-nav/login-nav.component";
-import {SignupFormComponent} from "../components/signup-form/signup-form.component";
-import {SignUpState, SignUpUserDetails} from "../../../shared/types/auth.types";
-import {combineLatest} from "rxjs";
-import {selectErrors, selectIsSubmitting} from "../../../auth/store/signup/reducers";
-import {signUpActions} from "../../../auth/store/signup/actions";
-import {McPage} from "../../../classes/mc-page";
-import {FooterComponent} from "../../../shared/components/footer/footer.component";
+import { Component } from '@angular/core';
+import { LoginNavComponent } from '../components/login-nav/login-nav.component';
+import { SignupFormComponent } from '../components/signup-form/signup-form.component';
+import {
+  SignUpState,
+  SignUpUserDetails,
+} from '../../../shared/types/auth.types';
+import { combineLatest } from 'rxjs';
+import {
+  selectErrors,
+  selectIsSubmitting,
+} from '../../../auth/store/signup/reducers';
+import { signUpActions } from '../../../auth/store/signup/actions';
+import { MCPage } from '../../../classes/mc-page';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'mc-signup-page',
   standalone: true,
-  imports: [
-    LoginNavComponent,
-    SignupFormComponent,
-    FooterComponent
-  ],
+  imports: [LoginNavComponent, SignupFormComponent, FooterComponent],
   templateUrl: './signup-page.component.html',
-  styleUrl: './signup-page.component.scss'
+  styleUrl: './signup-page.component.scss',
 })
-export class SignupPageComponent extends McPage {
-  public signUpState: Omit<SignUpState, "user"> = {
+export class SignupPageComponent extends MCPage {
+  public signUpState: Omit<SignUpState, 'user'> = {
     isSubmitting: false,
     errors: null,
-  }
+  };
   private signUpState$ = combineLatest([
     this.store.select(selectIsSubmitting),
-    this.store.select(selectErrors)
-  ])
+    this.store.select(selectErrors),
+  ]);
 
   constructor() {
     super();
   }
-  
+
   override ngOnInit() {
     super.ngOnInit();
-    this.setTitle("Sign Up");
+    this.setTitle('Sign Up');
     this.subscribeToSignUpState();
   }
 
@@ -47,13 +49,13 @@ export class SignupPageComponent extends McPage {
       },
       error: (err) => {
         this.signUpState.errors = err;
-      }
-    })
+      },
+    });
 
     this.subscriptions.push(signUpStateSubscription);
   }
 
   handleSignUp($event: SignUpUserDetails) {
-    this.store.dispatch(signUpActions.signUp($event))
+    this.store.dispatch(signUpActions.signUp($event));
   }
 }

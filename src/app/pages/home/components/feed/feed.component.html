@@ -1,0 +1,12 @@
+<div>
+  <header>
+    <p
+      (click)="handleFeedChange('global')"
+      [class]="{active: feedName == 'global'}"
+    >Global Feed</p>
+    <p (click)="handleFeedChange('personal')"
+       [class]="{active: feedName == 'personal'}"
+    >Your feed</p>
+  </header>
+  <!--  <p>#</p>-->
+</div>

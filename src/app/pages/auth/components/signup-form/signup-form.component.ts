@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {MCFormComponent} from "../../../../classes/mcform-component";
+import {MCFormComponent} from "../../../../classes/mc-form";
 import {BackendErrors, SignUpUserDetails} from "../../../../shared/types/auth.types";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {BackendErrorsComponent} from "../backend-errors/backend-errors.component";
@@ -25,6 +25,10 @@ export class SignupFormComponent extends MCFormComponent {
 
   constructor() {
     super();
+    this.setupForm();
+  }
+
+  setupForm() {
     this.form = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(4)]),
       email: new FormControl('', [Validators.required, Validators.email]),

@@ -10,19 +10,19 @@
     }
 
     <input formControlName="title" placeholder="Article Title" type="text">
-    @if (titleErrors) {
-      <div class="error">{{ titleErrors }}</div>
+    @if (getRequiredErrors("title")) {
+      <div class="error">{{ getRequiredErrors("title") }}</div>
     }
 
 
     <input formControlName="description" placeholder="What is this article about?" type="text">
-    @if (descriptionErrors) {
-      <div class="error">{{ descriptionErrors }}</div>
+    @if (getRequiredErrors("description")) {
+      <div class="error">{{ getRequiredErrors("description") }}</div>
     }
 
     <textarea formControlName="body" name="body" placeholder="Write your article" rows="8"></textarea>
-    @if (bodyErrors) {
-      <div class="error">{{ bodyErrors }}</div>
+    @if (getRequiredErrors("body")) {
+      <div class="error">{{ getRequiredErrors("body") }}</div>
     }
 
     <input formControlName="tags" placeholder="Enter tags" type="text">

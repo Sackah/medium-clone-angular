@@ -47,39 +47,8 @@ export class MCFormComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  get titleErrors() {
-    const control = this.form.get("title");
-    if (control?.invalid && (control.dirty || control.touched)) {
-      if (control.hasError("required")) {
-        return 'This field is required';
-      }
-    }
-    return '';
-  }
-
-  get descriptionErrors() {
-    const control = this.form.get("description");
-    if (control?.invalid && (control.dirty || control.touched)) {
-      if (control.hasError("required")) {
-        return 'This field is required';
-      }
-    }
-    return '';
-  }
-
-  get bodyErrors() {
-    const control = this.form.get("body");
-    if (control?.invalid && (control.dirty || control.touched)) {
-      if (control.hasError("required")) {
-        return 'This field is required';
-      }
-    }
-    return '';
-  }
-
-
-  getRequiredErrors(name: string) {
-    const control = this.form.get("name");
+  getRequiredErrors(formControlName: string) {
+    const control = this.form.get(formControlName);
     if (control?.invalid && (control.dirty || control.touched)) {
       if (control.hasError("required")) {
         return 'This field is required';

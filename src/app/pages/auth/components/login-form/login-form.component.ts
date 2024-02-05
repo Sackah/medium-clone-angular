@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ButtonSpinnerComponent} from "../../../../shared/components/loaders/button-spinner.component";
-import {MCFormComponent} from "../../../../classes/mcform-component";
+import {MCFormComponent} from "../../../../classes/mc-form";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {BackendErrors, LoginUserDetails} from "../../../../shared/types/auth.types";
@@ -27,6 +27,10 @@ export class LoginFormComponent extends MCFormComponent {
 
   constructor() {
     super();
+    this.setupForm();
+  }
+
+  setupForm() {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])

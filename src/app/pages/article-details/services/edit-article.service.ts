@@ -4,28 +4,17 @@ import {Article} from "../../../shared/types/main.types";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {EditArticleDetails, NewArticleResponse} from "../../../shared/types/editor.types";
 import {environment} from "../../../../environments/environment.development";
+import { MCService } from '../../../classes/mc-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EditArticleService {
+export class EditArticleService extends MCService{
   private dataSource = new BehaviorSubject<Article | null>(null);
   data = this.dataSource.asObservable();
-  private http = inject(HttpClient);
-  private slug: string = '';
+  private slug: string | undefined = undefined;
 
-  constructor() {
-  }
-
-  private get headers() {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-  }
-
-  edit(article: Article, slug: string) {
+  edit(article: Article | null, slug: string | undefined = undefined) {
     this.dataSource.next(article);
     this.slug = slug;
   }

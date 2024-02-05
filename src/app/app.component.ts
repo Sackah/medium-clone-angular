@@ -27,6 +27,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.fetchCurrentUser();
+  }
+
+  fetchCurrentUser() {
     this.pending.set(true)
     this.subscriptions.push(this.currentUserService.fetchCurrentUser().subscribe({
       next: () => {

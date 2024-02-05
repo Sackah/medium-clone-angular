@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MCFormComponent} from "../../../../classes/mcform-component";
+import {MCFormComponent} from "../../../../classes/mc-form";
 import {BackendErrorsComponent} from "../../../auth/components/backend-errors/backend-errors.component";
 import {ButtonSpinnerComponent} from "../../../../shared/components/loaders/button-spinner.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -26,6 +26,10 @@ export class EditorFormComponent extends MCFormComponent {
 
   override ngOnInit() {
     super.ngOnInit();
+    this.setupForm();
+  }
+
+  setupForm() {
     if (!this.article) {
       this.form = new FormGroup({
         title: new FormControl('', [Validators.required]),

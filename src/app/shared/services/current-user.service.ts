@@ -4,6 +4,7 @@ import {LoginUserResponse, User} from '../types/auth.types';
 import {HttpClient} from '@angular/common/http';
 import {TokenService} from './token.service';
 import {environment} from '../../../environments/environment.development';
+import { MCService } from '../../classes/mc-service';
 
 export interface UserData {
   data: User | null;
@@ -13,27 +14,25 @@ export interface UserData {
 /**
  * @class CurrentUserService - This service is the single source of truth for the current
  * user throughout the application.
- * @property user - An observable that resolves to the current user
- * @method fetchCurrentUser - A method to fetch the user from the server
- * @method setCurrentUser - A method for setting the current user when we get the user after
- * making an api call ex: login
- * @method clearCurrentUser - Method to remove the current user
  */
 @Injectable({
   providedIn: 'root',
 })
-export class CurrentUserService {
-  http = inject(HttpClient);
+export class CurrentUserService extends MCService{
   tokenService = inject(TokenService);
   private userDataSource = new BehaviorSubject<UserData>({
     data: null,
     isLoggedIn: false,
   });
+  /**
+   * @property user - An observable that resolves to the current user
+   */
   user = this.userDataSource.asObservable();
 
-  constructor() {
-  }
-
+  /**
+   * @method fetchCurrentUser - A method to fetch the user from the server
+   * @returns - An observable that resolves to the current user
+   */
   fetchCurrentUser() {
     const token = this.tokenService.get();
     if (token) {
@@ -61,6 +60,11 @@ export class CurrentUserService {
     }
   }
 
+/**
+ * @method setCurrentUser - A method for setting the current user when we get the user after
+ * making an api call ex: login
+ * @param user 
+ */
   setCurrentUser(user: User) {
     this.userDataSource.next({
       data: user,
@@ -68,6 +72,10 @@ export class CurrentUserService {
     });
   }
 
+  /**
+   * @method clearCurrentUser - Method to remove the current user
+   * @returns void
+   */
   clearCurrentUser() {
     this.userDataSource.next({
       data: null,

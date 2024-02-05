@@ -1,39 +1,38 @@
-import {Component, inject} from '@angular/core';
-import {HomeNavComponent} from "../../home/components/home-nav/home-nav.component";
-import {McPage} from "../../../classes/mc-page";
-import {SettingsFormComponent} from "../components/settings-form/settings-form.component";
-import {UpdateUserDetails, UpdateUserState} from "../../../shared/types/update-user.types";
-import {combineLatest} from "rxjs";
-import {selectErrors, selectIsSubmitting} from "../store/reducers";
-import {updateUserActions} from "../store/actions";
-import {TokenService} from "../../../shared/services/token.service";
-import {FooterComponent} from "../../../shared/components/footer/footer.component";
+import { Component, inject } from '@angular/core';
+import { HomeNavComponent } from '../../home/components/home-nav/home-nav.component';
+import { MCPage } from '../../../classes/mc-page';
+import { SettingsFormComponent } from '../components/settings-form/settings-form.component';
+import {
+  UpdateUserDetails,
+  UpdateUserState,
+} from '../../../shared/types/update-user.types';
+import { combineLatest } from 'rxjs';
+import { selectErrors, selectIsSubmitting } from '../store/reducers';
+import { updateUserActions } from '../store/actions';
+import { TokenService } from '../../../shared/services/token.service';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'mc-settings-page',
   standalone: true,
-  imports: [
-    HomeNavComponent,
-    SettingsFormComponent,
-    FooterComponent
-  ],
+  imports: [HomeNavComponent, SettingsFormComponent, FooterComponent],
   templateUrl: './settings-page.component.html',
-  styleUrl: './settings-page.component.scss'
+  styleUrl: './settings-page.component.scss',
 })
-export class SettingsPageComponent extends McPage {
+export class SettingsPageComponent extends MCPage {
   tokenService = inject(TokenService);
   public settingsState: Omit<UpdateUserState, 'user'> = {
     isSubmitting: false,
-    errors: null
-  }
+    errors: null,
+  };
   private settingsState$ = combineLatest([
     this.store.select(selectIsSubmitting),
-    this.store.select(selectErrors)
-  ])
+    this.store.select(selectErrors),
+  ]);
 
   constructor() {
     super();
-    this.setTitle("Settings")
+    this.setTitle('Settings');
   }
 
   override ngOnInit() {
@@ -49,8 +48,8 @@ export class SettingsPageComponent extends McPage {
       },
       error: (err) => {
         this.settingsState.errors = err;
-      }
-    })
+      },
+    });
 
     this.subscriptions.push(settingsStateSubscription);
   }
