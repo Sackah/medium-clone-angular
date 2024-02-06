@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'mc-feed-header',
@@ -8,7 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrl: './feed-header.component.scss',
 })
 export class FeedHeaderComponent {
-  feedName: 'global' | 'personal' = 'global';
+  @Input() feedName: 'global' | 'personal' = 'global';
   @Output() feedChange = new EventEmitter<'global' | 'personal'>();
 
   ngOnInit() {
@@ -16,7 +16,6 @@ export class FeedHeaderComponent {
   }
 
   handleFeedChange(name: 'global' | 'personal') {
-    this.feedName = name;
     this.feedChange.emit(name);
   }
 }

@@ -7,20 +7,31 @@
   <main>
     <section>
       <mc-feed-header
-        (feedChange)="fetchFeed($event)"
+        (feedChange)="changeFeed($event)"
+        [feedName]="feedName"
       ></mc-feed-header>
-      @if (articleSignal().pending) {
-        <div>Loading...</div>
-      } @else if (articleSignal().error) {
-        <!-- <mc-error-page
-          [error]="articleSignal().error!"
-          (refetch)="fetchFeed()"
-        ></mc-error-page> -->
-      } @else {
-        <mc-article-list
-          [articles]="articleSignal().data?.articles!"
-        ></mc-article-list>
-      }
+      <div class="content">
+        @if (articleSignal().pending) {
+
+          <span>
+          <mc-spinner></mc-spinner>
+        </span>
+
+        } @else if (articleSignal().error) {
+
+          <mc-error-page
+            [error]="articleSignal().error!"
+            (refetch)="fetchFeed()"
+          ></mc-error-page>
+
+        } @else {
+
+          <mc-article-list
+            [articles]="articleSignal().data?.articles!"
+          ></mc-article-list>
+
+        }
+      </div>
       <!--TODO: change hardcoded total to res.articlesCount-->
       <mc-pagination
         (changePage)="changePage($event)"
@@ -29,6 +40,11 @@
         [total]="260"
       ></mc-pagination>
     </section>
+    <section class="tags">
+      
+    </section>
   </main>
-  <mc-footer></mc-footer>
+  <footer>
+    <mc-footer></mc-footer>
+  </footer>
 </div>

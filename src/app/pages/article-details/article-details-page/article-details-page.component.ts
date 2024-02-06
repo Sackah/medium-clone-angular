@@ -1,19 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { MCPage } from '../../../classes/mc-page';
-import { FetchArticleService } from '../services/fetch-article.service';
-import { NewArticleResponse } from '../../../shared/types/editor.types';
-import {
-  completeSignal,
-  errorSignal,
-  newSignal,
-  pendSignal,
-} from '../../../utils/signal-factory';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
-import { HomeNavComponent } from '../../home/components/home-nav/home-nav.component';
-import { ProfileBannerComponent } from '../../profile/components/profile-banner/profile-banner.component';
-import { ArticleBannerComponent } from '../components/article-banner/article-banner.component';
-import { PageSpinnerComponent } from '../../../shared/components/loaders/page-spinner.component';
-import { ErrorPageComponent } from '../../../shared/pages/error-page/error-page.component';
+import {Component, inject} from '@angular/core';
+import {MCPage} from '../../../classes/mc-page';
+import {FetchArticleService} from '../services/fetch-article.service';
+import {NewArticleResponse} from '../../../shared/types/editor.types';
+import {completeSignal, errorSignal, newSignal, pendSignal,} from '../../../utils/signal-factory';
+import {FooterComponent} from '../../../shared/components/footer/footer.component';
+import {HomeNavComponent} from '../../home/components/home-nav/home-nav.component';
+import {ProfileBannerComponent} from '../../profile/components/profile-banner/profile-banner.component';
+import {ArticleBannerComponent} from '../components/article-banner/article-banner.component';
+import {PageSpinnerComponent} from '../../../shared/components/loaders/page-spinner.component';
+import {ErrorPageComponent} from '../../../shared/pages/error-page/error-page.component';
 
 @Component({
   selector: 'app-article-details-page',

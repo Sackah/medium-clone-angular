@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { AllArticles } from '../../../../shared/types/article.types';
-import { RouterLink } from '@angular/router';
-import { Article } from '../../../../shared/types/main.types';
+import {Component, Input} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {Article} from '../../../../shared/types/main.types';
+import {formatDate} from "../../../../utils/format-date";
 
 @Component({
   selector: 'mc-article-list',
@@ -12,4 +12,8 @@ import { Article } from '../../../../shared/types/main.types';
 })
 export class ArticleListComponent {
   @Input() articles!: Article[];
+
+  formatDate(date: string) {
+    return formatDate(date);
+  }
 }

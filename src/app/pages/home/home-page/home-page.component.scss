@@ -28,10 +28,35 @@
   main {
     @include center;
 
-    section {
+    > section {
       @include center;
       flex-direction: column;
-      width: 60%;
+      width: 50%;
+
+      div.content {
+        @include center;
+        width: 100%;
+        min-height: 52.5vh;
+
+        span {
+          @include center;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    section.tags {
+      width: 235px;
+      height: 83px;
+      background: #999;
+      align-self: flex-start;
     }
   }
+}
+
+footer {
+  display: block;
+  position: relative;
+  margin-top: 60px;
 }

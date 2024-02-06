@@ -1,39 +1,39 @@
-import { Component, inject } from '@angular/core';
-import { LoginNavComponent } from '../../auth/components/login-nav/login-nav.component';
-import { HomeNavComponent } from '../components/home-nav/home-nav.component';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
-import { MCPage } from '../../../classes/mc-page';
-import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import { AllArticlesService } from '../services/all-articles.service';
-import { AllArticles } from '../../../shared/types/article.types';
-import {
-  completeSignal,
-  errorSignal,
-  newSignal,
-  pendSignal,
-} from '../../../utils/signal-factory';
-import { FeedHeaderComponent } from "../components/feed-header/feed-header.component";
-import { ArticleListComponent } from "../components/article-list/article-list.component";
+import {Component, inject} from '@angular/core';
+import {LoginNavComponent} from '../../auth/components/login-nav/login-nav.component';
+import {HomeNavComponent} from '../components/home-nav/home-nav.component';
+import {FooterComponent} from '../../../shared/components/footer/footer.component';
+import {MCPage} from '../../../classes/mc-page';
+import {PaginationComponent} from '../../../shared/components/pagination/pagination.component';
+import {AllArticlesService} from '../services/all-articles.service';
+import {AllArticles} from '../../../shared/types/article.types';
+import {completeSignal, errorSignal, newSignal, pendSignal,} from '../../../utils/signal-factory';
+import {FeedHeaderComponent} from "../components/feed-header/feed-header.component";
+import {ArticleListComponent} from "../components/article-list/article-list.component";
+import {McSpinnerComponent} from "../../../shared/components/loaders/mc-spinner.component";
+import {ErrorPageComponent} from "../../../shared/pages/error-page/error-page.component";
 
 @Component({
-    selector: 'mc-home-page',
-    standalone: true,
-    templateUrl: './home-page.component.html',
-    styleUrl: './home-page.component.scss',
-    imports: [
-        LoginNavComponent,
-        HomeNavComponent,
-        FooterComponent,
-        PaginationComponent,
-        FeedHeaderComponent,
-        ArticleListComponent
-    ]
+  selector: 'mc-home-page',
+  standalone: true,
+  templateUrl: './home-page.component.html',
+  styleUrl: './home-page.component.scss',
+  imports: [
+    LoginNavComponent,
+    HomeNavComponent,
+    FooterComponent,
+    PaginationComponent,
+    FeedHeaderComponent,
+    ArticleListComponent,
+    McSpinnerComponent,
+    ErrorPageComponent
+  ]
 })
 export class HomePageComponent extends MCPage {
   currentPage = 1;
   articleLimit = 10;
   allArticlesService = inject(AllArticlesService);
   articleSignal = newSignal<AllArticles>();
+  feedName: 'global' | 'personal' = 'global';
 
   constructor() {
     super();
@@ -42,10 +42,15 @@ export class HomePageComponent extends MCPage {
 
   changePage(page: number) {
     this.currentPage = page;
-    console.log(page);
+    this.fetchFeed(this.feedName)
   }
 
-  fetchFeed(feedName: 'global' | 'personal') {
+  changeFeed(feedName: typeof this.feedName) {
+    this.feedName = feedName;
+    this.fetchFeed(feedName);
+  }
+
+  fetchFeed(feedName = this.feedName) {
     pendSignal(this.articleSignal);
 
     switch (feedName) {
@@ -54,7 +59,7 @@ export class HomePageComponent extends MCPage {
           .fetch(this.articleLimit, this.currentPage * 10 - 10)
           .subscribe({
             next: (articles) => {
-              completeSignal<AllArticles>(this.articleSignal, articles);
+              completeSignal(this.articleSignal, articles);
             },
             error: (error) => {
               errorSignal(this.articleSignal, error);
