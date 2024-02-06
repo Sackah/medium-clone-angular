@@ -1,15 +1,14 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Article} from "../../../shared/types/main.types";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {EditArticleDetails, NewArticleResponse} from "../../../shared/types/editor.types";
 import {environment} from "../../../../environments/environment.development";
-import { MCService } from '../../../classes/mc-service';
+import {MCService} from '../../../classes/mc-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EditArticleService extends MCService{
+export class EditArticleService extends MCService {
   private dataSource = new BehaviorSubject<Article | null>(null);
   data = this.dataSource.asObservable();
   private slug: string | undefined = undefined;
@@ -22,7 +21,7 @@ export class EditArticleService extends MCService{
   post(article: EditArticleDetails) {
     return this.http
       .put<NewArticleResponse>(
-        `${environment.BaseUrl}/articles${this.slug}`,
+        `${environment.BaseUrl}/articles/${this.slug}`,
         article,
         this.headers
       )

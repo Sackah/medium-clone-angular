@@ -89,8 +89,7 @@ export const redirectAfterEdit = createEffect(
       tap({
         next: async (data) => {
           console.log(data);
-          const route = `/${data.article.slug}`;
-          await router.navigate(['/article', route]);
+          await router.navigate(['/article', data.article.slug]);
         },
       })
     );
