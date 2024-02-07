@@ -57,7 +57,6 @@ export class ArticleDetailsPageComponent extends MCPage {
   fetchRouteParameters() {
     const subscription = this.route.params.subscribe({
       next: (params) => {
-        console.log(params['articleSlug']); //-> this in the format /whatever
         this.articleSlug = params['articleSlug'];
       },
     });
