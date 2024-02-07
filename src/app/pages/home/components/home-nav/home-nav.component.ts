@@ -19,13 +19,11 @@ export class HomeNavComponent implements OnInit, OnDestroy {
   currentUserService = inject(CurrentUserService);
   subscriptions: Subscription[] = [];
   userData!: UserData;
-  userRoute!: string;
 
   ngOnInit() {
     const subscription = this.currentUserService.user.subscribe({
       next: (data) => {
         this.userData = data;
-        this.userRoute = `/${data.data?.username}`
       }
     })
     this.subscriptions.push(subscription)

@@ -6,7 +6,7 @@
       <li><a [routerLink]="['/editor']" routerLinkActive="active">New Article</a></li>
       <li><a [routerLink]="['/settings']" routerLinkActive="active">Settings</a></li>
       <li>
-        <a [routerLink]="['/profile', userRoute]" routerLinkActive="active">
+        <a [routerLink]="['/profile', userData.data?.username]" routerLinkActive="active">
           <div class="img">
             <img [src]="userData.data?.image" alt="">
           </div>

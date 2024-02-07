@@ -1,9 +1,11 @@
 <header>
-    <p
-      (click)="handleFeedChange('global')"
-      [class]="{active: feedName == 'global'}"
-    >Global Feed</p>
+  <p
+    (click)="handleFeedChange('global')"
+    [class]="{active: feedName == 'global'}"
+  >Global Feed</p>
+  @if (isLoggedIn) {
     <p (click)="handleFeedChange('personal')"
        [class]="{active: feedName == 'personal'}"
     >Your feed</p>
+  }
 </header>

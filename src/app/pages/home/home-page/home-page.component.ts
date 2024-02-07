@@ -10,7 +10,7 @@ import {FeedHeaderComponent} from "../components/feed-header/feed-header.compone
 import {ArticleListComponent} from "../components/article-list/article-list.component";
 import {McSpinnerComponent} from "../../../shared/components/loaders/mc-spinner.component";
 import {ErrorPageComponent} from "../../../shared/pages/error-page/error-page.component";
-import { FetchArticlesService } from '../services/fetch-articles.service';
+import {FetchArticlesService} from '../services/fetch-articles.service';
 
 @Component({
   selector: 'mc-home-page',
@@ -34,6 +34,7 @@ export class HomePageComponent extends MCPage {
   articlesService = inject(FetchArticlesService);
   articleSignal = newSignal<AllArticles>();
   feedName: 'global' | 'personal' = 'global';
+  protected readonly Boolean = Boolean;
 
   constructor() {
     super();

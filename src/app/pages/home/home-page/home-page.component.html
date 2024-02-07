@@ -1,5 +1,9 @@
 <div class="home page">
-  <mc-home-nav></mc-home-nav>
+  @if (user) {
+    <mc-home-nav></mc-home-nav>
+  } @else {
+    <mc-login-nav></mc-login-nav>
+  }
   <section class="hero">
     <h1>conduit</h1>
     <p>A place to share your knowledge.</p>
@@ -9,6 +13,7 @@
       <mc-feed-header
         (feedChange)="changeFeed($event)"
         [feedName]="feedName"
+        [isLoggedIn]="Boolean(user)"
       ></mc-feed-header>
       <div class="content">
         @if (articleSignal().pending) {
@@ -26,7 +31,6 @@
           ></mc-article-list>
         }
       </div>
-      <!--TODO: change hardcoded total to res.articlesCount-->
       <mc-pagination
         (changePage)="changePage($event)"
         [currentPage]="currentPage"
@@ -35,7 +39,7 @@
       ></mc-pagination>
     </section>
     <section class="tags">
-      
+
     </section>
   </main>
   <footer>
