@@ -3,7 +3,7 @@ import {InitialSig} from "../shared/types/main.types";
 import {BackendErrors} from "../shared/types/auth.types";
 
 /**
- * @function newSignal - creates a new signal with initial state <T>
+ * @function newSignal - creates a new signal with initial state <T> where T is the response to be expected
  * @returns a new signal with the initial state
  */
 export const newSignal = <T>() => {

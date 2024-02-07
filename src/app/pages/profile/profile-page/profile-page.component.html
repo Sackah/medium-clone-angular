@@ -1,6 +1,8 @@
 <div class="profile page">
   <mc-home-nav></mc-home-nav>
   <mc-profile-banner
+    [pending]="profileSignal().pending"
+    [userProfile]="currentProfile!"
     [user]="user!"
   ></mc-profile-banner>
   <mc-footer></mc-footer>

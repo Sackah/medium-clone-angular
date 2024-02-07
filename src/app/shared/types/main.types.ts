@@ -17,7 +17,7 @@ export interface Article {
   updatedAt: string,
   favorited: boolean,
   favoritesCount: number,
-  author: Profile
+  author: Profile,
 }
 
 export interface InitialSig<T> {

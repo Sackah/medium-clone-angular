@@ -12,24 +12,18 @@
       ></mc-feed-header>
       <div class="content">
         @if (articleSignal().pending) {
-
           <span>
-          <mc-spinner></mc-spinner>
-        </span>
-
+            <mc-spinner></mc-spinner>
+          </span>
         } @else if (articleSignal().error) {
-
           <mc-error-page
             [error]="articleSignal().error!"
             (refetch)="fetchFeed()"
           ></mc-error-page>
-
         } @else {
-
           <mc-article-list
             [articles]="articleSignal().data?.articles!"
           ></mc-article-list>
-
         }
       </div>
       <!--TODO: change hardcoded total to res.articlesCount-->
@@ -37,7 +31,7 @@
         (changePage)="changePage($event)"
         [currentPage]="currentPage"
         [limit]="articleLimit"
-        [total]="260"
+        [total]="articleSignal().data?.articlesCount!"
       ></mc-pagination>
     </section>
     <section class="tags">
