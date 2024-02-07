@@ -58,9 +58,9 @@ export class SettingsPageComponent extends MCPage {
     this.store.dispatch(updateUserActions.update($event));
   }
 
-  handleLogout() {
+  async handleLogout() {
     this.currentUserService.clearCurrentUser();
     this.tokenService.clear();
-    this.router.navigateByUrl('/login').then();
+    await this.router.navigateByUrl('/login');
   }
 }

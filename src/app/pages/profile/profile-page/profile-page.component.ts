@@ -22,12 +22,12 @@ export class ProfilePageComponent extends MCPage {
 
   constructor() {
     super();
-    this.setTitle('Profile');
+    this.fetchRouteParameters();
   }
-
+  
   override ngOnInit() {
     super.ngOnInit();
-    this.fetchRouteParameters();
+    this.setTitle('Profile');
     this.fetchProfile(this.userName);
   }
 
@@ -36,7 +36,7 @@ export class ProfilePageComponent extends MCPage {
     const sub = this.profileService.get(username).subscribe({
       next: (profile) => {
         this.currentProfile = profile.profile;
-        completeSignal(this.profileSignal, profile)
+        completeSignal(this.profileSignal, profile);
       },
       error: (err) => {
         errorSignal(this.profileSignal, err);

@@ -45,7 +45,6 @@ export class ArticleDetailsPageComponent extends MCPage {
     const subscription = this.articleService.get(this.articleSlug).subscribe({
       next: (data) => {
         completeSignal(this.articleSig, data);
-        console.log(this.articleSig());
       },
       error: (err) => {
         errorSignal(this.articleSig, err);

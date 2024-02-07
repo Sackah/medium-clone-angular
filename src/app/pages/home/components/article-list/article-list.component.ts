@@ -14,7 +14,7 @@ import {Subscription} from "rxjs";
   styleUrl: './article-list.component.scss',
 })
 export class ArticleListComponent implements OnDestroy {
-  @Input() articles!: Article[];
+  @Input() articles: Article[] = [];
   articleSignal = newSignal<{
     article: Article
   }>();

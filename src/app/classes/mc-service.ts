@@ -7,7 +7,7 @@ import { inject } from '@angular/core';
 import { throwError } from 'rxjs';
 
 export class MCService {
-  http = inject(HttpClient);
+  protected http = inject(HttpClient);
 
   constructor() {}
 
@@ -15,7 +15,7 @@ export class MCService {
    * Returns standard headers
    * @returns {HttpHeaders}
    */
-  get headers() {
+  protected get headers() {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export class MCService {
    * @param error The HTTP error response.
    * @returns An observable of the error.
    */
-  onError(error: HttpErrorResponse) {
+  protected onError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error(error.error);
       return throwError(() => ({
