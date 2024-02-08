@@ -16,13 +16,13 @@ section {
   }
 
   h1 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 2.8rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
   }
 
   .article-meta {
-    margin-top: 1rem;
+    margin-top: 2rem;
     height: calc($size-3 + $size-2);
     gap: 10px;
     @include center;
@@ -65,7 +65,7 @@ section {
         cursor: pointer;
         background: transparent;
 
-        &.edit {
+        &.edit, &.follow {
           color: $grey-7;
           border: 1px solid $grey-7;
 
@@ -83,6 +83,20 @@ section {
             color: light-comp($red-1);
             background: $red-1;
           }
+        }
+
+        &.favourite {
+          color: $main-green;
+          border: 1px solid $main-green;
+
+          &:hover, &.active {
+            color: light-comp($main-green);
+            background: $main-green;
+          }
+        }
+
+        &:disabled {
+          cursor: not-allowed;
         }
       }
     }
