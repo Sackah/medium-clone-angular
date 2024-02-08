@@ -9,6 +9,7 @@ import {ProfileBannerComponent} from '../../profile/components/profile-banner/pr
 import {ArticleBannerComponent} from '../components/article-banner/article-banner.component';
 import {PageSpinnerComponent} from '../../../shared/components/loaders/page-spinner.component';
 import {ErrorPageComponent} from '../../../shared/pages/error-page/error-page.component';
+import {LoginNavComponent} from "../../login/components/login-nav/login-nav.component";
 
 @Component({
   selector: 'app-article-details-page',
@@ -20,6 +21,7 @@ import {ErrorPageComponent} from '../../../shared/pages/error-page/error-page.co
     ArticleBannerComponent,
     PageSpinnerComponent,
     ErrorPageComponent,
+    LoginNavComponent,
   ],
   templateUrl: './article-details-page.component.html',
   styleUrl: './article-details-page.component.scss',

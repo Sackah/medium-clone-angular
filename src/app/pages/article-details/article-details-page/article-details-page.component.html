@@ -1,5 +1,9 @@
 <div class="article-details page">
-  <mc-home-nav></mc-home-nav>
+  @if (user) {
+    <mc-home-nav></mc-home-nav>
+  } @else {
+    <mc-login-nav></mc-login-nav>
+  }
   @if (articleSig().pending) {
     <mc-page-spinner></mc-page-spinner>
   } @else if (articleSig().error) {
