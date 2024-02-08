@@ -1,11 +1,16 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MCFormComponent} from "../../../../classes/mc-form";
-import {BackendErrorsComponent} from "../../../auth/components/backend-errors/backend-errors.component";
-import {ButtonSpinnerComponent} from "../../../../shared/components/loaders/button-spinner.component";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {BackendErrors} from "../../../../shared/types/auth.types";
-import {NewArticleDetails} from "../../../../shared/types/editor.types";
-import {Article} from "../../../../shared/types/main.types";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MCFormComponent } from '../../../../classes/mc-form';
+import { BackendErrorsComponent } from '../../../../shared/components/backend-errors/backend-errors.component';
+import { ButtonSpinnerComponent } from '../../../../shared/components/loaders/button-spinner.component';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { BackendErrors } from '../../../../shared/types/auth.types';
+import { NewArticleDetails } from '../../../../shared/types/editor.types';
+import { Article } from '../../../../shared/types/main.types';
 
 @Component({
   selector: 'mc-editor-form',
@@ -13,10 +18,13 @@ import {Article} from "../../../../shared/types/main.types";
   imports: [
     BackendErrorsComponent,
     ButtonSpinnerComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './editor-form.component.html',
-  styleUrls: ['../../../../shared/styles/forms.styles.scss', './editor-form.component.scss']
+  styleUrls: [
+    '../../../../shared/styles/forms.styles.scss',
+    './editor-form.component.scss',
+  ],
 })
 export class EditorFormComponent extends MCFormComponent {
   @Input() errors: BackendErrors | null = null;
@@ -35,27 +43,36 @@ export class EditorFormComponent extends MCFormComponent {
         title: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
         body: new FormControl('', [Validators.required]),
-        tags: new FormControl('',)
-      })
+        tags: new FormControl(''),
+      });
     } else {
       this.form = new FormGroup({
-        title: new FormControl({
-          value: this.article.title,
-          disabled: false
-        }, [Validators.required]),
-        description: new FormControl({
-          value: this.article.description,
-          disabled: false
-        }, [Validators.required]),
-        body: new FormControl({
-          value: this.article.body,
-          disabled: false
-        }, [Validators.required]),
+        title: new FormControl(
+          {
+            value: this.article.title,
+            disabled: false,
+          },
+          [Validators.required]
+        ),
+        description: new FormControl(
+          {
+            value: this.article.description,
+            disabled: false,
+          },
+          [Validators.required]
+        ),
+        body: new FormControl(
+          {
+            value: this.article.body,
+            disabled: false,
+          },
+          [Validators.required]
+        ),
         tags: new FormControl({
           value: this.article.tagList.join(' ,'),
-          disabled: false
-        },)
-      })
+          disabled: false,
+        }),
+      });
     }
   }
 
@@ -65,12 +82,11 @@ export class EditorFormComponent extends MCFormComponent {
 
     const formValues = {
       ...this.form.value,
-      tags: tagsArray
+      tags: tagsArray,
     };
 
     if (this.form.valid) {
-      this.newArticle.emit({article: formValues});
+      this.newArticle.emit({ article: formValues });
     }
   }
-
 }

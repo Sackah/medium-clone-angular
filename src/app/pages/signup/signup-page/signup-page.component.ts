@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginNavComponent } from '../components/login-nav/login-nav.component';
+import { LoginNavComponent } from '../../login/components/login-nav/login-nav.component';
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
 import {
   SignUpState,

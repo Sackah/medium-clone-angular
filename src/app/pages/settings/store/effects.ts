@@ -45,9 +45,8 @@ export const redirectAfterUpdate = createEffect(
     return actions$.pipe(
       ofType(updateUserActions.updateSuccess),
       tap({
-        next: (data) => {
-          const userRoute = `/${data.user.username}`;
-          router.navigate(['/profile', userRoute]).then().catch(e => console.error(e));
+        next: async (data) => {
+          await router.navigate(['/profile', data.user.username]);
         }
       })
     );

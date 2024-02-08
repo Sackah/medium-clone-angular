@@ -8,13 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({ standalone: true, template: '' })
 export class MCPage implements OnInit, OnDestroy {
-  subscriptions: Subscription[] = [];
-  store = inject(Store);
-  currentUserService = inject(CurrentUserService);
-  user?: User;
-  titleService = inject(Title);
-  router = inject(Router);
-  route = inject(ActivatedRoute);
+  protected  readonly subscriptions: Subscription[] = [];
+  readonly store = inject(Store);
+  readonly currentUserService = inject(CurrentUserService);
+  protected user?: User;
+  protected readonly titleService = inject(Title);
+  readonly router = inject(Router);
+  readonly route = inject(ActivatedRoute);
 
   constructor() {}
 
@@ -26,7 +26,7 @@ export class MCPage implements OnInit, OnDestroy {
     this.subscribeToCurrentUser();
   }
 
-  subscribeToCurrentUser() {
+  private subscribeToCurrentUser() {
     const currentUserSubscription = this.currentUserService.user.subscribe({
       next: (user) => {
         user.data ? (this.user = user.data) : null;

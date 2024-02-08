@@ -1,14 +1,14 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {BackendErrors} from "../../../../shared/types/auth.types";
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { BackendErrors } from '../../types/auth.types';
 
 @Component({
   selector: 'mc-backend-errors',
   standalone: true,
   imports: [],
   templateUrl: './backend-errors.component.html',
-  styleUrl: './backend-errors.component.scss'
+  styleUrl: './backend-errors.component.scss',
 })
-export class BackendErrorsComponent implements OnChanges{
+export class BackendErrorsComponent implements OnChanges {
   @Input() errors: BackendErrors = {};
 
   errorMessages: string[] = [];
@@ -16,9 +16,9 @@ export class BackendErrorsComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges) {
     if (changes['errors']) {
       this.errorMessages = [];
-      for (let err in this.errors){
+      for (let err in this.errors) {
         const messages = this.errors[err];
-        if(err !== "type"){
+        if (err !== 'type') {
           this.errorMessages.push(`${err} ${messages}`);
         }
       }

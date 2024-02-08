@@ -8,9 +8,6 @@ section {
   span {
     @include center;
     gap: 10px;
-
-    p {
-      cursor: pointer;
-    }
+    cursor: pointer;
   }
 }

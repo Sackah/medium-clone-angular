@@ -4,7 +4,7 @@ import {FormGroup} from "@angular/forms";
 
 @Component({template: '', standalone: true})
 export class MCFormComponent implements OnInit, OnDestroy {
-  subscriptions?: Subscription[];
+  protected readonly subscriptions?: Subscription[];
 
   form!: FormGroup;
 
