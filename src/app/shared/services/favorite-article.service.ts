@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { MCService } from '../../../classes/mc-service';
-import { Article } from '../../../shared/types/main.types';
-import { environment } from '../../../../environments/environment.development';
-import { map } from 'rxjs';
+import { MCService } from '../../classes/mc-service';
+import { Article } from '../types/main.types';
+import { environment } from '../../../environments/environment.development';
+import { catchError, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,10 @@ export class FavoriteArticleService extends MCService {
         `${environment.BaseUrl}/articles/${slug}/favorite`,
         {}
       )
-      .pipe(map((data) => data.article));
+      .pipe(
+        map((data) => data.article),
+        catchError((error) => this.onError(error))
+      );
   }
 
   unfavorite(slug: string) {
@@ -22,6 +25,9 @@ export class FavoriteArticleService extends MCService {
       .delete<{ article: Article }>(
         `${environment.BaseUrl}/articles/${slug}/favorite`
       )
-      .pipe(map((data) => data.article));
+      .pipe(
+        map((data) => data.article),
+        catchError((error) => this.onError(error))
+      );
   }
 }

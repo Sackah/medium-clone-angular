@@ -1,14 +1,10 @@
-import { inject, Inject, WritableSignal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FavoriteArticleService } from '../pages/home/services/favorite-article.service';
-import { filter, Subscription, take, tap } from 'rxjs';
-import {
-  completeSignal,
-  errorSignal,
-  pendSignal,
-} from '../utils/signal-factory';
-import { CurrentUserService } from '../shared/services/current-user.service';
-import { Router } from '@angular/router';
+import {inject, Inject, WritableSignal} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {FavoriteArticleService} from '../shared/services/favorite-article.service';
+import {Subscription, take, tap} from 'rxjs';
+import {completeSignal, errorSignal, pendSignal,} from '../utils/signal-factory';
+import {CurrentUserService} from '../shared/services/current-user.service';
+import {Router} from '@angular/router';
 
 export class FavouriteArticleWorker {
   readonly http = Inject(HttpClient);
@@ -29,12 +25,12 @@ export class FavouriteArticleWorker {
 
   favorite(slug: string, isFavorited: boolean) {
     this.articleSignal ? pendSignal(this.articleSignal) : null;
-  
+
     if (isFavorited) {
       this.unfavorite(slug);
       return;
     }
-  
+
     const continueExecution = () => {
       const sub = this.favoriteArticleService.favorite(slug).subscribe({
         next: (article) => {
@@ -45,12 +41,12 @@ export class FavouriteArticleWorker {
           this.articleSignal ? errorSignal(this.articleSignal, err) : null;
         },
       });
-  
+
       this.subscriptions.push(sub);
     };
-  
+
     this.currentUserService.user.pipe(
-      take(1), 
+      take(1),
       tap((user) => {
         if (!user.data) {
           this.router.navigateByUrl('/login');

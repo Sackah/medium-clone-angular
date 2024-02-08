@@ -69,7 +69,7 @@ section {
           color: $grey-7;
           border: 1px solid $grey-7;
 
-          &:hover {
+          &:hover, &.active {
             color: light-comp($grey-7);
             background: $grey-7;
           }

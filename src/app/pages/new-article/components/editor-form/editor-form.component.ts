@@ -1,16 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MCFormComponent } from '../../../../classes/mc-form';
-import { BackendErrorsComponent } from '../../../../shared/components/backend-errors/backend-errors.component';
-import { ButtonSpinnerComponent } from '../../../../shared/components/loaders/button-spinner.component';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { BackendErrors } from '../../../../shared/types/auth.types';
-import { NewArticleDetails } from '../../../../shared/types/editor.types';
-import { Article } from '../../../../shared/types/main.types';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {MCFormComponent} from '../../../../classes/mc-form';
+import {BackendErrorsComponent} from '../../../../shared/components/backend-errors/backend-errors.component';
+import {ButtonSpinnerComponent} from '../../../../shared/components/loaders/button-spinner.component';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {BackendErrors} from '../../../../shared/types/auth.types';
+import {NewArticleDetails} from '../../../../shared/types/editor.types';
+import {Article} from '../../../../shared/types/main.types';
 
 @Component({
   selector: 'mc-editor-form',
@@ -69,7 +64,7 @@ export class EditorFormComponent extends MCFormComponent {
           [Validators.required]
         ),
         tags: new FormControl({
-          value: this.article.tagList.join(' ,'),
+          value: this.article.tagList.join(', '),
           disabled: false,
         }),
       });
@@ -79,14 +74,14 @@ export class EditorFormComponent extends MCFormComponent {
   handleSubmit() {
     const tagsString = this.form.get('tags')?.value;
     const tagsArray = tagsString.split(/\s+|,|;/).filter(Boolean);
-
+    
     const formValues = {
       ...this.form.value,
-      tags: tagsArray,
+      tagList: tagsArray,
     };
 
     if (this.form.valid) {
-      this.newArticle.emit({ article: formValues });
+      this.newArticle.emit({article: formValues});
     }
   }
 }

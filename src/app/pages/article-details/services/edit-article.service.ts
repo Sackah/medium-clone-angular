@@ -26,4 +26,11 @@ export class EditArticleService extends MCService {
         this.headers
       )
   }
+
+  delete(slug: string) {
+    return this.http
+      .delete(`${environment.BaseUrl}/articles/${slug}`,
+        this.headers
+      )
+  }
 }

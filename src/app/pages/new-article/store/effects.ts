@@ -42,9 +42,7 @@ export const redirectAfterPost = createEffect(
       ofType(articleActions.postSuccess),
       tap({
         next: async (data) => {
-          console.log(data);
-          const route = `/${data.article.slug}`;
-          await router.navigate(['/article', route]);
+          await router.navigate(['/article', data.article.slug]);
         },
       })
     );
@@ -88,7 +86,6 @@ export const redirectAfterEdit = createEffect(
       ofType(articleActions.editSuccess),
       tap({
         next: async (data) => {
-          console.log(data);
           await router.navigate(['/article', data.article.slug]);
         },
       })

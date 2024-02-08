@@ -12,22 +12,32 @@
       @if (article.author.username === user?.username) {
         <span>
           <button class="edit" (click)="editArticle()">Edit Article</button>
-          <button class="delete">Delete Article</button>
+          <button class="delete" [disabled]="articleSignal().pending" (click)="deleteArticle(article.slug)">Delete Article</button>
         </span>
       } @else {
         <span>
-          <button class="follow">
-            Follow {{ article.author.username }}
-          </button>
+          @if (article.author.following) {
+            <button class="follow active" 
+              [disabled]="articleSignal().pending"
+              (click)="followProfileWorker.follow(article.author.username, article.author.following)">
+              Unfollow {{ article.author.username }}
+            </button>
+          } @else {
+            <button class="follow" 
+              [disabled]="articleSignal().pending"
+            (click)="followProfileWorker.follow(article.author.username, article.author.following)">
+              Follow {{ article.author.username }}
+            </button>
+          }
           @if (article.favorited) {
             <button class="favourite active" [disabled]="articleSignal().pending"
                     (click)="favoriteArticleWorker.favorite(article.slug, article.favorited)">
-            Unfavorite Article {{ article.favoritesCount }}
+            Unfavorite Article ({{ article.favoritesCount }})
           </button>
           } @else {
             <button class="favourite" [disabled]="articleSignal().pending"
                     (click)="favoriteArticleWorker.favorite(article.slug, article.favorited)">
-              Favorite Article {{ article.favoritesCount }}
+              Favorite Article ({{ article.favoritesCount }})
             </button>
           }
         </span>
