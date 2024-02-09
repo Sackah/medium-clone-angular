@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Article } from '../../../../shared/types/main.types';
 import { formatDate } from '../../../../utils/format-date';
 import { newSignal } from '../../../../utils/signal-factory';
-import { FavouriteArticleWorker } from '../../../../classes/mc-favorite-worker';
+import { FavouriteArticleWorker } from '../../../../classes/mc-favorites-worker';
 
 @Component({
   selector: 'mc-article-list',

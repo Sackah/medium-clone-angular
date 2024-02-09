@@ -1,0 +1,15 @@
+<header>
+  @if (isLoggedIn) {
+    <p (click)="handleFeedChange('personal')"
+       [class]="{active: feedName == 'personal'}"
+    >My Articles</p>
+  } @else {
+    <p (click)="handleFeedChange('personal')"
+       [class]="{active: feedName == 'personal'}"
+    >Articles by {{ profile.username }}</p>
+  }
+  <p
+    (click)="handleFeedChange('favorites')"
+    [class]="{active: feedName == 'favorites'}"
+  >Favorited Articles</p>
+</header>

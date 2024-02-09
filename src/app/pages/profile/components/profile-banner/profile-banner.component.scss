@@ -1,4 +1,4 @@
-@import '../../../../styles/main.scss';
+@import "../../../../styles/main.scss";
 
 section {
   @include center;
@@ -23,10 +23,6 @@ section {
     margin: 1rem 0;
   }
 
-  p {
-
-  }
-
   span {
     @include center;
     justify-content: flex-end;
@@ -34,9 +30,9 @@ section {
 
     button {
       @include center;
-      padding: .25rem .5rem;
+      padding: 0.25rem 0.5rem;
       font-size: $size-2;
-      border-radius: .2rem;
+      border-radius: 0.2rem;
       gap: 10px;
       border: 1px solid $grey-6;
       color: $grey-6;
@@ -45,6 +41,9 @@ section {
       &:hover {
         color: light-comp($grey-6);
         background: $grey-6;
+      }
+      &:disabled {
+        cursor: not-allowed;
       }
     }
   }

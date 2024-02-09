@@ -5,6 +5,7 @@ import {Subscription, take, tap} from 'rxjs';
 import {completeSignal, errorSignal, pendSignal,} from '../utils/signal-factory';
 import {CurrentUserService} from '../shared/services/current-user.service';
 import {Router} from '@angular/router';
+import { Article, Profile } from '../shared/types/main.types';
 
 export class FavouriteArticleWorker {
   readonly http = Inject(HttpClient);
@@ -17,7 +18,7 @@ export class FavouriteArticleWorker {
 
   constructor(
     articleSignal?: WritableSignal<any>,
-    updaterFn?: (data: any) => void
+    updaterFn?: (article: Article) => void
   ) {
     this.articleSignal = articleSignal;
     this.updaterFn = updaterFn;

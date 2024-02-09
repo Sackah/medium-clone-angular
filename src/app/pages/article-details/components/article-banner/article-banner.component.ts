@@ -3,21 +3,21 @@ import { User } from '../../../../shared/types/auth.types';
 import { Article, Profile } from '../../../../shared/types/main.types';
 import { formatDate } from '../../../../utils/format-date';
 import { EditArticleService } from '../../services/edit-article.service';
-import { Router } from '@angular/router';
-import { FavouriteArticleWorker } from '../../../../classes/mc-favorite-worker';
+import { Router, RouterLink } from '@angular/router';
+import { FavouriteArticleWorker } from '../../../../classes/mc-favorites-worker';
 import {
   completeSignal,
   errorSignal,
   newSignal,
   pendSignal,
 } from '../../../../utils/signal-factory';
-import { FollowProfileWorker } from '../../../../classes/mc-follow-worker';
+import { FollowProfileWorker } from '../../../../classes/mc-followers-worker';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'mc-article-banner',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './article-banner.component.html',
   styleUrl: './article-banner.component.scss',
 })
@@ -34,13 +34,14 @@ export class ArticleBannerComponent implements OnDestroy {
 
   constructor() {
     this.updateArticle = this.updateArticle.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
     this.favoriteArticleWorker = new FavouriteArticleWorker(
       this.articleSignal,
       this.updateArticle
     );
     this.followProfileWorker = new FollowProfileWorker(
       this.articleSignal,
-      this.updateArticle
+      this.updateProfile
     );
   }
 
@@ -58,12 +59,12 @@ export class ArticleBannerComponent implements OnDestroy {
     }
   }
 
-  updateArticle(article?: Article, profile?: Profile) {
-    if (profile) {
-      this.article = { ...(this.article as Article), author: profile };
-    } else if (article) {
-      this.article = article;
-    }
+  updateArticle(article: Article) {
+    this.article = { ...(this.article as Article), ...article };
+  }
+
+  updateProfile(profile: Profile) {
+    this.article = { ...(this.article as Article), author: profile };
   }
 
   deleteArticle(slug: string) {

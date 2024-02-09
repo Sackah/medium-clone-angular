@@ -15,7 +15,7 @@ import { FeedHeaderComponent } from '../components/feed-header/feed-header.compo
 import { ArticleListComponent } from '../components/article-list/article-list.component';
 import { McSpinnerComponent } from '../../../shared/components/loaders/mc-spinner.component';
 import { ErrorPageComponent } from '../../../shared/pages/error-page/error-page.component';
-import { FetchArticlesService } from '../services/fetch-articles.service';
+import { FetchArticlesService } from '../../../shared/services/fetch-articles.service';
 
 @Component({
   selector: 'mc-home-page',

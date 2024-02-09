@@ -13,9 +13,19 @@
             Edit Profile Settings
           </button>
         } @else {
-          <button>
-            Follow {{ userProfile.username }}
-          </button>
+          @if (userProfile.following) {
+            <button 
+              [disabled]="followSignal().pending"
+              (click)="followerWorker.follow(userProfile.username, userProfile.following)">
+              Unfollow {{ userProfile.username }}
+            </button>
+          } @else {
+            <button 
+              [disabled]="followSignal().pending"
+              (click)="followerWorker.follow(userProfile.username, userProfile.following)">
+              Follow {{ userProfile.username }}
+            </button>
+          }
         }
       </span>
   }

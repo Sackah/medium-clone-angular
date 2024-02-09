@@ -5,5 +5,33 @@
     [userProfile]="currentProfile!"
     [user]="user!"
   ></mc-profile-banner>
-  <mc-footer></mc-footer>
+  <main>
+    <section>
+      <mc-profile-feed-header
+        (feedChange)="changeFeed($event)"
+        [feedName]="feedName"
+        [isLoggedIn]="Boolean(user)"
+        [profile]="currentProfile!"
+      ></mc-profile-feed-header>
+      <div class="content">
+        @if (articleSignal().pending) {
+          <span>
+            <mc-spinner></mc-spinner>
+          </span>
+        } @else if (articleSignal().error) {
+          <mc-error-page
+            [error]="articleSignal().error!"
+            (refetch)="fetchFeed()"
+          ></mc-error-page>
+        } @else {
+          <mc-article-list
+            [articles]="articleSignal().data?.articles!"
+          ></mc-article-list>
+        }
+      </div>
+    </section>
+  </main>
+  <footer>
+    <mc-footer></mc-footer>
+  </footer>
 </div>

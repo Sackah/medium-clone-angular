@@ -5,7 +5,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './feed-header.component.html',
-  styleUrl: './feed-header.component.scss',
+  styleUrls: ['../../../../shared/styles/feed-headers.styles.scss']
+
 })
 export class FeedHeaderComponent {
   @Input() isLoggedIn = false;
