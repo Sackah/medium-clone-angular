@@ -1,17 +1,22 @@
-import {Component, inject} from '@angular/core';
-import {MCPage} from '@app/classes/mc-page';
-import {HomeNavComponent} from '@app/pages/home/components/home-nav/home-nav.component';
-import {FooterComponent} from '@shared/components/footer/footer.component';
-import {ProfileBannerComponent} from '../components/profile-banner/profile-banner.component';
-import {ProfileService} from '../services/profile.service';
-import {Profile} from '@shared/types/main.types';
-import {completeSignal, errorSignal, newSignal, pendSignal,} from '@app/utils/signal-factory';
-import {ProfileFeedHeaderComponent} from '../components/profile-feed-header/profile-feed-header.component';
-import {FetchArticlesService} from '@shared/services/fetch-articles.service';
-import {AllArticles} from '@shared/types/article.types';
-import {ArticleListComponent} from '@app/pages/home/components/article-list/article-list.component';
-import {ErrorPageComponent} from '@shared/pages/error-page/error-page.component';
-import {McSpinnerComponent} from '@shared/components/loaders/mc-spinner.component';
+import { Component, inject } from '@angular/core';
+import { MCPage } from '@app/classes/mc-page';
+import { HomeNavComponent } from '@app/pages/home/components/home-nav/home-nav.component';
+import { FooterComponent } from '@shared/components/footer/footer.component';
+import { ProfileBannerComponent } from '../components/profile-banner/profile-banner.component';
+import { ProfileService } from '../services/profile.service';
+import { Profile } from '@shared/types/main.types';
+import {
+  completeSignal,
+  errorSignal,
+  newSignal,
+  pendSignal,
+} from '@app/utils/signal-factory';
+import { ProfileFeedHeaderComponent } from '../components/profile-feed-header/profile-feed-header.component';
+import { FetchArticlesService } from '@shared/services/fetch-articles.service';
+import { AllArticles } from '@shared/types/article.types';
+import { ArticleListComponent } from '@app/pages/home/components/article-list/article-list.component';
+import { ErrorPageComponent } from '@shared/pages/error-page/error-page.component';
+import { McSpinnerComponent } from '@shared/components/loaders/mc-spinner.component';
 
 @Component({
   selector: 'mc-profile-page',
@@ -40,13 +45,12 @@ export class ProfilePageComponent extends MCPage {
 
   constructor() {
     super();
-    this.fetchRouteParameters();
   }
 
   override ngOnInit() {
     super.ngOnInit();
     this.setTitle('Profile');
-    this.fetchProfile(this.userName);
+    this.fetchProfile();
   }
 
   changeFeed(feedName: typeof this.feedName) {
@@ -54,27 +58,31 @@ export class ProfilePageComponent extends MCPage {
     this.fetchFeed(feedName);
   }
 
-  fetchProfile(username: string) {
-    pendSignal(this.profileSignal);
-    const sub = this.profileService.get(username).subscribe({
-      next: (profile) => {
-        this.currentProfile = profile.profile;
-        completeSignal(this.profileSignal, profile);
-        this.feedName = 'personal';
-      },
-      error: (err) => {
-        errorSignal(this.profileSignal, err);
-      },
-    });
-    this.subscriptions.push(sub);
-  }
-
-  fetchRouteParameters() {
-    this.route.params.subscribe({
+  fetchProfile() {
+    const sub = this.route.params.subscribe({
       next: (params) => {
         this.userName = params['userName'];
+
+        pendSignal(this.profileSignal);
+        pendSignal(this.articleSignal);
+
+        const sub = this.profileService.get(this.userName).subscribe({
+          next: (profile) => {
+            this.currentProfile = profile.profile;
+            completeSignal(this.profileSignal, profile);
+            this.feedName = 'personal';
+            this.fetchFeed();
+          },
+          error: (err) => {
+            errorSignal(this.profileSignal, err);
+          },
+        });
+
+        this.subscriptions.push(sub);
       },
     });
+
+    this.subscriptions.push(sub);
   }
 
   fetchFeed(feedName = this.feedName) {

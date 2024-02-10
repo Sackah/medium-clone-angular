@@ -1,9 +1,9 @@
-import {Component, Input, OnDestroy} from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {Article} from '@shared/types/main.types';
-import {formatDate} from '@app/utils/format-date';
-import {newSignal} from '@app/utils/signal-factory';
-import {FavouriteArticleWorker} from '@app/classes/mc-favorites-worker';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Article } from '@shared/types/main.types';
+import { formatDate } from '@app/utils/format-date';
+import { newSignal } from '@app/utils/signal-factory';
+import { FavouriteArticleWorker } from '@/app/workers/favorites.worker';
 
 @Component({
   selector: 'mc-article-list',

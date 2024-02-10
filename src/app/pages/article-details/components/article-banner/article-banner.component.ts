@@ -1,13 +1,18 @@
-import {Component, inject, Input, OnDestroy} from '@angular/core';
-import {User} from '@shared/types/auth.types';
-import {Article, Profile} from '@shared/types/main.types';
-import {formatDate} from '@app/utils/format-date';
-import {EditArticleService} from '../../services/edit-article.service';
-import {Router, RouterLink} from '@angular/router';
-import {FavouriteArticleWorker} from '@app/classes/mc-favorites-worker';
-import {completeSignal, errorSignal, newSignal, pendSignal,} from '@app/utils/signal-factory';
-import {FollowProfileWorker} from '@app/classes/mc-followers-worker';
-import {Subscription} from 'rxjs';
+import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { User } from '@shared/types/auth.types';
+import { Article, Profile } from '@shared/types/main.types';
+import { formatDate } from '@app/utils/format-date';
+import { EditArticleService } from '../../services/edit-article.service';
+import { Router, RouterLink } from '@angular/router';
+import { FavouriteArticleWorker } from '@/app/workers/favorites.worker';
+import {
+  completeSignal,
+  errorSignal,
+  newSignal,
+  pendSignal,
+} from '@app/utils/signal-factory';
+import { FollowProfileWorker } from '@/app/workers/followers.worker';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'mc-article-banner',
@@ -55,11 +60,11 @@ export class ArticleBannerComponent implements OnDestroy {
   }
 
   updateArticle(article: Article) {
-    this.article = {...(this.article as Article), ...article};
+    this.article = { ...(this.article as Article), ...article };
   }
 
   updateProfile(profile: Profile) {
-    this.article = {...(this.article as Article), author: profile};
+    this.article = { ...(this.article as Article), author: profile };
   }
 
   deleteArticle(slug: string) {
