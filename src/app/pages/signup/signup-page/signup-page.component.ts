@@ -4,15 +4,15 @@ import { SignupFormComponent } from '../components/signup-form/signup-form.compo
 import {
   SignUpState,
   SignUpUserDetails,
-} from '../../../shared/types/auth.types';
+} from '@shared/types/auth.types';
 import { combineLatest } from 'rxjs';
 import {
   selectErrors,
   selectIsSubmitting,
-} from '../../../auth/store/signup/reducers';
-import { signUpActions } from '../../../auth/store/signup/actions';
-import { MCPage } from '../../../classes/mc-page';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
+} from '@app/auth/store/signup/reducers';
+import { signUpActions } from '@app/auth/store/signup/actions';
+import { MCPage } from '@app/classes/mc-page';
+import { FooterComponent } from '@shared/components/footer/footer.component';
 
 @Component({
   selector: 'mc-signup-page',

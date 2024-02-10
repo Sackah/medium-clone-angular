@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {CurrentUserService, UserData} from "../../../../shared/services/current-user.service";
+import {CurrentUserService, UserData} from "@shared/services/current-user.service";
 import {Subscription} from "rxjs";
 
 @Component({

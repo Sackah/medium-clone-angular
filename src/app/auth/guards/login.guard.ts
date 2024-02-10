@@ -1,6 +1,6 @@
 import {inject} from "@angular/core";
 import {Router} from "@angular/router";
-import {CurrentUserService} from "../../shared/services/current-user.service";
+import {CurrentUserService} from "@shared/services/current-user.service";
 
 export const LoginGuard = async () => {
   const currentUserService = inject(CurrentUserService);

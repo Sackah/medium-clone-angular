@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {updateUserActions} from "./actions";
 import {UpdateUserService} from "../services/update-user.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {CurrentUserService} from "../../../shared/services/current-user.service";
+import {CurrentUserService} from "@shared/services/current-user.service";
 
 export const updateUserEffects = createEffect(
   (

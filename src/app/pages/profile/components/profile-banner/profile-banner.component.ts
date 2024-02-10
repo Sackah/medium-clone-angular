@@ -1,10 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Article, Profile } from '../../../../shared/types/main.types';
-import { User } from '../../../../shared/types/auth.types';
-import { McSpinnerComponent } from '../../../../shared/components/loaders/mc-spinner.component';
-import { FollowProfileWorker } from '../../../../classes/mc-followers-worker';
-import { newSignal } from '../../../../utils/signal-factory';
+import { Article, Profile } from '@shared/types/main.types';
+import { User } from '@shared/types/auth.types';
+import { McSpinnerComponent } from '@shared/components/loaders/mc-spinner.component';
+import { FollowProfileWorker } from '@app/classes/mc-followers-worker';
+import { newSignal } from '@app/utils/signal-factory';
 
 @Component({
   selector: 'mc-profile-banner',

@@ -3,7 +3,7 @@ import {
   BackendErrors,
   SignUpUserDetails,
   SignUpUserResponse
-} from '../../../shared/types/auth.types';
+} from '@shared/types/auth.types';
 
 export const signUpActions = createActionGroup({
   source: 'signup',

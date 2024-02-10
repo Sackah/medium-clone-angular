@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { LoginNavComponent } from '../components/login-nav/login-nav.component';
 import { LoginFormComponent } from '../components/login-form/login-form.component';
-import { loginActions } from '../../../auth/store/login/actions';
-import { LoginState, LoginUserDetails } from '../../../shared/types/auth.types';
+import { loginActions } from '@app/auth/store/login/actions';
+import { LoginState, LoginUserDetails } from '@shared/types/auth.types';
 import { combineLatest } from 'rxjs';
 import {
   selectErrors,
   selectIsSubmitting,
-} from '../../../auth/store/login/reducers';
-import { MCPage } from '../../../classes/mc-page';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
+} from '@app/auth/store/login/reducers';
+import { MCPage } from '@app/classes/mc-page';
+import { FooterComponent } from '@shared/components/footer/footer.component';
 
 @Component({
   selector: 'mc-login-page',

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {SignUpUserDetails, SignUpUserResponse} from "../../shared/types/auth.types";
-import {environment} from "../../../environments/environment.development";
-import { MCService } from '../../classes/mc-service';
+import {SignUpUserDetails, SignUpUserResponse} from "@shared/types/auth.types";
+import {environment} from "@/environments/environment.development";
+import { MCService } from '@app/classes/mc-service';
 
 @Injectable({
   providedIn: 'root'

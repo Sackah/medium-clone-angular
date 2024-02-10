@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MCService } from '../../classes/mc-service';
+import { MCService } from '@app/classes/mc-service';
 import { AllArticles } from '../types/article.types';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '@/environments/environment.development';
 import { catchError } from 'rxjs';
 
 @Injectable({
@@ -44,5 +44,5 @@ export class FetchArticlesService extends MCService {
       )
       .pipe(catchError((error) => this.onError(error)));
   }
-  
+
 }

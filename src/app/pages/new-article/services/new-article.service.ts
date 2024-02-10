@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../../../environments/environment.development";
-import {NewArticleDetails, NewArticleResponse} from "../../../shared/types/editor.types";
-import { MCService } from '../../../classes/mc-service';
+import {environment} from "@/environments/environment.development";
+import {NewArticleDetails, NewArticleResponse} from "@shared/types/editor.types";
+import { MCService } from '@app/classes/mc-service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,5 @@ export class NewArticleService extends MCService {
         this.headers
       )
   }
-  
+
 }

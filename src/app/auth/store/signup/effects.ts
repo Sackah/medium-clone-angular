@@ -4,9 +4,9 @@ import {catchError, map, of, switchMap, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {signUpActions} from "./actions";
 import {SignupService} from "../../services/signup.service";
-import {TokenService} from "../../../shared/services/token.service";
+import {TokenService} from "@shared/services/token.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {CurrentUserService} from "../../../shared/services/current-user.service";
+import {CurrentUserService} from "@shared/services/current-user.service";
 
 
 export const signUpEffects = createEffect(

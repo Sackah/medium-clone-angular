@@ -1,6 +1,6 @@
 import {createActionGroup, props} from '@ngrx/store';
-import {BackendErrors} from "../../../shared/types/auth.types";
-import {UpdateUserDetails, UpdateUserResponse} from "../../../shared/types/update-user.types";
+import {BackendErrors} from "@shared/types/auth.types";
+import {UpdateUserDetails, UpdateUserResponse} from "@shared/types/update-user.types";
 
 export const updateUserActions = createActionGroup({
   source: 'updateUser',

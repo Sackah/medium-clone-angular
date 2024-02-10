@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../../../environments/environment.development";
-import {NewArticleResponse} from "../../../shared/types/editor.types";
+import {environment} from "@/environments/environment.development";
+import {NewArticleResponse} from "@shared/types/editor.types";
 import {catchError} from "rxjs";
-import {MCService} from '../../../classes/mc-service';
+import {MCService} from '@app/classes/mc-service';
 
 @Injectable({
   providedIn: 'root'

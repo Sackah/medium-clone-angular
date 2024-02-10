@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { HomeNavComponent } from '../../home/components/home-nav/home-nav.component';
-import { MCPage } from '../../../classes/mc-page';
+import { MCPage } from '@app/classes/mc-page';
 import { SettingsFormComponent } from '../components/settings-form/settings-form.component';
 import {
   UpdateUserDetails,
   UpdateUserState,
-} from '../../../shared/types/update-user.types';
+} from '@shared/types/update-user.types';
 import { combineLatest } from 'rxjs';
 import { selectErrors, selectIsSubmitting } from '../store/reducers';
 import { updateUserActions } from '../store/actions';
-import { TokenService } from '../../../shared/services/token.service';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
+import { TokenService } from '@shared/services/token.service';
+import { FooterComponent } from '@shared/components/footer/footer.component';
 
 @Component({
   selector: 'mc-settings-page',

@@ -1,15 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { WritableSignal, inject } from '@angular/core';
-import { FollowProfileService } from '../shared/services/follow-profile.service';
-import { Subscription, take, tap } from 'rxjs';
-import { Router } from '@angular/router';
-import {
-  completeSignal,
-  errorSignal,
-  pendSignal,
-} from '../utils/signal-factory';
-import { Article, Profile } from '../shared/types/main.types';
-import { CurrentUserService } from '../shared/services/current-user.service';
+import {HttpClient} from '@angular/common/http';
+import {inject, WritableSignal} from '@angular/core';
+import {FollowProfileService} from '@shared/services/follow-profile.service';
+import {Subscription, take, tap} from 'rxjs';
+import {Router} from '@angular/router';
+import {completeSignal, errorSignal, pendSignal,} from '@app/utils/signal-factory';
+import {Profile} from '@shared/types/main.types';
+import {CurrentUserService} from '@shared/services/current-user.service';
 
 export class FollowProfileWorker {
   readonly http = inject(HttpClient);
@@ -55,9 +51,9 @@ export class FollowProfileWorker {
     this.currentUserService.user
       .pipe(
         take(1),
-        tap((user) => {
+        tap(async (user) => {
           if (!user.data) {
-            this.router.navigateByUrl('/login');
+            await this.router.navigateByUrl('/login');
           } else {
             continueExecution();
           }

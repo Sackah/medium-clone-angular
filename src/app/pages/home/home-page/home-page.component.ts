@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { LoginNavComponent } from '../../login/components/login-nav/login-nav.component';
 import { HomeNavComponent } from '../components/home-nav/home-nav.component';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
-import { MCPage } from '../../../classes/mc-page';
-import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import { AllArticles } from '../../../shared/types/article.types';
+import { FooterComponent } from '@shared/components/footer/footer.component';
+import { MCPage } from '@app/classes/mc-page';
+import { PaginationComponent } from '@shared/components/pagination/pagination.component';
+import { AllArticles } from '@shared/types/article.types';
 import {
   completeSignal,
   errorSignal,

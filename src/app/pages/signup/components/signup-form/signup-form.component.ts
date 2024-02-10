@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MCFormComponent } from '../../../../classes/mc-form';
+import { MCFormComponent } from '@app/classes/mc-form';
 import {
   BackendErrors,
   SignUpUserDetails,
-} from '../../../../shared/types/auth.types';
+} from '@shared/types/auth.types';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BackendErrorsComponent } from '../../../../shared/components/backend-errors/backend-errors.component';
-import { ButtonSpinnerComponent } from '../../../../shared/components/loaders/button-spinner.component';
+import { BackendErrorsComponent } from '@shared/components/backend-errors/backend-errors.component';
+import { ButtonSpinnerComponent } from '@shared/components/loaders/button-spinner.component';
 
 @Component({
   selector: 'mc-signup-form',

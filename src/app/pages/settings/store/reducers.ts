@@ -1,5 +1,5 @@
 import {createFeature, createReducer, on} from '@ngrx/store';
-import {UpdateUserState} from "../../../shared/types/update-user.types";
+import {UpdateUserState} from "@shared/types/update-user.types";
 import {updateUserActions} from "./actions";
 
 const initialState: UpdateUserState = {

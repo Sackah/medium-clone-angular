@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ButtonSpinnerComponent } from '../../../../shared/components/loaders/button-spinner.component';
-import { MCFormComponent } from '../../../../classes/mc-form';
+import { ButtonSpinnerComponent } from '@shared/components/loaders/button-spinner.component';
+import { MCFormComponent } from '@app/classes/mc-form';
 import {
   FormControl,
   FormGroup,
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import {
   BackendErrors,
   LoginUserDetails,
-} from '../../../../shared/types/auth.types';
+} from '@shared/types/auth.types';
 import { BackendErrorsComponent } from '../../../../shared/components/backend-errors/backend-errors.component';
 import { RouterLink } from '@angular/router';
 

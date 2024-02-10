@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MCService } from '../../classes/mc-service';
+import { MCService } from '@app/classes/mc-service';
 import { Article } from '../types/main.types';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '@/environments/environment.development';
 import { catchError, map } from 'rxjs';
 
 @Injectable({

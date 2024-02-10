@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { LoginState } from '../../../shared/types/auth.types';
+import { LoginState } from '@shared/types/auth.types';
 import { loginActions } from './actions';
 
 const initialState: LoginState = {

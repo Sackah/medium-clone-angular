@@ -1,6 +1,6 @@
 import {createActionGroup, props} from '@ngrx/store';
-import {BackendErrors} from '../../../shared/types/auth.types';
-import {EditArticleDetails, NewArticleDetails, NewArticleResponse,} from '../../../shared/types/editor.types';
+import {BackendErrors} from '@shared/types/auth.types';
+import {EditArticleDetails, NewArticleDetails, NewArticleResponse,} from '@shared/types/editor.types';
 
 export const articleActions = createActionGroup({
   source: 'edit',

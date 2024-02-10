@@ -1,22 +1,17 @@
-import { Component, inject } from '@angular/core';
-import { MCPage } from '../../../classes/mc-page';
-import { HomeNavComponent } from '../../home/components/home-nav/home-nav.component';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
-import { ProfileBannerComponent } from '../components/profile-banner/profile-banner.component';
-import { ProfileService } from '../services/profile.service';
-import { Profile } from '../../../shared/types/main.types';
-import {
-  completeSignal,
-  errorSignal,
-  newSignal,
-  pendSignal,
-} from '../../../utils/signal-factory';
-import { ProfileFeedHeaderComponent } from '../components/profile-feed-header/profile-feed-header.component';
-import { FetchArticlesService } from '../../../shared/services/fetch-articles.service';
-import { AllArticles } from '../../../shared/types/article.types';
-import { ArticleListComponent } from '../../home/components/article-list/article-list.component';
-import { ErrorPageComponent } from '../../../shared/pages/error-page/error-page.component';
-import { McSpinnerComponent } from '../../../shared/components/loaders/mc-spinner.component';
+import {Component, inject} from '@angular/core';
+import {MCPage} from '@app/classes/mc-page';
+import {HomeNavComponent} from '@app/pages/home/components/home-nav/home-nav.component';
+import {FooterComponent} from '@shared/components/footer/footer.component';
+import {ProfileBannerComponent} from '../components/profile-banner/profile-banner.component';
+import {ProfileService} from '../services/profile.service';
+import {Profile} from '@shared/types/main.types';
+import {completeSignal, errorSignal, newSignal, pendSignal,} from '@app/utils/signal-factory';
+import {ProfileFeedHeaderComponent} from '../components/profile-feed-header/profile-feed-header.component';
+import {FetchArticlesService} from '@shared/services/fetch-articles.service';
+import {AllArticles} from '@shared/types/article.types';
+import {ArticleListComponent} from '@app/pages/home/components/article-list/article-list.component';
+import {ErrorPageComponent} from '@shared/pages/error-page/error-page.component';
+import {McSpinnerComponent} from '@shared/components/loaders/mc-spinner.component';
 
 @Component({
   selector: 'mc-profile-page',
@@ -38,10 +33,10 @@ export class ProfilePageComponent extends MCPage {
   profileService = inject(ProfileService);
   profileSignal = newSignal<{ profile: Profile }>();
   currentProfile: Profile | undefined = undefined;
-  private feedName: 'favorites' | 'personal' | undefined = undefined;
-  private articlesService = inject(FetchArticlesService);
-  private articleSignal = newSignal<AllArticles>();
+  feedName: 'favorites' | 'personal' | undefined = undefined;
+  articleSignal = newSignal<AllArticles>();
   protected readonly Boolean = Boolean;
+  private articlesService = inject(FetchArticlesService);
 
   constructor() {
     super();

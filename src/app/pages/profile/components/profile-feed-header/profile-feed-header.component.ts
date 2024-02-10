@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, SimpleChanges,} from '@angular/core';
-import {Profile} from '../../../../shared/types/main.types';
+import {Profile} from '@shared/types/main.types';
 
 @Component({
   selector: 'mc-profile-feed-header',

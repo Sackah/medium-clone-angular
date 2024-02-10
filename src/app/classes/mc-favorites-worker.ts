@@ -1,11 +1,11 @@
 import {inject, Inject, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {FavoriteArticleService} from '../shared/services/favorite-article.service';
+import {FavoriteArticleService} from '@shared/services/favorite-article.service';
 import {Subscription, take, tap} from 'rxjs';
-import {completeSignal, errorSignal, pendSignal,} from '../utils/signal-factory';
-import {CurrentUserService} from '../shared/services/current-user.service';
+import {completeSignal, errorSignal, pendSignal,} from '@app/utils/signal-factory';
+import {CurrentUserService} from '@shared/services/current-user.service';
 import {Router} from '@angular/router';
-import { Article, Profile } from '../shared/types/main.types';
+import {Article} from '@shared/types/main.types';
 
 export class FavouriteArticleWorker {
   readonly http = Inject(HttpClient);
@@ -35,7 +35,9 @@ export class FavouriteArticleWorker {
     const continueExecution = () => {
       const sub = this.favoriteArticleService.favorite(slug).subscribe({
         next: (article) => {
-          this.articleSignal ? completeSignal(this.articleSignal, article) : null;
+          this.articleSignal
+            ? completeSignal(this.articleSignal, article)
+            : null;
           this.updaterFn ? this.updaterFn(article) : null;
         },
         error: (err) => {
@@ -46,16 +48,18 @@ export class FavouriteArticleWorker {
       this.subscriptions.push(sub);
     };
 
-    this.currentUserService.user.pipe(
-      take(1),
-      tap((user) => {
-        if (!user.data) {
-          this.router.navigateByUrl('/login');
-        } else {
-          continueExecution();
-        }
-      })
-    ).subscribe();
+    this.currentUserService.user
+      .pipe(
+        take(1),
+        tap(async (user) => {
+          if (!user.data) {
+            await this.router.navigateByUrl('/login');
+          } else {
+            continueExecution();
+          }
+        })
+      )
+      .subscribe();
   }
 
   unfavorite(slug: string) {

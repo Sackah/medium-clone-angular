@@ -1,14 +1,14 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { User } from '../shared/types/auth.types';
-import { CurrentUserService } from '../shared/services/current-user.service';
+import { User } from '@shared/types/auth.types';
+import { CurrentUserService } from '@shared/services/current-user.service';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({ standalone: true, template: '' })
 export class MCPage implements OnInit, OnDestroy {
-  protected  readonly subscriptions: Subscription[] = [];
+  protected readonly subscriptions: Subscription[] = [];
   readonly store = inject(Store);
   readonly currentUserService = inject(CurrentUserService);
   protected user?: User;
