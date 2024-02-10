@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { MCService } from '@app/classes/mc-service';
-import { environment } from '@/environments/environment.development';
-import { catchError, map } from 'rxjs';
-import { Profile } from '../types/main.types';
+import {Injectable} from '@angular/core';
+import {MCService} from '@app/classes/mc-service';
+import {environment} from '@/environments/environment.development';
+import {catchError, map} from 'rxjs';
+import {Profile} from '../types/main.types';
 
 @Injectable({
   providedIn: 'root',

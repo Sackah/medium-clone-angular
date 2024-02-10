@@ -1,21 +1,16 @@
-import { Component, inject } from '@angular/core';
-import { LoginNavComponent } from '../../login/components/login-nav/login-nav.component';
-import { HomeNavComponent } from '../components/home-nav/home-nav.component';
-import { FooterComponent } from '@shared/components/footer/footer.component';
-import { MCPage } from '@app/classes/mc-page';
-import { PaginationComponent } from '@shared/components/pagination/pagination.component';
-import { AllArticles } from '@shared/types/article.types';
-import {
-  completeSignal,
-  errorSignal,
-  newSignal,
-  pendSignal,
-} from '../../../utils/signal-factory';
-import { FeedHeaderComponent } from '../components/feed-header/feed-header.component';
-import { ArticleListComponent } from '../components/article-list/article-list.component';
-import { McSpinnerComponent } from '../../../shared/components/loaders/mc-spinner.component';
-import { ErrorPageComponent } from '../../../shared/pages/error-page/error-page.component';
-import { FetchArticlesService } from '../../../shared/services/fetch-articles.service';
+import {Component, inject} from '@angular/core';
+import {LoginNavComponent} from '../../login/components/login-nav/login-nav.component';
+import {HomeNavComponent} from '../components/home-nav/home-nav.component';
+import {FooterComponent} from '@shared/components/footer/footer.component';
+import {MCPage} from '@app/classes/mc-page';
+import {PaginationComponent} from '@shared/components/pagination/pagination.component';
+import {AllArticles} from '@shared/types/article.types';
+import {completeSignal, errorSignal, newSignal, pendSignal,} from '../../../utils/signal-factory';
+import {FeedHeaderComponent} from '../components/feed-header/feed-header.component';
+import {ArticleListComponent} from '../components/article-list/article-list.component';
+import {McSpinnerComponent} from '../../../shared/components/loaders/mc-spinner.component';
+import {ErrorPageComponent} from '../../../shared/pages/error-page/error-page.component';
+import {FetchArticlesService} from '../../../shared/services/fetch-articles.service';
 
 @Component({
   selector: 'mc-home-page',

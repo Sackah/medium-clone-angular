@@ -42,6 +42,7 @@ section {
         color: light-comp($grey-6);
         background: $grey-6;
       }
+
       &:disabled {
         cursor: not-allowed;
       }

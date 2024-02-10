@@ -1,18 +1,12 @@
-import { Component } from '@angular/core';
-import { LoginNavComponent } from '../../login/components/login-nav/login-nav.component';
-import { SignupFormComponent } from '../components/signup-form/signup-form.component';
-import {
-  SignUpState,
-  SignUpUserDetails,
-} from '@shared/types/auth.types';
-import { combineLatest } from 'rxjs';
-import {
-  selectErrors,
-  selectIsSubmitting,
-} from '@app/auth/store/signup/reducers';
-import { signUpActions } from '@app/auth/store/signup/actions';
-import { MCPage } from '@app/classes/mc-page';
-import { FooterComponent } from '@shared/components/footer/footer.component';
+import {Component} from '@angular/core';
+import {LoginNavComponent} from '../../login/components/login-nav/login-nav.component';
+import {SignupFormComponent} from '../components/signup-form/signup-form.component';
+import {SignUpState, SignUpUserDetails,} from '@shared/types/auth.types';
+import {combineLatest} from 'rxjs';
+import {selectErrors, selectIsSubmitting,} from '@app/auth/store/signup/reducers';
+import {signUpActions} from '@app/auth/store/signup/actions';
+import {MCPage} from '@app/classes/mc-page';
+import {FooterComponent} from '@shared/components/footer/footer.component';
 
 @Component({
   selector: 'mc-signup-page',

@@ -1,5 +1,5 @@
 import {createFeature, createReducer, on} from '@ngrx/store';
-import {NewArticleState} from '../../../shared/types/editor.types';
+import {NewArticleState} from '@shared/types/editor.types';
 import {articleActions} from './actions';
 
 const initialState: NewArticleState = {

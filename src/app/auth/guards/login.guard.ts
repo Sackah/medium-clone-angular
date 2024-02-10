@@ -7,7 +7,7 @@ export const LoginGuard = async () => {
   const router = inject(Router);
 
   currentUserService.user.subscribe({
-    next: async (user)=>{
+    next: async (user) => {
       if (!user.isLoggedIn) {
         return true;
       } else {

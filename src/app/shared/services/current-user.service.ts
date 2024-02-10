@@ -1,10 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, of, tap} from 'rxjs';
 import {LoginUserResponse, User} from '../types/auth.types';
-import {HttpClient} from '@angular/common/http';
 import {TokenService} from './token.service';
 import {environment} from '@/environments/environment.development';
-import { MCService } from '@app/classes/mc-service';
+import {MCService} from '@app/classes/mc-service';
 
 export interface UserData {
   data: User | null;
@@ -18,7 +17,7 @@ export interface UserData {
 @Injectable({
   providedIn: 'root',
 })
-export class CurrentUserService extends MCService{
+export class CurrentUserService extends MCService {
   tokenService = inject(TokenService);
   private userDataSource = new BehaviorSubject<UserData>({
     data: null,
@@ -60,11 +59,11 @@ export class CurrentUserService extends MCService{
     }
   }
 
-/**
- * @method setCurrentUser - A method for setting the current user when we get the user after
- * making an api call ex: login
- * @param user
- */
+  /**
+   * @method setCurrentUser - A method for setting the current user when we get the user after
+   * making an api call ex: login
+   * @param user
+   */
   setCurrentUser(user: User) {
     this.userDataSource.next({
       data: user,

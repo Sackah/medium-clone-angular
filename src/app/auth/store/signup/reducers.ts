@@ -1,6 +1,6 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { SignUpState } from '@shared/types/auth.types';
-import { signUpActions } from './actions';
+import {createFeature, createReducer, on} from '@ngrx/store';
+import {SignUpState} from '@shared/types/auth.types';
+import {signUpActions} from './actions';
 
 const initialState: SignUpState = {
   isSubmitting: false,
@@ -12,16 +12,16 @@ const signUpFeature = createFeature({
   name: 'signup',
   reducer: createReducer(
     initialState,
-    on(signUpActions.signUp, (state)=>({
+    on(signUpActions.signUp, (state) => ({
       ...state,
       isSubmitting: true
     })),
-    on(signUpActions.signUpSuccess, (state, action)=>({
+    on(signUpActions.signUpSuccess, (state, action) => ({
       ...state,
       isSubmitting: false,
       user: action.user,
     })),
-    on(signUpActions.signUpFailure, (state, action)=>({
+    on(signUpActions.signUpFailure, (state, action) => ({
       ...state,
       isSubmitting: false,
       user: null,

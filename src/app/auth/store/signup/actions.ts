@@ -1,9 +1,5 @@
-import { createActionGroup, props } from '@ngrx/store';
-import {
-  BackendErrors,
-  SignUpUserDetails,
-  SignUpUserResponse
-} from '@shared/types/auth.types';
+import {createActionGroup, props} from '@ngrx/store';
+import {BackendErrors, SignUpUserDetails, SignUpUserResponse} from '@shared/types/auth.types';
 
 export const signUpActions = createActionGroup({
   source: 'signup',

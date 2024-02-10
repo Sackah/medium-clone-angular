@@ -1,18 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { HomeNavComponent } from '../../home/components/home-nav/home-nav.component';
-import { FooterComponent } from '@shared/components/footer/footer.component';
-import { EditorFormComponent } from '../components/editor-form/editor-form.component';
-import {
-  EditArticleDetails,
-  NewArticleDetails,
-  NewArticleState,
-} from '@shared/types/editor.types';
-import { MCPage } from '@app/classes/mc-page';
-import { combineLatest } from 'rxjs';
-import { selectErrors, selectIsSubmitting } from '../store/reducers';
-import { articleActions } from '../store/actions';
-import { EditArticleService } from '../../article-details/services/edit-article.service';
-import { Article } from '@shared/types/main.types';
+import {Component, inject} from '@angular/core';
+import {HomeNavComponent} from '../../home/components/home-nav/home-nav.component';
+import {FooterComponent} from '@shared/components/footer/footer.component';
+import {EditorFormComponent} from '../components/editor-form/editor-form.component';
+import {EditArticleDetails, NewArticleDetails, NewArticleState,} from '@shared/types/editor.types';
+import {MCPage} from '@app/classes/mc-page';
+import {combineLatest} from 'rxjs';
+import {selectErrors, selectIsSubmitting} from '../store/reducers';
+import {articleActions} from '../store/actions';
+import {EditArticleService} from '../../article-details/services/edit-article.service';
+import {Article} from '@shared/types/main.types';
 
 @Component({
   selector: 'mc-editor-page',

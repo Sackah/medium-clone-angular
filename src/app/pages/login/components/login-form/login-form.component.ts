@@ -1,19 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ButtonSpinnerComponent } from '@shared/components/loaders/button-spinner.component';
-import { MCFormComponent } from '@app/classes/mc-form';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import {
-  BackendErrors,
-  LoginUserDetails,
-} from '@shared/types/auth.types';
-import { BackendErrorsComponent } from '../../../../shared/components/backend-errors/backend-errors.component';
-import { RouterLink } from '@angular/router';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ButtonSpinnerComponent} from '@shared/components/loaders/button-spinner.component';
+import {MCFormComponent} from '@app/classes/mc-form';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {BackendErrors, LoginUserDetails,} from '@shared/types/auth.types';
+import {BackendErrorsComponent} from '../../../../shared/components/backend-errors/backend-errors.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'mc-login-form',
@@ -47,7 +39,7 @@ export class LoginFormComponent extends MCFormComponent {
 
   handleSubmit() {
     if (this.form.valid) {
-      this.userDetails.emit({ user: this.form.value });
+      this.userDetails.emit({user: this.form.value});
     }
   }
 }
