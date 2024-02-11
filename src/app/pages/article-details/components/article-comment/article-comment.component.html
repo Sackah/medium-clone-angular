@@ -9,6 +9,13 @@
     ></mc-article-meta>
   </div>
   <div class="form">
-    <mc-comments-form></mc-comments-form>
+    @if (user) {
+      <mc-comments-form
+        [user]="user"
+      ></mc-comments-form>
+    } @else {
+      <p><a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
+        article</p>
+    }
   </div>
 </section>

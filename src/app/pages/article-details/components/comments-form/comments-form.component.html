@@ -1,5 +1,11 @@
 <section>
   <form (submit)="handleSubmit()" [formGroup]="form">
     <textarea formControlName="body" name="body" placeholder="Write a comment..." rows="8"></textarea>
+    <main>
+      <div class="img">
+        <img [src]="user?.image" alt="">
+      </div>
+      <button>Post comment</button>
+    </main>
   </form>
 </section>

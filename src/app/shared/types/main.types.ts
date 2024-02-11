@@ -1,4 +1,4 @@
-import { BackendErrors } from './auth.types';
+import {BackendErrors} from './auth.types';
 
 export interface Profile {
   username: string;
@@ -31,3 +31,11 @@ export type Tag = string;
 export type FeedNames = 'global' | 'personal' | 'favorites' | 'feed';
 
 export type GeneralFeedNames = FeedNames | Tag;
+
+export interface Comment {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  author: Profile;
+}

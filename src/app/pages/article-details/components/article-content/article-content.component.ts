@@ -6,7 +6,7 @@ import {Article} from "@shared/types/main.types";
   standalone: true,
   imports: [],
   templateUrl: './article-content.component.html',
-  styleUrl: './article-content.component.scss'
+  styleUrls: ['./article-content.component.scss', '../../../../shared/styles/taglist.styles.scss']
 })
 export class ArticleContentComponent {
   @Input() article: Article | undefined = undefined;

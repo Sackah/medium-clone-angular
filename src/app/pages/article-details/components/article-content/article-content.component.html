@@ -1,5 +1,11 @@
 @if (article) {
   <article>
     <p>{{ article.body }}</p>
+    <ul>
+      @for (tag of article.tagList; track $index) {
+        <li>{{ tag }}</li>
+      }
+    </ul>
+    <hr>
   </article>
 }

@@ -9,6 +9,19 @@ section {
   }
 
   div.form {
-    width: 45vw;
+    width: 55vw;
+  }
+
+  p {
+    margin: 2rem 0;
+
+    a {
+      text-decoration: none;
+      color: $main-green;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }

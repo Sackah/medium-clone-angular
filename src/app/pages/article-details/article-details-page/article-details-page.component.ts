@@ -43,7 +43,7 @@ export class ArticleDetailsPageComponent extends MCPage {
 
   override ngOnInit() {
     super.ngOnInit();
-    this.setTitle('Details');
+    this.setTitle(`${this.articleSlug}`);
     this.fetchArticle();
   }
 
