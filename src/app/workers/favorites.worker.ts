@@ -10,6 +10,8 @@ import {
 import {CurrentUserService} from '@shared/services/current-user.service';
 import {Router} from '@angular/router';
 import {Article} from '@shared/types/main.types';
+import {User} from '../shared/types/auth.types';
+import {EditArticleService} from '../pages/article-details/services/edit-article.service';
 
 export class FavouriteArticleWorker {
   readonly http = Inject(HttpClient);
@@ -19,6 +21,7 @@ export class FavouriteArticleWorker {
   private readonly updaterFn;
   private currentUserService = inject(CurrentUserService);
   private router = inject(Router);
+  private readonly editArticleService = inject(EditArticleService);
 
   constructor(
     articleSignal?: WritableSignal<any>,
@@ -77,6 +80,21 @@ export class FavouriteArticleWorker {
       },
     });
 
+    this.subscriptions.push(sub);
+  }
+
+  deleteArticle(slug: string, user: User | undefined) {
+    this.articleSignal ? pendSignal(this.articleSignal) : null;
+
+    const sub = this.editArticleService.delete(slug).subscribe({
+      next: async (data) => {
+        this.articleSignal ? completeSignal(this.articleSignal, data) : null;
+        await this.router.navigateByUrl(`/profile/${user?.username}`);
+      },
+      error: (err) => {
+        this.articleSignal ? errorSignal(this.articleSignal, err) : null;
+      },
+    });
     this.subscriptions.push(sub);
   }
 

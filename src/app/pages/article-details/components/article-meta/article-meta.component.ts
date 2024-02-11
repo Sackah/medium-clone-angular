@@ -1,27 +1,39 @@
-import {Component, EventEmitter, inject, Input, OnDestroy, Output} from '@angular/core';
-import {Router, RouterLink} from "@angular/router";
-import {Article, Profile} from "@shared/types/main.types";
-import {formatDate} from "@app/utils/format-date";
-import {User} from "@shared/types/auth.types";
-import {EditArticleService} from "@app/pages/article-details/services/edit-article.service";
-import {FavouriteArticleWorker} from "@app/workers/favorites.worker";
-import {FollowProfileWorker} from "@app/workers/followers.worker";
-import {completeSignal, errorSignal, newSignal, pendSignal} from "@app/utils/signal-factory";
-import {Subscription} from "rxjs";
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {Article, Profile} from '@shared/types/main.types';
+import {formatDate} from '@app/utils/format-date';
+import {User} from '@shared/types/auth.types';
+import {EditArticleService} from '@app/pages/article-details/services/edit-article.service';
+import {FavouriteArticleWorker} from '@app/workers/favorites.worker';
+import {FollowProfileWorker} from '@app/workers/followers.worker';
+import {
+  completeSignal,
+  errorSignal,
+  newSignal,
+  pendSignal,
+} from '@app/utils/signal-factory';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'mc-article-meta',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './article-meta.component.html',
-  styleUrl: './article-meta.component.scss'
+  styleUrl: './article-meta.component.scss',
 })
 export class ArticleMetaComponent implements OnDestroy {
   @Input() user?: User;
   @Input() lightBg: boolean = false;
   @Input() article?: Article;
   @Input() slug: string = '';
-  @Output() updatedArticle = new EventEmitter<Article>()
+  @Output() updatedArticle = new EventEmitter<Article>();
   router = inject(Router);
   editArticleService = inject(EditArticleService);
   favoriteArticleWorker: FavouriteArticleWorker;
@@ -67,18 +79,7 @@ export class ArticleMetaComponent implements OnDestroy {
   }
 
   deleteArticle(slug: string) {
-    pendSignal(this.articleSignal);
-
-    const sub = this.editArticleService.delete(slug).subscribe({
-      next: async (data) => {
-        completeSignal(this.articleSignal, data);
-        await this.router.navigateByUrl(`/profile/${this.user?.username}`);
-      },
-      error: (err) => {
-        errorSignal(this.articleSignal, err);
-      },
-    });
-    this.subscriptions.push(sub);
+    this.favoriteArticleWorker.deleteArticle(slug, this.user);
   }
 
   ngOnDestroy(): void {

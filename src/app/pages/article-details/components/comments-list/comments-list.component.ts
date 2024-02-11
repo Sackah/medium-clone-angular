@@ -1,4 +1,11 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges,} from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {newSignal} from '@app/utils/signal-factory';
 import {CommentsWorker} from '@app/workers/comments.worker';
 import {Comment} from '@app/shared/types/main.types';
@@ -13,11 +20,11 @@ import {RouterLink} from '@angular/router';
   templateUrl: './comments-list.component.html',
   styleUrl: './comments-list.component.scss',
 })
-export class CommentsListComponent implements OnInit, OnChanges {
+export class CommentsListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() newComment: Comment | undefined = undefined;
   @Input() slug: string = '';
   comments: Comment[] = [];
-  commentSignal = newSignal<{ comments: Comment[] }>();
+  commentSignal = newSignal<{comments: Comment[]}>();
   commentsWorker: CommentsWorker;
 
   constructor() {
@@ -39,7 +46,7 @@ export class CommentsListComponent implements OnInit, OnChanges {
 
   fetchComments() {
     this.commentsWorker.fetchComments(this.slug, (comments) => {
-      this.comments = [...comments]
+      this.comments = [...comments];
     });
   }
 
@@ -52,5 +59,9 @@ export class CommentsListComponent implements OnInit, OnChanges {
       const index = this.comments.findIndex((comment) => comment.id === id);
       this.comments.splice(index, 1);
     });
+  }
+
+  ngOnDestroy() {
+    this.commentsWorker.dispose();
   }
 }

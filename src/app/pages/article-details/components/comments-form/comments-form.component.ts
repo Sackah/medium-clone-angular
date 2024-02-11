@@ -62,4 +62,9 @@ export class CommentsFormComponent extends MCFormComponent {
       });
     }
   }
+
+  override ngOnDestroy() {
+    super.ngOnDestroy();
+    this.commentWorker.dispose();
+  }
 }
