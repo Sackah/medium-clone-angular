@@ -12,6 +12,7 @@ import {ErrorPageComponent} from '@shared/pages/error-page/error-page.component'
 import {LoginNavComponent} from "../../login/components/login-nav/login-nav.component";
 import {ArticleContentComponent} from "@app/pages/article-details/components/article-content/article-content.component";
 import {ArticleCommentComponent} from "@app/pages/article-details/components/article-comment/article-comment.component";
+import {Article} from "@shared/types/main.types";
 
 @Component({
   selector: 'app-article-details-page',
@@ -66,5 +67,9 @@ export class ArticleDetailsPageComponent extends MCPage {
       },
     });
     this.subscriptions.push(subscription);
+  }
+
+  updateArticle(event: Article) {
+    completeSignal(this.articleSig, {article: event})
   }
 }

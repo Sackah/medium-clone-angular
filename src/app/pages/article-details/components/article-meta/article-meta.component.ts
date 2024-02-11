@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnDestroy, Output} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {Article, Profile} from "@shared/types/main.types";
 import {formatDate} from "@app/utils/format-date";
@@ -16,11 +16,12 @@ import {Subscription} from "rxjs";
   templateUrl: './article-meta.component.html',
   styleUrl: './article-meta.component.scss'
 })
-export class ArticleMetaComponent {
+export class ArticleMetaComponent implements OnDestroy {
   @Input() user?: User;
   @Input() lightBg: boolean = false;
   @Input() article?: Article;
   @Input() slug: string = '';
+  @Output() updatedArticle = new EventEmitter<Article>()
   router = inject(Router);
   editArticleService = inject(EditArticleService);
   favoriteArticleWorker: FavouriteArticleWorker;
@@ -57,10 +58,12 @@ export class ArticleMetaComponent {
 
   updateArticle(article: Article) {
     this.article = {...(this.article as Article), ...article};
+    this.updatedArticle.emit(this.article);
   }
 
   updateProfile(profile: Profile) {
     this.article = {...(this.article as Article), author: profile};
+    this.updatedArticle.emit(this.article);
   }
 
   deleteArticle(slug: string) {

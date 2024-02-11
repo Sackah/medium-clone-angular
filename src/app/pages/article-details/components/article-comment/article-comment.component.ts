@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommentsFormComponent} from "@app/pages/article-details/components/comments-form/comments-form.component";
 import {Article} from "@shared/types/main.types";
 import {RouterLink} from "@angular/router";
@@ -19,4 +19,9 @@ import {User} from "@shared/types/auth.types";
 export class ArticleCommentComponent {
   @Input() article: Article | undefined = undefined;
   @Input() user: User | undefined = undefined;
+  @Output() updatedArticle = new EventEmitter<Article>();
+
+  updateArticle(event: Article) {
+    this.updatedArticle.emit(event)
+  }
 }

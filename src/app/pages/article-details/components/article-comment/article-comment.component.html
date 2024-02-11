@@ -1,6 +1,7 @@
 <section>
   <div class="author">
     <mc-article-meta
+      (updatedArticle)="updateArticle($event)"
       [article]="article"
       [lightBg]="true"
       [slug]="article?.slug!"
