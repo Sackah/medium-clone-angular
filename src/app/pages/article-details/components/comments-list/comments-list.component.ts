@@ -1,16 +1,56 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges,} from '@angular/core';
+import {newSignal} from '@app/utils/signal-factory';
+import {CommentsWorker} from '@app/workers/comments.worker';
+import {Comment} from '@app/shared/types/main.types';
+import {McSpinnerComponent} from '@shared/components/loaders/mc-spinner.component';
+import {formatDate} from '@app/utils/format-date';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'mc-comments-list',
   standalone: true,
-  imports: [],
+  imports: [McSpinnerComponent, RouterLink],
   templateUrl: './comments-list.component.html',
-  styleUrl: './comments-list.component.scss'
+  styleUrl: './comments-list.component.scss',
 })
-export class CommentsListComponent implements OnInit {
-  @Input() comments: Comment[] = [];
+export class CommentsListComponent implements OnInit, OnChanges {
+  @Input() newComment: Comment | undefined = undefined;
+  @Input() slug: string = '';
+  comments: Comment[] = [];
+  commentSignal = newSignal<{ comments: Comment[] }>();
+  commentsWorker: CommentsWorker;
+
+  constructor() {
+    this.commentsWorker = new CommentsWorker(this.commentSignal);
+  }
 
   ngOnInit() {
+    this.fetchComments();
+  }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['newComment']) {
+      if (this.newComment) {
+        this.comments.unshift(this.newComment);
+        this.comments = [...this.comments];
+      }
+    }
+  }
+
+  fetchComments() {
+    this.commentsWorker.fetchComments(this.slug, (comments) => {
+      this.comments = [...comments]
+    });
+  }
+
+  formatDate(date: string) {
+    return formatDate(date);
+  }
+
+  deleteComment(id: number) {
+    this.commentsWorker.deleteComment(this.slug, id, (id) => {
+      const index = this.comments.findIndex((comment) => comment.id === id);
+      this.comments.splice(index, 1);
+    });
   }
 }

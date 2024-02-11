@@ -2,7 +2,11 @@ import {inject, Inject, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FavoriteArticleService} from '@shared/services/favorite-article.service';
 import {Subscription, take, tap} from 'rxjs';
-import {completeSignal, errorSignal, pendSignal,} from '@app/utils/signal-factory';
+import {
+  completeSignal,
+  errorSignal,
+  pendSignal,
+} from '@app/utils/signal-factory';
 import {CurrentUserService} from '@shared/services/current-user.service';
 import {Router} from '@angular/router';
 import {Article} from '@shared/types/main.types';

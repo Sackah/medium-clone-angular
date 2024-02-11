@@ -6,7 +6,7 @@
   } @else {
     <p (click)="handleFeedChange('personal')"
        [class]="{active: feedName == 'personal'}"
-    >Articles by {{ profile.username }}</p>
+    >Articles by {{ profile?.username }}</p>
   }
   <p
     (click)="handleFeedChange('favorites')"

@@ -5,7 +5,14 @@
       <div class="img">
         <img [src]="user?.image" alt="">
       </div>
-      <button>Post comment</button>
+      @if (commentSignal().pending) {
+        <button type="button" disabled>
+          Posting comment
+          <mc-button-spinner></mc-button-spinner>
+        </button>
+      } @else {
+        <button type="submit">Post comment</button>
+      }
     </main>
   </form>
 </section>

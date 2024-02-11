@@ -12,10 +12,18 @@
     @if (user) {
       <mc-comments-form
         [user]="user"
+        (newComment)="updateComment($event)"
+        [slug]="article?.slug!"
       ></mc-comments-form>
+      <mc-comments-list
+        [slug]="article?.slug!"
+        [newComment]="comment"
+      ></mc-comments-list>
     } @else {
-      <p><a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
-        article</p>
+      <p>
+        <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
+        article
+      </p>
     }
   </div>
 </section>

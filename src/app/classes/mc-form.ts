@@ -1,34 +1,33 @@
-import {Subscription} from "rxjs";
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {FormGroup} from "@angular/forms";
+import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
-@Component({template: '', standalone: true})
+@Component({ template: '', standalone: true })
 export class MCFormComponent implements OnInit, OnDestroy {
   protected readonly subscriptions?: Subscription[];
 
   form!: FormGroup;
 
-  constructor() {
-  }
+  constructor() {}
 
   get emailErrors() {
-    const control = this.form.get("email");
+    const control = this.form.get('email');
     if (control?.invalid && (control.dirty || control.touched)) {
-      if (control.hasError("required")) {
-        return "Email is required";
-      } else if (control.hasError("email")) {
-        return "Email must be a valid email address";
+      if (control.hasError('required')) {
+        return 'Email is required';
+      } else if (control.hasError('email')) {
+        return 'Email must be a valid email address';
       }
     }
     return '';
   }
 
   get passwordErrors() {
-    const control = this.form.get("password");
+    const control = this.form.get('password');
     if (control?.invalid && (control.dirty || control.touched)) {
-      if (control.hasError("required")) {
+      if (control.hasError('required')) {
         return 'This field is required';
-      } else if (control.hasError("minlength")) {
+      } else if (control.hasError('minlength')) {
         return 'Password should be at least 8 characters';
       }
     }
@@ -36,11 +35,11 @@ export class MCFormComponent implements OnInit, OnDestroy {
   }
 
   get userNameErrors() {
-    const control = this.form.get("username");
+    const control = this.form.get('username');
     if (control?.invalid && (control.dirty || control.touched)) {
-      if (control.hasError("required")) {
+      if (control.hasError('required')) {
         return 'This field is required';
-      } else if (control.hasError("minlength")) {
+      } else if (control.hasError('minlength')) {
         return 'Username must be at least 4 characters';
       }
     }
@@ -50,15 +49,14 @@ export class MCFormComponent implements OnInit, OnDestroy {
   getRequiredErrors(formControlName: string) {
     const control = this.form.get(formControlName);
     if (control?.invalid && (control.dirty || control.touched)) {
-      if (control.hasError("required")) {
+      if (control.hasError('required')) {
         return 'This field is required';
       }
     }
     return '';
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     if (this.subscriptions) {
