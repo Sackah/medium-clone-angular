@@ -4,8 +4,8 @@
     [class]="{active: feedName == 'global'}"
   >Global Feed</p>
   @if (isLoggedIn) {
-    <p (click)="handleFeedChange('personal')"
-       [class]="{active: feedName == 'personal'}"
+    <p (click)="handleFeedChange('feed')"
+       [class]="{active: feedName == 'feed'}"
     >Your feed</p>
   }
 </header>

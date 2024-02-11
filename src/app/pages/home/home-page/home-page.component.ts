@@ -5,12 +5,14 @@ import {FooterComponent} from '@shared/components/footer/footer.component';
 import {MCPage} from '@app/classes/mc-page';
 import {PaginationComponent} from '@shared/components/pagination/pagination.component';
 import {AllArticles} from '@shared/types/article.types';
-import {completeSignal, errorSignal, newSignal, pendSignal,} from '../../../utils/signal-factory';
+import {newSignal,} from '../../../utils/signal-factory';
 import {FeedHeaderComponent} from '../components/feed-header/feed-header.component';
 import {ArticleListComponent} from '../components/article-list/article-list.component';
 import {McSpinnerComponent} from '../../../shared/components/loaders/mc-spinner.component';
 import {ErrorPageComponent} from '../../../shared/pages/error-page/error-page.component';
 import {FetchArticlesService} from '../../../shared/services/fetch-articles.service';
+import {FeedWorker} from '@/app/workers/feed.worker';
+import { FeedNames } from '@/app/shared/types/main.types';
 
 @Component({
   selector: 'mc-home-page',
@@ -33,12 +35,14 @@ export class HomePageComponent extends MCPage {
   articleLimit = 10;
   articlesService = inject(FetchArticlesService);
   articleSignal = newSignal<AllArticles>();
-  feedName: 'global' | 'personal' = 'global';
+  feedName: Extract<FeedNames, 'global' | 'feed'> = 'global';
+  feedWorker: FeedWorker;
   protected readonly Boolean = Boolean;
 
   constructor() {
     super();
     this.setTitle('Home');
+    this.feedWorker = new FeedWorker(this.articleSignal);
   }
 
   changePage(page: number) {
@@ -52,38 +56,17 @@ export class HomePageComponent extends MCPage {
   }
 
   fetchFeed(feedName = this.feedName) {
-    pendSignal(this.articleSignal);
     const offsetConstant = this.currentPage * 10 - 10;
+    this.feedWorker.fetchFeed(
+      feedName,
+      undefined,
+      this.articleLimit,
+      offsetConstant
+    );
+  }
 
-    switch (feedName) {
-      case 'global':
-        const sub = this.articlesService
-          .getAll(this.articleLimit, offsetConstant)
-          .subscribe({
-            next: (articles) => {
-              completeSignal(this.articleSignal, articles);
-            },
-            error: (error) => {
-              errorSignal(this.articleSignal, error);
-            },
-          });
-        this.subscriptions.push(sub);
-        break;
-      case 'personal':
-        const sub2 = this.articlesService
-          .getFeed(this.articleLimit, offsetConstant)
-          .subscribe({
-            next: (articles) => {
-              completeSignal(this.articleSignal, articles);
-            },
-            error: (error) => {
-              errorSignal(this.articleSignal, error);
-            },
-          });
-        this.subscriptions.push(sub2);
-        break;
-      default:
-        break;
-    }
+  override ngOnDestroy() {
+    super.ngOnDestroy();
+    this.feedWorker.dispose();
   }
 }

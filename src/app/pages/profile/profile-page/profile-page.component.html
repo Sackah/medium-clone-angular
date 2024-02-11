@@ -2,7 +2,7 @@
   <mc-home-nav></mc-home-nav>
   <mc-profile-banner
     [pending]="profileSignal().pending"
-    [userProfile]="currentProfile!"
+    [userProfile]="profileSignal().data?.profile!"
     [user]="user!"
   ></mc-profile-banner>
   <main>
@@ -10,8 +10,8 @@
       <mc-profile-feed-header
         (feedChange)="changeFeed($event)"
         [feedName]="feedName"
-        [isLoggedIn]="Boolean(user)"
-        [profile]="currentProfile!"
+        [isUser]="Boolean(user?.username === profileSignal().data?.profile?.username)"
+        [profile]="profileSignal().data?.profile!"
       ></mc-profile-feed-header>
       <div class="content">
         @if (articleSignal().pending) {

@@ -29,10 +29,6 @@ export class ArticleListComponent implements OnDestroy {
     return formatDate(date);
   }
 
-  ngOnDestroy() {
-    this.favoriteArticleWorker.dispose();
-  }
-
   private updateArticles(article: Article) {
     const index = this.articles.findIndex((art) => art.slug === article.slug);
     if (index !== -1) {
@@ -44,5 +40,9 @@ export class ArticleListComponent implements OnDestroy {
     } else {
       this.articles = [...this.articles, article];
     }
+  }
+
+  ngOnDestroy() {
+    this.favoriteArticleWorker.dispose();
   }
 }

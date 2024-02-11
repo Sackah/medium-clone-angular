@@ -1,5 +1,5 @@
 <header>
-  @if (isLoggedIn) {
+  @if (isUser) {
     <p (click)="handleFeedChange('personal')"
        [class]="{active: feedName == 'personal'}"
     >My Articles</p>
