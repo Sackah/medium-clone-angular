@@ -10,6 +10,8 @@ import {ArticleBannerComponent} from '../components/article-banner/article-banne
 import {PageSpinnerComponent} from '@shared/components/loaders/page-spinner.component';
 import {ErrorPageComponent} from '@shared/pages/error-page/error-page.component';
 import {LoginNavComponent} from "../../login/components/login-nav/login-nav.component";
+import {ArticleContentComponent} from "@app/pages/article-details/components/article-content/article-content.component";
+import {ArticleCommentComponent} from "@app/pages/article-details/components/article-comment/article-comment.component";
 
 @Component({
   selector: 'app-article-details-page',
@@ -22,6 +24,8 @@ import {LoginNavComponent} from "../../login/components/login-nav/login-nav.comp
     PageSpinnerComponent,
     ErrorPageComponent,
     LoginNavComponent,
+    ArticleContentComponent,
+    ArticleCommentComponent,
   ],
   templateUrl: './article-details-page.component.html',
   styleUrl: './article-details-page.component.scss',

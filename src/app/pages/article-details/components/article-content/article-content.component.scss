@@ -1,0 +1,13 @@
+@import "main";
+
+article {
+  @include center;
+  padding: 32px 10%;
+
+  p {
+    font-family: 'source serif pro', serif;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin-bottom: 2rem;
+  }
+}

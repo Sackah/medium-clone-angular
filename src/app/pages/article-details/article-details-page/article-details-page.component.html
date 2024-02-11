@@ -17,6 +17,15 @@
       [slug]="articleSlug"
       [user]="user"
     ></mc-article-banner>
+    <mc-article-content
+      [article]="articleSig().data?.article"
+    ></mc-article-content>
+    <mc-article-comment
+      [article]="articleSig().data?.article"
+      [user]="user"
+    ></mc-article-comment>
   }
-  <mc-footer></mc-footer>
+  <footer>
+    <mc-footer></mc-footer>
+  </footer>
 </div>

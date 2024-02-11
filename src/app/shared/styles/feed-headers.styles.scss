@@ -8,6 +8,13 @@ header {
   border-bottom: 1px solid $grey-5;
   color: $grey-5;
   font-size: $size-4;
+
+  @include lg {
+    width: 60vw;
+  }
+  @include breakpoint-height-max(700px) {
+    width: 60vw;
+  }
 }
 
 p {

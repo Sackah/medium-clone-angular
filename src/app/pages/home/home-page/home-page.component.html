@@ -31,12 +31,14 @@
           ></mc-article-list>
         }
       </div>
-      <mc-pagination
-        (changePage)="changePage($event)"
-        [currentPage]="currentPage"
-        [limit]="articleLimit"
-        [total]="articleSignal().data?.articlesCount!"
-      ></mc-pagination>
+      @if (articleSignal().data) {
+        <mc-pagination
+          (changePage)="changePage($event)"
+          [currentPage]="currentPage"
+          [limit]="articleLimit"
+          [total]="articleSignal().data?.articlesCount!"
+        ></mc-pagination>
+      }
     </section>
     <section class="tags">
 

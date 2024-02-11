@@ -23,7 +23,5 @@ main {
 }
 
 footer {
-  display: block;
-  position: relative;
-  margin-top: 60px;
+  @include footer;
 }

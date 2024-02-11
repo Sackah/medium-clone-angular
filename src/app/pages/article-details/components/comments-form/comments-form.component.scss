@@ -1,0 +1,17 @@
+@import "main";
+
+section {
+  width: 100%;
+
+  form {
+    width: 100%;
+    min-width: 0;
+
+    textarea {
+      width: 100%;
+      font-size: 1rem;
+      height: 100px;
+      padding: 1.25rem;
+    }
+  }
+}

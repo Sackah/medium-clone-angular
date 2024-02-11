@@ -1,0 +1,44 @@
+<div class="article-meta">
+  <div class="img">
+    <img [src]="article?.author?.image" alt="">
+  </div>
+  <summary [class]="{'light-bg': lightBg}">
+    <a [routerLink]="['/profile', article?.author?.username]">{{ article?.author?.username }}</a>
+    <p>{{ formatDate(article?.createdAt) }}</p>
+  </summary>
+  @if (article) {
+    @if (article!.author.username === user?.username) {
+      <span>
+          <button class="edit" (click)="editArticle()">Edit Article</button>
+          <button class="delete" [disabled]="articleSignal().pending" (click)="deleteArticle(article!.slug)">Delete Article</button>
+        </span>
+    } @else {
+      <span>
+          @if (article.author.following) {
+            <button class="follow active"
+                    [disabled]="articleSignal().pending"
+                    (click)="followProfileWorker.follow(article!.author.username, article!.author.following)">
+              Unfollow {{ article.author.username }}
+            </button>
+          } @else {
+            <button class="follow"
+                    [disabled]="articleSignal().pending"
+                    (click)="followProfileWorker.follow(article!.author.username, article!.author.following)">
+              Follow {{ article.author.username }}
+            </button>
+          }
+        @if (article.favorited) {
+          <button class="favourite active" [disabled]="articleSignal().pending"
+                  (click)="favoriteArticleWorker.favorite(article!.slug, article!.favorited)">
+            Unfavorite Article ({{ article.favoritesCount }})
+          </button>
+        } @else {
+          <button class="favourite" [disabled]="articleSignal().pending"
+                  (click)="favoriteArticleWorker.favorite(article!.slug, article!.favorited)">
+              Favorite Article ({{ article.favoritesCount }})
+            </button>
+        }
+        </span>
+    }
+  }
+</div>
