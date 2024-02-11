@@ -28,6 +28,10 @@ export class CurrentUserService extends MCService {
    */
   user = this.userDataSource.asObservable();
 
+  constructor() {
+    super();
+  }
+
   /**
    * @method fetchCurrentUser - A method to fetch the user from the server
    * @returns - An observable that resolves to the current user

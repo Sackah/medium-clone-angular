@@ -1,13 +1,18 @@
-import {Injectable} from '@angular/core';
-import {MCService} from '@app/classes/mc-service';
-import {Article} from '../types/main.types';
-import {environment} from '@/environments/environment.development';
-import {catchError, map} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { MCService } from '@app/classes/mc-service';
+import { Article } from '../types/main.types';
+import { environment } from '@/environments/environment.development';
+import { catchError, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoriteArticleService extends MCService {
+
+  constructor() {
+    super();
+  }
+
   favorite(slug: string) {
     return this.http
       .post<{ article: Article }>(

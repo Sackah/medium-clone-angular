@@ -8,6 +8,10 @@ import {MCService} from '@app/classes/mc-service';
 })
 export class NewArticleService extends MCService {
 
+  constructor() {
+    super();
+  }
+
   post(article: NewArticleDetails) {
     return this.http
       .post<NewArticleResponse>(

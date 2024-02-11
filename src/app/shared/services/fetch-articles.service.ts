@@ -9,6 +9,10 @@ import {catchError} from 'rxjs';
 })
 export class FetchArticlesService extends MCService {
 
+  constructor() {
+    super();
+  }
+
   getAll(limit: number, offset: number) {
     return this.http
       .get<AllArticles>(

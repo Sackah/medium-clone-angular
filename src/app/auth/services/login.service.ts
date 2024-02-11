@@ -8,6 +8,10 @@ import { MCService } from '../../classes/mc-service';
 })
 export class LoginService extends MCService{
 
+  constructor() {
+    super();
+  }
+
   post(userDetails: LoginUserDetails) {
     return this.http
       .post<LoginUserResponse>(

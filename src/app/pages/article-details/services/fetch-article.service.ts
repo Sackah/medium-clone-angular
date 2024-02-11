@@ -9,6 +9,10 @@ import {MCService} from '@app/classes/mc-service';
 })
 export class FetchArticleService extends MCService {
 
+  constructor() {
+    super();
+  }
+
   get(articleSlug: string) {
     return this.http
       .get<NewArticleResponse>(

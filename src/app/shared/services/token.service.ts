@@ -7,9 +7,6 @@ export class TokenService {
   private tokenName: string = "token";
   private routeName: string = "lastRoute";
 
-  constructor() {
-  }
-
   get() {
     let token;
 

@@ -9,6 +9,12 @@ import { NewComment } from '@shared/types/comment.types';
   providedIn: 'root',
 })
 export class CommentService extends MCService {
+
+  constructor() {
+    super();
+  }
+
+
   post(comment: NewComment, slug: string) {
     return this.http
       .post<{
@@ -44,4 +50,5 @@ export class CommentService extends MCService {
       )
       .pipe(catchError((err) => this.onError(err)));
   }
+
 }

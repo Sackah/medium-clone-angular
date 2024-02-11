@@ -8,6 +8,11 @@ import {Profile} from '../types/main.types';
   providedIn: 'root',
 })
 export class FollowProfileService extends MCService {
+
+  constructor() {
+    super();
+  }
+
   follow(username: string) {
     return this.http
       .post<{ profile: Profile }>(

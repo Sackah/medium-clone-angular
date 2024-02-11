@@ -13,6 +13,11 @@ export class EditArticleService extends MCService {
   data = this.dataSource.asObservable();
   private slug: string | undefined = undefined;
 
+  constructor() {
+    super();
+  }
+
+
   edit(article: Article | null, slug: string | undefined = undefined) {
     this.dataSource.next(article);
     this.slug = slug;

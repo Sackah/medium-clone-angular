@@ -8,6 +8,10 @@ import {MCService} from '@app/classes/mc-service';
 })
 export class UpdateUserService extends MCService {
 
+  constructor() {
+    super();
+  }
+
   post(userDetails: UpdateUserDetails) {
     return this.http
       .put<UpdateUserResponse>(

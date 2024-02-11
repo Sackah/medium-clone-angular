@@ -9,6 +9,10 @@ import {Profile} from "@shared/types/main.types";
 })
 export class ProfileService extends MCService {
 
+  constructor() {
+    super();
+  }
+
   get(userName: string) {
     return this.http.get<{ profile: Profile }>(
       `${environment.BaseUrl}/profiles/${userName}`,
