@@ -28,6 +28,7 @@
 
   footer {
     @include footer;
+    margin-top: 170px;
     @media only screen and (max-height: 700px) {
       display: block;
       position: relative;

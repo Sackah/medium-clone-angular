@@ -15,10 +15,14 @@
         (newComment)="updateComment($event)"
         [slug]="article?.slug!"
       ></mc-comments-form>
-      <mc-comments-list
-        [slug]="article?.slug!"
-        [newComment]="comment"
-      ></mc-comments-list>
+      @defer (on viewport) {
+        <mc-comments-list
+          [slug]="article?.slug!"
+          [newComment]="comment"
+        ></mc-comments-list>
+      }@placeholder {
+        <details>Comments</details>
+      }
     } @else {
       <p>
         <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
