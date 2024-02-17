@@ -17,24 +17,24 @@
           @if (article.author.following) {
             <button class="follow active"
                     [disabled]="articleSignal().pending"
-                    (click)="followProfileWorker.follow(article!.author.username, article!.author.following)">
+                    (click)="followProfile(article!.author.username, article!.author.following)">
               Unfollow {{ article.author.username }}
             </button>
           } @else {
             <button class="follow"
                     [disabled]="articleSignal().pending"
-                    (click)="followProfileWorker.follow(article!.author.username, article!.author.following)">
+                    (click)="followProfile(article!.author.username, article!.author.following)">
               Follow {{ article.author.username }}
             </button>
           }
         @if (article.favorited) {
           <button class="favourite active" [disabled]="articleSignal().pending"
-                  (click)="favoriteArticleWorker.favorite(article!.slug, article!.favorited)">
+                  (click)="favoriteArticle(article!.slug, article!.favorited)">
             Unfavorite Article ({{ article.favoritesCount }})
           </button>
         } @else {
           <button class="favourite" [disabled]="articleSignal().pending"
-                  (click)="favoriteArticleWorker.favorite(article!.slug, article!.favorited)">
+                  (click)="favoriteArticle(article!.slug, article!.favorited)">
               Favorite Article ({{ article.favoritesCount }})
             </button>
         }

@@ -10,21 +10,23 @@
       ></mc-backend-errors>
     }
 
-    <input title="image" formControlName="image" type="text">
+    <input (keydown)="preventLeadingSpace($event)" formControlName="image" title="image" type="text">
 
-    <input formControlName="username" placeholder="Username" type="text">
+    <input (keydown)="preventLeadingSpace($event)" formControlName="username" placeholder="Username" type="text">
     @if (userNameErrors !== '') {
       <div class="error">{{ userNameErrors }}</div>
     }
 
-    <textarea formControlName="bio" name="bio" placeholder="Short bio about you" rows="8"></textarea>
+    <textarea (keydown)="preventLeadingSpace($event)" formControlName="bio" name="bio" placeholder="Short bio about you"
+              rows="8"></textarea>
 
-    <input formControlName="email" placeholder="Email" type="email">
+    <input (keydown)="preventLeadingSpace($event)" formControlName="email" placeholder="Email" type="email">
     @if (emailErrors !== '') {
       <div class="error">{{ emailErrors }}</div>
     }
 
-    <input formControlName="password" placeholder="New Password" type="password">
+    <input (keydown)="preventLeadingSpace($event)" formControlName="password" placeholder="New Password"
+           type="password">
     @if (passwordErrors !== '') {
       <div class="error">{{ passwordErrors }}</div>
     }

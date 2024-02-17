@@ -4,7 +4,7 @@ import {HomeNavComponent} from '@app/pages/home/components/home-nav/home-nav.com
 import {FooterComponent} from '@shared/components/footer/footer.component';
 import {ProfileBannerComponent} from '../components/profile-banner/profile-banner.component';
 import {FeedNames, Profile} from '@shared/types/main.types';
-import {newSignal,} from '@app/utils/signal-factory';
+import {newSignal} from '@app/utils/signal-factory';
 import {ProfileFeedHeaderComponent} from '../components/profile-feed-header/profile-feed-header.component';
 import {AllArticles} from '@shared/types/article.types';
 import {ArticleListComponent} from '@app/pages/home/components/article-list/article-list.component';
@@ -14,68 +14,66 @@ import {ProfileWorker} from '@/app/workers/profile.worker';
 import {FeedWorker} from '@/app/workers/feed.worker';
 
 @Component({
-  selector: 'mc-profile-page',
-  standalone: true,
-  imports: [
-    HomeNavComponent,
-    FooterComponent,
-    ProfileBannerComponent,
-    ProfileFeedHeaderComponent,
-    ArticleListComponent,
-    ErrorPageComponent,
-    McSpinnerComponent,
-  ],
-  templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.scss',
+   selector: 'mc-profile-page',
+   standalone: true,
+   imports: [
+      HomeNavComponent,
+      FooterComponent,
+      ProfileBannerComponent,
+      ProfileFeedHeaderComponent,
+      ArticleListComponent,
+      ErrorPageComponent,
+      McSpinnerComponent,
+   ],
+   templateUrl: './profile-page.component.html',
+   styleUrl: './profile-page.component.scss',
 })
 export class ProfilePageComponent extends MCPage {
-  profileSignal = newSignal<{ profile: Profile }>();
-  articleSignal = newSignal<AllArticles>();
-  feedName: Extract<FeedNames, 'personal' | 'favorites'> | undefined =
-    undefined;
-  profileWorker: ProfileWorker;
-  feedWorker: FeedWorker;
-  protected readonly Boolean = Boolean;
+   profileSignal = newSignal<{profile: Profile}>();
+   articleSignal = newSignal<AllArticles>();
+   feedName: Extract<FeedNames, 'personal' | 'favorites'> | undefined =
+      undefined;
+   profileWorker: ProfileWorker;
+   feedWorker: FeedWorker;
+   protected readonly Boolean = Boolean;
 
-  constructor() {
-    super();
-    this.profileWorker = new ProfileWorker(
-      this.route,
-      this.profileSignal,
-      [this.articleSignal]
-    );
-    this.feedWorker = new FeedWorker(this.articleSignal);
-  }
+   constructor() {
+      super();
+      this.profileWorker = new ProfileWorker(this.profileSignal, [
+         this.articleSignal,
+      ]);
+      this.feedWorker = new FeedWorker(this.articleSignal);
+   }
 
-  override ngOnInit() {
-    super.ngOnInit();
-    this.setTitle('Profile');
-    this.fetchProfile();
-  }
+   override ngOnInit() {
+      super.ngOnInit();
+      this.setTitle('Profile');
+      this.fetchProfile();
+   }
 
-  changeFeed(feedName: typeof this.feedName) {
-    this.feedName = feedName;
-    this.fetchFeed(feedName);
-  }
+   changeFeed(feedName: typeof this.feedName) {
+      this.feedName = feedName;
+      this.fetchFeed(feedName);
+   }
 
-  fetchProfile() {
-    this.profileWorker.fetchProfile(() => {
-      this.feedName = 'personal';
-      this.fetchFeed();
-    });
-  }
+   fetchProfile() {
+      this.profileWorker.fetchProfile(() => {
+         this.feedName = 'personal';
+         this.fetchFeed();
+      });
+   }
 
-  fetchFeed(feedName = this.feedName) {
-    const userName = this.profileSignal().data?.profile.username;
+   fetchFeed(feedName = this.feedName) {
+      const userName = this.profileSignal().data?.profile.username;
 
-    if (feedName && userName) {
-      this.feedWorker.fetchFeed(feedName, userName);
-    }
-  }
+      if (feedName && userName) {
+         this.feedWorker.fetchFeed(feedName, userName);
+      }
+   }
 
-  override ngOnDestroy() {
-    super.ngOnDestroy();
-    this.profileWorker.dispose();
-    this.feedWorker.dispose();
-  }
+   override ngOnDestroy() {
+      super.ngOnDestroy();
+      this.profileWorker.dispose();
+      this.feedWorker.dispose();
+   }
 }

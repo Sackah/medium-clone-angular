@@ -6,43 +6,50 @@ import {newSignal} from '@app/utils/signal-factory';
 import {FavouriteArticleWorker} from '@/app/workers/favorites.worker';
 
 @Component({
-  selector: 'mc-article-list',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './article-list.component.html',
-  styleUrls: ['./article-list.component.scss', '../../../../shared/styles/taglist.styles.scss'],
+   selector: 'mc-article-list',
+   standalone: true,
+   imports: [RouterLink],
+   templateUrl: './article-list.component.html',
+   styleUrls: [
+      './article-list.component.scss',
+      '../../../../shared/styles/taglist.styles.scss',
+   ],
 })
 export class ArticleListComponent implements OnDestroy {
-  @Input() articles: Article[] = [];
-  articleSignal = newSignal<Article>();
-  favoriteArticleWorker: FavouriteArticleWorker;
+   @Input() articles: Article[] = [];
+   articleSignal = newSignal<Article>();
+   favoriteArticleWorker: FavouriteArticleWorker;
 
-  constructor() {
-    this.updateArticles = this.updateArticles.bind(this);
-    this.favoriteArticleWorker = new FavouriteArticleWorker(
-      this.articleSignal,
-      this.updateArticles
-    );
-  }
+   constructor() {
+      this.favoriteArticleWorker = new FavouriteArticleWorker(
+         this.articleSignal
+      );
+   }
 
-  formatDate(date: string) {
-    return formatDate(date);
-  }
+   formatDate(date: string) {
+      return formatDate(date);
+   }
 
-  ngOnDestroy() {
-    this.favoriteArticleWorker.dispose();
-  }
+   favoriteArticle(slug: string, isFavorited: boolean) {
+      this.favoriteArticleWorker.favorite(slug, isFavorited, (article) => {
+         this.updateArticles(article);
+      });
+   }
 
-  private updateArticles(article: Article) {
-    const index = this.articles.findIndex((art) => art.slug === article.slug);
-    if (index !== -1) {
-      this.articles = [
-        ...this.articles.slice(0, index),
-        article,
-        ...this.articles.slice(index + 1),
-      ];
-    } else {
-      this.articles = [...this.articles, article];
-    }
-  }
+   ngOnDestroy() {
+      this.favoriteArticleWorker.dispose();
+   }
+
+   private updateArticles(article: Article) {
+      const index = this.articles.findIndex((art) => art.slug === article.slug);
+      if (index !== -1) {
+         this.articles = [
+            ...this.articles.slice(0, index),
+            article,
+            ...this.articles.slice(index + 1),
+         ];
+      } else {
+         this.articles = [...this.articles, article];
+      }
+   }
 }

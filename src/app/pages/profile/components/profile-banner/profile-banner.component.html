@@ -16,13 +16,13 @@
           @if (userProfile.following) {
             <button 
               [disabled]="followSignal().pending"
-              (click)="followerWorker.follow(userProfile.username, userProfile.following)">
+              (click)="followProfile(userProfile.username, userProfile.following)">
               Unfollow {{ userProfile.username }}
             </button>
           } @else {
             <button 
               [disabled]="followSignal().pending"
-              (click)="followerWorker.follow(userProfile.username, userProfile.following)">
+              (click)="followProfile(userProfile.username, userProfile.following)">
               Follow {{ userProfile.username }}
             </button>
           }

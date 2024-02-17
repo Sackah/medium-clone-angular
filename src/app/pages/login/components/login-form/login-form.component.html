@@ -4,27 +4,28 @@
     <a [routerLink]="['/register']">Need an account?</a>
   </header>
   <form (submit)="handleSubmit()" [formGroup]="form">
-    @if(errors){
+    @if (errors) {
       <mc-backend-errors
         [errors]="errors"
       ></mc-backend-errors>
     }
 
-    <input type="text" placeholder="Email" formControlName="email"/>
-    @if(emailErrors !== ''){
-      <div class="error">{{emailErrors}}</div>
+    <input (keydown)="preventLeadingSpace($event)" formControlName="email" placeholder="Email" type="text"/>
+    @if (emailErrors !== '') {
+      <div class="error">{{ emailErrors }}</div>
     }
 
-    <input type="password" placeholder="Password" formControlName="password"/>
-    @if(passwordErrors !== ''){
-      <div class="error">{{passwordErrors}}</div>
+    <input (keydown)="preventLeadingSpace($event)" formControlName="password" placeholder="Password" type="password"/>
+    @if (passwordErrors !== '') {
+      <div class="error">{{ passwordErrors }}</div>
     }
 
-    @if(isSubmitting){
+    @if (isSubmitting) {
       <button type="button" disabled>
-        Signing In <mc-button-spinner></mc-button-spinner>
+        Signing In
+        <mc-button-spinner></mc-button-spinner>
       </button>
-    } @else{
+    } @else {
       <button type="submit">Sign In</button>
     }
   </form>
