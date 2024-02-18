@@ -1,7 +1,5 @@
 <section>
-  <mc-backend-errors
-    [errors]="error"
-  ></mc-backend-errors>
+  <mc-backend-errors [errors]="error"/>
   <span (click)="refetch.emit()">
     <p>Click here to retry</p>
     <svg height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg">

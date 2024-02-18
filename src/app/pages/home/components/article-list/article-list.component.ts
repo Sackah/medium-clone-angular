@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Article} from '@shared/types/main.types';
-// import {formatDate} from '@app/utils/format-date';
 import {newSignal} from '@app/utils/signal-factory';
 import {FavouriteArticleWorker} from '@app/workers/favorites.worker';
 import {FormatDate} from '@/app/utils/format-date';
@@ -34,10 +33,6 @@ export class ArticleListComponent implements OnDestroy {
       });
    }
 
-   ngOnDestroy() {
-      this.favoriteArticleWorker.dispose();
-   }
-
    private updateArticles(article: Article) {
       const index = this.articles.findIndex((art) => art.slug === article.slug);
       if (index !== -1) {
@@ -49,5 +44,9 @@ export class ArticleListComponent implements OnDestroy {
       } else {
          this.articles = [...this.articles, article];
       }
+   }
+
+   ngOnDestroy() {
+      this.favoriteArticleWorker.dispose();
    }
 }

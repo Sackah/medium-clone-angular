@@ -22,7 +22,6 @@ export class ProfileBannerComponent implements OnDestroy {
    followSignal = newSignal<Profile>();
 
    constructor() {
-      this.updateProfile = this.updateProfile.bind(this);
       this.followerWorker = new FollowProfileWorker(this.followSignal);
    }
 
@@ -32,12 +31,8 @@ export class ProfileBannerComponent implements OnDestroy {
 
    followProfile(username: string, following: boolean) {
       this.followerWorker.follow(username, following, (profile) => {
-         this.updateProfile(profile);
+         this.userProfile = {...this.userProfile, ...profile};
       });
-   }
-
-   updateProfile(profile: Profile) {
-      this.userProfile = {...this.userProfile, ...profile};
    }
 
    ngOnDestroy() {
