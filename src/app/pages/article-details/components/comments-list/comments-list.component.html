@@ -16,7 +16,7 @@
                   {{ comment.author.username }}
                 </a>
                 <p>
-                  {{ formatDate(comment.createdAt) }}
+                  {{ FormatDate.toLocale(comment.createdAt) }}
                 </p>
               </span>
               <span class="delete" (click)="deleteComment(comment.id)">

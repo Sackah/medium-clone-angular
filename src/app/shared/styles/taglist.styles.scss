@@ -1,19 +1,18 @@
-@import "main";
+@import 'main';
 
 ul,
-li,
-{
-  display: inline;
-  list-style: none;
-  font-size: $size-1;
-  color: #bbb;
+li {
+   display: inline;
+   list-style: none;
+   font-size: $size-1;
+   color: #bbb;
 }
 
 ul {
-  li {
-    border: 1px solid #ddd;
-    padding: 0.3rem 0.6rem;
-    border-radius: 10rem;
-    margin-left: 4px;
-  }
+   li {
+      border: 1px solid #ddd;
+      padding: 0.3rem 0.6rem;
+      border-radius: 10rem;
+      margin-left: 4px;
+   }
 }

@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 
 @Component({template: '', standalone: true})
 export class MCFormComponent implements OnInit, OnDestroy {
-   protected readonly subscriptions?: Subscription[];
+   protected readonly subscriptions: Subscription[] = [];
 
    form!: FormGroup;
 
@@ -68,7 +68,7 @@ export class MCFormComponent implements OnInit, OnDestroy {
    }
 
    ngOnDestroy() {
-      if (this.subscriptions) {
+      if (this.subscriptions.length > 0) {
          this.subscriptions.forEach((sub) => sub.unsubscribe());
       }
    }

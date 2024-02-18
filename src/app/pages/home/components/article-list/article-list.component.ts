@@ -1,9 +1,10 @@
 import {Component, Input, OnDestroy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Article} from '@shared/types/main.types';
-import {formatDate} from '@app/utils/format-date';
+// import {formatDate} from '@app/utils/format-date';
 import {newSignal} from '@app/utils/signal-factory';
-import {FavouriteArticleWorker} from '@/app/workers/favorites.worker';
+import {FavouriteArticleWorker} from '@app/workers/favorites.worker';
+import {FormatDate} from '@/app/utils/format-date';
 
 @Component({
    selector: 'mc-article-list',
@@ -19,15 +20,12 @@ export class ArticleListComponent implements OnDestroy {
    @Input() articles: Article[] = [];
    articleSignal = newSignal<Article>();
    favoriteArticleWorker: FavouriteArticleWorker;
+   protected readonly FormatDate = FormatDate;
 
    constructor() {
       this.favoriteArticleWorker = new FavouriteArticleWorker(
          this.articleSignal
       );
-   }
-
-   formatDate(date: string) {
-      return formatDate(date);
    }
 
    favoriteArticle(slug: string, isFavorited: boolean) {

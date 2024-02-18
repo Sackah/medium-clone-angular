@@ -7,7 +7,7 @@
           </div>
           <div>
             <a [routerLink]="['/profile', article.author.username]">{{ article.author.username }}</a>
-            <p>{{ formatDate(article.createdAt) }}</p>
+            <p>{{ FormatDate.toLocale(article.createdAt) }}</p>
           </div>
         </span>
       <button

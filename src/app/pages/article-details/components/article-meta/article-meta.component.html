@@ -4,7 +4,7 @@
   </div>
   <summary [class]="{'light-bg': lightBg}">
     <a [routerLink]="['/profile', article?.author?.username]">{{ article?.author?.username }}</a>
-    <p>{{ formatDate(article?.createdAt) }}</p>
+    <p>{{ FormatDate.toLocale(article?.createdAt) }}</p>
   </summary>
   @if (article) {
     @if (article!.author.username === user?.username) {

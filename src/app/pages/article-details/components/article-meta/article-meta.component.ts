@@ -8,18 +8,12 @@ import {
 } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {Article, Profile} from '@shared/types/main.types';
-import {formatDate} from '@app/utils/format-date';
+import {FormatDate} from '@app/utils/format-date';
 import {User} from '@shared/types/auth.types';
 import {EditArticleService} from '@app/pages/article-details/services/edit-article.service';
 import {FavouriteArticleWorker} from '@app/workers/favorites.worker';
 import {FollowProfileWorker} from '@app/workers/followers.worker';
-import {
-   completeSignal,
-   errorSignal,
-   newSignal,
-   pendSignal,
-} from '@app/utils/signal-factory';
-import {Subscription} from 'rxjs';
+import {newSignal} from '@app/utils/signal-factory';
 
 @Component({
    selector: 'mc-article-meta',
@@ -39,7 +33,7 @@ export class ArticleMetaComponent implements OnDestroy {
    favoriteArticleWorker: FavouriteArticleWorker;
    followProfileWorker: FollowProfileWorker;
    articleSignal = newSignal<Article>();
-   subscriptions: Subscription[] = [];
+   protected readonly FormatDate = FormatDate;
 
    constructor() {
       this.favoriteArticleWorker = new FavouriteArticleWorker(
@@ -48,11 +42,18 @@ export class ArticleMetaComponent implements OnDestroy {
       this.followProfileWorker = new FollowProfileWorker(this.articleSignal);
    }
 
-   formatDate(date: string | undefined) {
-      if (date) {
-         return formatDate(date);
-      }
-      return null;
+   favoriteArticle(slug: string, isFavorited: boolean) {
+      this.favoriteArticleWorker.favorite(slug, isFavorited, (article) => {
+         this.article = {...(this.article as Article), ...article};
+         this.updatedArticle.emit(this.article);
+      });
+   }
+
+   followProfile(username: string, isFollowing: boolean) {
+      this.followProfileWorker.follow(username, isFollowing, (profile) => {
+         this.article = {...(this.article as Article), author: profile};
+         this.updatedArticle.emit(this.article);
+      });
    }
 
    async editArticle() {
@@ -62,30 +63,8 @@ export class ArticleMetaComponent implements OnDestroy {
       }
    }
 
-   updateArticle(article: Article) {
-      this.article = {...(this.article as Article), ...article};
-      this.updatedArticle.emit(this.article);
-   }
-
-   updateProfile(profile: Profile) {
-      this.article = {...(this.article as Article), author: profile};
-      this.updatedArticle.emit(this.article);
-   }
-
    deleteArticle(slug: string) {
       this.favoriteArticleWorker.deleteArticle(slug, this.user);
-   }
-
-   favoriteArticle(slug: string, isFavorited: boolean) {
-      this.favoriteArticleWorker.favorite(slug, isFavorited, (articel) => {
-         this.updateArticle(articel);
-      });
-   }
-
-   followProfile(username: string, isFollowing: boolean) {
-      this.followProfileWorker.follow(username, isFollowing, (profile) => {
-         this.updateProfile(profile);
-      });
    }
 
    ngOnDestroy(): void {
