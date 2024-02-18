@@ -1,8 +1,9 @@
 <section>
-  <h1>{{ article?.title }}</h1>
-  <mc-article-meta
-    (updatedArticle)="updateArticle($event)"
-    [article]="article"
-    [user]="user"
-  ></mc-article-meta>
+   <h1>{{ article?.title }}</h1>
+   <mc-article-meta
+      [slug]="slug"
+      (updatedArticle)="updateArticle($event)"
+      [article]="article"
+      [user]="user"
+   ></mc-article-meta>
 </section>

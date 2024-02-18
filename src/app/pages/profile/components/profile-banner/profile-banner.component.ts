@@ -14,9 +14,9 @@ import {newSignal} from '@app/utils/signal-factory';
    styleUrl: './profile-banner.component.scss',
 })
 export class ProfileBannerComponent implements OnDestroy {
-   @Input() user!: User;
-   @Input() userProfile!: Profile;
-   @Input() pending = false;
+   @Input({required: true}) user!: User;
+   @Input({required: true}) userProfile!: Profile;
+   @Input({required: true}) pending = false;
    router = inject(Router);
    followerWorker;
    followSignal = newSignal<Profile>();

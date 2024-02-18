@@ -21,8 +21,8 @@ import {FormatDate} from '@/app/utils/format-date';
    styleUrl: './comments-list.component.scss',
 })
 export class CommentsListComponent implements OnInit, OnChanges, OnDestroy {
-   @Input() newComment: Comment | undefined = undefined;
-   @Input() slug: string = '';
+   @Input({required: true}) newComment: Comment | undefined = undefined;
+   @Input({required: true}) slug: string = '';
    comments: Comment[] = [];
    commentSignal = newSignal<{comments: Comment[]}>();
    commentsWorker: CommentsWorker;

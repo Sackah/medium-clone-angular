@@ -17,7 +17,7 @@ import {FormatDate} from '@/app/utils/format-date';
    ],
 })
 export class ArticleListComponent implements OnDestroy {
-   @Input() articles: Article[] = [];
+   @Input({required: true}) articles: Article[] = [];
    articleSignal = newSignal<Article>();
    favoriteArticleWorker: FavouriteArticleWorker;
    protected readonly FormatDate = FormatDate;

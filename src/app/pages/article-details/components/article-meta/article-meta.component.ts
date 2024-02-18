@@ -23,10 +23,10 @@ import {newSignal} from '@app/utils/signal-factory';
    styleUrl: './article-meta.component.scss',
 })
 export class ArticleMetaComponent implements OnDestroy {
-   @Input() user?: User;
    @Input() lightBg: boolean = false;
-   @Input() article?: Article;
-   @Input() slug: string = '';
+   @Input({required: true}) user?: User;
+   @Input({required: true}) article?: Article;
+   @Input({required: true}) slug: string = '';
    @Output() updatedArticle = new EventEmitter<Article>();
    router = inject(Router);
    editArticleService = inject(EditArticleService);
