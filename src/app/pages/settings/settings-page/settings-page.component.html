@@ -1,17 +1,17 @@
 <div class="settings page">
-  <mc-home-nav></mc-home-nav>
+  <mc-home-nav />
   <mc-settings-form
-    (userDetails)="updateSettings($event)"
     [errors]="settingsState.errors"
     [isSubmitting]="settingsState.isSubmitting"
     [user]="user!"
-  ></mc-settings-form>
+    (userDetails)="updateSettings($event)"
+  />
   <section>
     <button (click)="handleLogout()">
       Or click here to logout
     </button>
   </section>
   <footer>
-    <mc-footer></mc-footer>
+    <mc-footer />
   </footer>
 </div>

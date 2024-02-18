@@ -1,12 +1,12 @@
 <section>
   <div class="author">
     <mc-article-meta
-      (updatedArticle)="updateArticle($event)"
       [article]="article"
       [lightBg]="true"
       [slug]="article?.slug!"
       [user]="user"
-    ></mc-article-meta>
+      (updatedArticle)="updateArticle($event)"
+    />
   </div>
   <div class="form">
     @if (user) {
@@ -14,19 +14,24 @@
         [user]="user"
         (newComment)="updateComment($event)"
         [slug]="article?.slug!"
-      ></mc-comments-form>
+      />
       @defer (on viewport) {
         <mc-comments-list
           [slug]="article?.slug!"
           [newComment]="comment"
-        ></mc-comments-list>
+        />
       }@placeholder {
         <details>Comments</details>
       }
     } @else {
       <p>
-        <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
-        article
+        <a 
+          [routerLink]="['/login']"
+        >Sign in</a> or 
+        <a 
+          [routerLink]="['/register']"
+        >sign up</a> 
+        to add comments on this article
       </p>
     }
   </div>

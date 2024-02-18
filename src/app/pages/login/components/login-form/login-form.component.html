@@ -5,17 +5,21 @@
   </header>
   <form (submit)="handleSubmit()" [formGroup]="form">
     @if (errors) {
-      <mc-backend-errors
-        [errors]="errors"
-      ></mc-backend-errors>
+      <mc-backend-errors [errors]="errors"/>
     }
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="email" placeholder="Email" type="text"/>
+    <input 
+      (keydown)="preventLeadingSpace($event)" 
+      formControlName="email" placeholder="Email" type="text"
+    />
     @if (emailErrors !== '') {
       <div class="error">{{ emailErrors }}</div>
     }
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="password" placeholder="Password" type="password"/>
+    <input
+     (keydown)="preventLeadingSpace($event)" 
+     formControlName="password" placeholder="Password" type="password"
+    />
     @if (passwordErrors !== '') {
       <div class="error">{{ passwordErrors }}</div>
     }
@@ -23,7 +27,7 @@
     @if (isSubmitting) {
       <button type="button" disabled>
         Signing In
-        <mc-button-spinner></mc-button-spinner>
+        <mc-button-spinner/>
       </button>
     } @else {
       <button type="submit">Sign In</button>

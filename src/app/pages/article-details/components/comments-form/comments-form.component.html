@@ -1,7 +1,9 @@
 <section>
   <form (submit)="handleSubmit()" [formGroup]="form">
-    <textarea (keydown)="preventLeadingSpace($event)" formControlName="body" name="body" placeholder="Write a comment..."
-              rows="8"
+    <textarea 
+      (keydown)="preventLeadingSpace($event)" 
+      formControlName="body" name="body" 
+      placeholder="Write a comment..." rows="8"
     ></textarea>
     <main>
       <div class="img">
@@ -10,7 +12,7 @@
       @if (commentSignal().pending) {
         <button type="button" disabled>
           Posting comment
-          <mc-button-spinner></mc-button-spinner>
+          <mc-button-spinner />
         </button>
       } @else {
         <button type="submit">Post comment</button>

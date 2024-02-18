@@ -6,33 +6,43 @@
     @if (errors) {
       <mc-backend-errors
         [errors]="errors"
-      ></mc-backend-errors>
+      />
     }
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="title" placeholder="Article Title" type="text">
+    <input 
+      (keydown)="preventLeadingSpace($event)" 
+      formControlName="title" placeholder="Article Title" type="text"
+    >
     @if (getRequiredErrors("title")) {
       <div class="error">{{ getRequiredErrors("title") }}</div>
     }
 
-
-    <input (keydown)="preventLeadingSpace($event)" formControlName="description" placeholder="What is this article about?"
-           type="text">
+    <input 
+      (keydown)="preventLeadingSpace($event)" 
+      formControlName="description" placeholder="What is this article about?"
+      type="text"
+    >
     @if (getRequiredErrors("description")) {
       <div class="error">{{ getRequiredErrors("description") }}</div>
     }
 
-    <textarea (keydown)="preventLeadingSpace($event)" formControlName="body" name="body" placeholder="Write your article"
-              rows="8"></textarea>
+    <textarea 
+      (keydown)="preventLeadingSpace($event)" formControlName="body" name="body" 
+      placeholder="Write your article" rows="8"
+    ></textarea>
     @if (getRequiredErrors("body")) {
       <div class="error">{{ getRequiredErrors("body") }}</div>
     }
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="tags" placeholder="Enter tags" type="text">
+    <input 
+      (keydown)="preventLeadingSpace($event)" formControlName="tags" 
+      placeholder="Enter tags" type="text"
+    >
 
     @if (isSubmitting) {
       <button type="button" disabled>
         Publishing Article
-        <mc-button-spinner></mc-button-spinner>
+        <mc-button-spinner />
       </button>
     } @else {
       <button type="submit">Publish Article</button>

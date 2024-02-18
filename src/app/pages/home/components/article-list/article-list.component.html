@@ -6,7 +6,9 @@
             <img [src]="article.author.image" alt="profile picture">
           </div>
           <div>
-            <a [routerLink]="['/profile', article.author.username]">{{ article.author.username }}</a>
+            <a 
+              [routerLink]="['/profile', article.author.username]"
+            >{{ article.author.username }}</a>
             <p>{{ FormatDate.toLocale(article.createdAt) }}</p>
           </div>
         </span>

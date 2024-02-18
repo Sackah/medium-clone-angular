@@ -1,37 +1,37 @@
 <div class="profile page">
-  <mc-home-nav></mc-home-nav>
+  <mc-home-nav />
   <mc-profile-banner
     [pending]="profileSignal().pending"
     [userProfile]="profileSignal().data?.profile!"
     [user]="user!"
-  ></mc-profile-banner>
+  />
   <main>
     <section>
       <mc-profile-feed-header
-        (feedChange)="changeFeed($event)"
         [feedName]="feedName"
         [isUser]="Boolean(user?.username === profileSignal().data?.profile?.username)"
         [profile]="profileSignal().data?.profile!"
-      ></mc-profile-feed-header>
+        (feedChange)="changeFeed($event)"
+      />
       <div class="content">
         @if (articleSignal().pending) {
           <span>
-            <mc-spinner></mc-spinner>
+            <mc-spinner />
           </span>
         } @else if (articleSignal().error) {
           <mc-error-page
             [error]="articleSignal().error!"
             (refetch)="fetchFeed()"
-          ></mc-error-page>
+          />
         } @else {
           <mc-article-list
             [articles]="articleSignal().data?.articles!"
-          ></mc-article-list>
+          />
         }
       </div>
     </section>
   </main>
   <footer>
-    <mc-footer></mc-footer>
+    <mc-footer />
   </footer>
 </div>

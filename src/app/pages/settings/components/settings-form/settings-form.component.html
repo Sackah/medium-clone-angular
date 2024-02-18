@@ -5,28 +5,39 @@
 
   <form (submit)="handleSubmit()" [formGroup]="form">
     @if (errors) {
-      <mc-backend-errors
-        [errors]="errors"
-      ></mc-backend-errors>
+      <mc-backend-errors [errors]="errors"/>
     }
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="image" title="image" type="text">
+    <input 
+      (keydown)="preventLeadingSpace($event)" formControlName="image" 
+      title="image" type="text"
+    >
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="username" placeholder="Username" type="text">
+    <input 
+      (keydown)="preventLeadingSpace($event)" formControlName="username" 
+      placeholder="Username" type="text"
+    >
     @if (userNameErrors !== '') {
       <div class="error">{{ userNameErrors }}</div>
     }
 
-    <textarea (keydown)="preventLeadingSpace($event)" formControlName="bio" name="bio" placeholder="Short bio about you"
-              rows="8"></textarea>
+    <textarea 
+      (keydown)="preventLeadingSpace($event)" formControlName="bio" name="bio"
+      placeholder="Short bio about you" rows="8"
+    ></textarea>
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="email" placeholder="Email" type="email">
+    <input 
+      (keydown)="preventLeadingSpace($event)" formControlName="email" placeholder="Email" 
+      type="email"
+    >
     @if (emailErrors !== '') {
       <div class="error">{{ emailErrors }}</div>
     }
 
-    <input (keydown)="preventLeadingSpace($event)" formControlName="password" placeholder="New Password"
-           type="password">
+    <input 
+      (keydown)="preventLeadingSpace($event)" formControlName="password" placeholder="New Password"
+      type="password"
+    >
     @if (passwordErrors !== '') {
       <div class="error">{{ passwordErrors }}</div>
     }
@@ -34,7 +45,7 @@
     @if (isSubmitting) {
       <button type="button" disabled>
         Updating Settings
-        <mc-button-spinner></mc-button-spinner>
+        <mc-button-spinner />
       </button>
     } @else {
       <button type="submit">Update Settings</button>

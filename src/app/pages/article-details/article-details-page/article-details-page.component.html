@@ -1,33 +1,33 @@
 <div class="article-details page">
   @if (user) {
-    <mc-home-nav></mc-home-nav>
+    <mc-home-nav />
   } @else {
-    <mc-login-nav></mc-login-nav>
+    <mc-login-nav />
   }
   @if (articleSig().pending) {
-    <mc-page-spinner></mc-page-spinner>
+    <mc-page-spinner />
   } @else if (articleSig().error) {
     <mc-error-page
       [error]="articleSig().error!"
       (refetch)="fetchArticle()"
-    ></mc-error-page>
+    />
   } @else {
     <mc-article-banner
       [article]="articleSig().data?.article"
       [slug]="articleSlug"
       [user]="user"
       (updatedArticle)="updateArticle($event)"
-    ></mc-article-banner>
+    />
     <mc-article-content
       [article]="articleSig().data?.article"
-    ></mc-article-content>
+    />
     <mc-article-comment
       [article]="articleSig().data?.article"
       [user]="user"
       (updatedArticle)="updateArticle($event)"
-    ></mc-article-comment>
+    />
   }
   <footer>
-    <mc-footer></mc-footer>
+    <mc-footer />
   </footer>
 </div>

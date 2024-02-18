@@ -1,12 +1,12 @@
 <div class="editor page">
-  <mc-home-nav></mc-home-nav>
+  <mc-home-nav />
   <mc-editor-form
-    (newArticle)="postArticle($event)"
     [article]="article"
     [errors]="articleState.errors"
     [isSubmitting]="articleState.isSubmitting"
-  ></mc-editor-form>
+    (newArticle)="postArticle($event)"
+  />
   <footer>
-    <mc-footer></mc-footer>
+    <mc-footer />
   </footer>
 </div>
