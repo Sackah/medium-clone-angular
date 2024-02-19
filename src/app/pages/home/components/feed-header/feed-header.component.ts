@@ -14,10 +14,6 @@ export class FeedHeaderComponent {
       'global';
    @Output() feedChange = new EventEmitter<typeof this.feedName>();
 
-   ngOnInit() {
-      this.feedChange.emit(this.feedName);
-   }
-
    handleFeedChange(name: typeof this.feedName) {
       this.feedChange.emit(name);
    }

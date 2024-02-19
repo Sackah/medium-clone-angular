@@ -5,68 +5,73 @@ import {FooterComponent} from '@shared/components/footer/footer.component';
 import {MCPage} from '@app/classes/mc-page';
 import {PaginationComponent} from '@shared/components/pagination/pagination.component';
 import {AllArticles} from '@shared/types/article.types';
-import {newSignal,} from '../../../utils/signal-factory';
+import {newSignal} from '../../../utils/signal-factory';
 import {FeedHeaderComponent} from '../components/feed-header/feed-header.component';
 import {ArticleListComponent} from '../components/article-list/article-list.component';
 import {McSpinnerComponent} from '../../../shared/components/loaders/mc-spinner.component';
 import {ErrorPageComponent} from '../../../shared/pages/error-page/error-page.component';
 import {FetchArticlesService} from '../../../shared/services/fetch-articles.service';
 import {FeedWorker} from '@/app/workers/feed.worker';
-import { FeedNames } from '@/app/shared/types/main.types';
+import {FeedNames} from '@/app/shared/types/main.types';
 
 @Component({
-  selector: 'mc-home-page',
-  standalone: true,
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
-  imports: [
-    LoginNavComponent,
-    HomeNavComponent,
-    FooterComponent,
-    PaginationComponent,
-    FeedHeaderComponent,
-    ArticleListComponent,
-    McSpinnerComponent,
-    ErrorPageComponent,
-  ],
+   selector: 'mc-home-page',
+   standalone: true,
+   templateUrl: './home-page.component.html',
+   styleUrl: './home-page.component.scss',
+   imports: [
+      LoginNavComponent,
+      HomeNavComponent,
+      FooterComponent,
+      PaginationComponent,
+      FeedHeaderComponent,
+      ArticleListComponent,
+      McSpinnerComponent,
+      ErrorPageComponent,
+   ],
 })
 export class HomePageComponent extends MCPage {
-  currentPage = 1;
-  articleLimit = 10;
-  articlesService = inject(FetchArticlesService);
-  articleSignal = newSignal<AllArticles>();
-  feedName: Extract<FeedNames, 'global' | 'feed'> = 'global';
-  feedWorker: FeedWorker;
-  protected readonly Boolean = Boolean;
+   currentPage = 1;
+   articleLimit = 10;
+   articlesService = inject(FetchArticlesService);
+   articleSignal = newSignal<AllArticles>();
+   feedName: Extract<FeedNames, 'global' | 'feed'> = 'global';
+   feedWorker: FeedWorker;
+   protected readonly Boolean = Boolean;
 
-  constructor() {
-    super();
-    this.setTitle('Home');
-    this.feedWorker = new FeedWorker(this.articleSignal);
-  }
+   constructor() {
+      super();
+      this.setTitle('Home');
+      this.feedWorker = new FeedWorker(this.articleSignal);
+   }
 
-  changePage(page: number) {
-    this.currentPage = page;
-    this.fetchFeed(this.feedName);
-  }
+   override ngOnInit() {
+      super.ngOnInit();
+      this.fetchFeed();
+   }
 
-  changeFeed(feedName: typeof this.feedName) {
-    this.feedName = feedName;
-    this.fetchFeed(feedName);
-  }
+   changePage(page: number) {
+      this.currentPage = page;
+      this.fetchFeed();
+   }
 
-  fetchFeed(feedName = this.feedName) {
-    const offsetConstant = this.currentPage * 10 - 10;
-    this.feedWorker.fetchFeed(
-      feedName,
-      undefined,
-      this.articleLimit,
-      offsetConstant
-    );
-  }
+   changeFeed(feedName: typeof this.feedName) {
+      this.feedName = feedName;
+      this.fetchFeed(feedName);
+   }
 
-  override ngOnDestroy() {
-    super.ngOnDestroy();
-    this.feedWorker.dispose();
-  }
+   fetchFeed(feedName = this.feedName) {
+      const offsetConstant = this.currentPage * 10 - 10;
+      this.feedWorker.fetchFeed(
+         feedName,
+         undefined,
+         this.articleLimit,
+         offsetConstant
+      );
+   }
+
+   override ngOnDestroy() {
+      super.ngOnDestroy();
+      this.feedWorker.dispose();
+   }
 }
