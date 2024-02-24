@@ -79,6 +79,16 @@ export class FeedWorker {
             );
             break;
          default:
+            this.subscriptions.push(
+               this.articleService.getByTag(feedName, limit, offset).subscribe({
+                  next: (articles) => {
+                     completeSignal(this.signal, articles);
+                  },
+                  error: (error) => {
+                     errorSignal(this.signal, error);
+                  },
+               })
+            );
             break;
       }
    }

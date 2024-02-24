@@ -13,6 +13,8 @@ import {ErrorPageComponent} from '../../../shared/pages/error-page/error-page.co
 import {FetchArticlesService} from '../../../shared/services/fetch-articles.service';
 import {FeedWorker} from '@/app/workers/feed.worker';
 import {FeedNames} from '@/app/shared/types/main.types';
+import {TagsListComponent} from '../components/tags-list/tags-list.component';
+import {TagsService} from '@/app/shared/services/tags.service';
 
 @Component({
    selector: 'mc-home-page',
@@ -28,16 +30,19 @@ import {FeedNames} from '@/app/shared/types/main.types';
       ArticleListComponent,
       McSpinnerComponent,
       ErrorPageComponent,
+      TagsListComponent,
    ],
 })
 export class HomePageComponent extends MCPage {
    currentPage = 1;
    articleLimit = 10;
    articlesService = inject(FetchArticlesService);
+   tagsService = inject(TagsService);
    articleSignal = newSignal<AllArticles>();
    feedName: Extract<FeedNames, 'global' | 'feed'> = 'global';
    feedWorker: FeedWorker;
    protected readonly Boolean = Boolean;
+   tagFilter = '';
 
    constructor() {
       super();
@@ -48,14 +53,20 @@ export class HomePageComponent extends MCPage {
    override ngOnInit() {
       super.ngOnInit();
       this.fetchFeed();
+      this.watchTags();
    }
 
    changePage(page: number) {
       this.currentPage = page;
-      this.fetchFeed();
+      if (this.tagFilter) {
+         this.fetchFeed(this.tagFilter as typeof this.feedName);
+      } else {
+         this.fetchFeed();
+      }
    }
 
    changeFeed(feedName: typeof this.feedName) {
+      this.tagFilter = '';
       this.feedName = feedName;
       this.fetchFeed(feedName);
    }
@@ -67,6 +78,23 @@ export class HomePageComponent extends MCPage {
          undefined,
          this.articleLimit,
          offsetConstant
+      );
+   }
+
+   watchTags() {
+      const offsetConstant = this.currentPage * 10 - 10;
+      this.subscriptions.push(
+         this.tagsService.tagFilter.subscribe((tag) => {
+            if (this.Boolean(tag)) {
+               this.tagFilter = tag;
+               this.feedWorker.fetchFeed(
+                  tag,
+                  undefined,
+                  this.articleLimit,
+                  offsetConstant
+               );
+            }
+         })
       );
    }
 

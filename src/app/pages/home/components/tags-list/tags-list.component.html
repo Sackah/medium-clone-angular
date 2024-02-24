@@ -1,0 +1,20 @@
+<summary>
+    <h2>Popular Tags</h2>
+
+    @if (tagSignal().pending) {
+        <mc-spinner />
+    } @else if (tagSignal().error) {
+        <mc-backend-errors
+            [errors]="tagSignal().error!"
+        />
+    } @else {
+        <ul>
+            @for (tag of tagSignal().data?.tags; track $index) {
+              <li 
+                (click)="changeFilter(tag)"
+                [class]="{active: (tagsService.tagFilter | async) === tag}"
+              >{{ tag }}</li>
+            }
+        </ul>
+    }
+</summary>

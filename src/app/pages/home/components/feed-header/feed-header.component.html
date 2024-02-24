@@ -8,4 +8,11 @@
        [class]="{active: feedName == 'feed'}"
     >Your feed</p>
   }
+  @if (tagFilter) {
+    <p 
+      [class]="{active: tagFilter}"
+    >
+      {{tagFilter}}
+    </p>
+  }
 </header>
