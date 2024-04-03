@@ -31,8 +31,8 @@ export class SettingsFormComponent extends MCFormComponent {
    @Output() userDetails = new EventEmitter<UpdateUserDetails>();
 
    override ngOnInit() {
-      super.ngOnInit();
       this.setupForm();
+      super.ngOnInit();
    }
 
    setupForm() {

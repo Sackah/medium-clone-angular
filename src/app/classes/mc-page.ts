@@ -7,7 +7,7 @@ import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({standalone: true, template: ''})
-export class MCPage implements OnInit, OnDestroy {
+export abstract class MCPage implements OnInit, OnDestroy {
    protected subscriptions: Subscription[] = [];
    protected store = inject(Store);
    protected currentUserService = inject(CurrentUserService);

@@ -1,5 +1,11 @@
-@import "main";
+@import 'main';
 
 footer {
-  @include footer;
+   @include footer;
+   @include xlg {
+      margin-top: 200px;
+   }
+   @include breakpoint-min(map-get($breakpoints, 'xlg')) {
+      margin-top: 280px;
+   }
 }

@@ -33,47 +33,38 @@ export class EditorFormComponent extends MCFormComponent {
    @Output() newArticle = new EventEmitter<NewArticleDetails>();
 
    override ngOnInit() {
-      super.ngOnInit();
       this.setupForm();
+      super.ngOnInit();
    }
 
    setupForm() {
-      if (!this.article) {
-         this.form = new FormGroup({
-            title: new FormControl('', [Validators.required]),
-            description: new FormControl('', [Validators.required]),
-            body: new FormControl('', [Validators.required]),
-            tags: new FormControl(''),
-         });
-      } else {
-         this.form = new FormGroup({
-            title: new FormControl(
-               {
-                  value: this.article.title,
-                  disabled: false,
-               },
-               [Validators.required]
-            ),
-            description: new FormControl(
-               {
-                  value: this.article.description,
-                  disabled: false,
-               },
-               [Validators.required]
-            ),
-            body: new FormControl(
-               {
-                  value: this.article.body,
-                  disabled: false,
-               },
-               [Validators.required]
-            ),
-            tags: new FormControl({
-               value: this.article.tagList.join(', '),
+      this.form = new FormGroup({
+         title: new FormControl(
+            {
+               value: this.article?.title || '',
                disabled: false,
-            }),
-         });
-      }
+            },
+            [Validators.required]
+         ),
+         description: new FormControl(
+            {
+               value: this.article?.description || '',
+               disabled: false,
+            },
+            [Validators.required]
+         ),
+         body: new FormControl(
+            {
+               value: this.article?.body || '',
+               disabled: false,
+            },
+            [Validators.required]
+         ),
+         tags: new FormControl({
+            value: this.article ? this.article.tagList.join(', ') : '',
+            disabled: false,
+         }),
+      });
    }
 
    handleSubmit() {

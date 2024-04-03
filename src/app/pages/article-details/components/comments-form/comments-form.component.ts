@@ -39,10 +39,6 @@ export class CommentsFormComponent extends MCFormComponent {
    constructor() {
       super();
       this.commentWorker = new CommentsWorker(this.commentSignal);
-   }
-
-   override ngOnInit() {
-      super.ngOnInit();
       this.setupForm();
    }
 

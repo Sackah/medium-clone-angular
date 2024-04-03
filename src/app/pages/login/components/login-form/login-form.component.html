@@ -12,17 +12,13 @@
       (keydown)="preventLeadingSpace($event)" 
       formControlName="email" placeholder="Email" type="text"
     />
-    @if (emailErrors !== '') {
-      <div class="error">{{ emailErrors }}</div>
-    }
+    <div class="error">{{formValidator.errors('email')}}</div>
 
     <input
      (keydown)="preventLeadingSpace($event)" 
      formControlName="password" placeholder="Password" type="password"
     />
-    @if (passwordErrors !== '') {
-      <div class="error">{{ passwordErrors }}</div>
-    }
+    <div class="error">{{formValidator.errors('password')}}</div>
 
     @if (isSubmitting) {
       <button type="button" disabled>

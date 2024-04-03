@@ -13,26 +13,20 @@
       (keydown)="preventLeadingSpace($event)" 
       formControlName="title" placeholder="Article Title" type="text"
     >
-    @if (getRequiredErrors("title")) {
-      <div class="error">{{ getRequiredErrors("title") }}</div>
-    }
+    <div class="error">{{formValidator.errors('title')}}</div>
 
     <input 
       (keydown)="preventLeadingSpace($event)" 
       formControlName="description" placeholder="What is this article about?"
       type="text"
     >
-    @if (getRequiredErrors("description")) {
-      <div class="error">{{ getRequiredErrors("description") }}</div>
-    }
+    <div class="error">{{ formValidator.errors('description') }}</div>
 
     <textarea 
       (keydown)="preventLeadingSpace($event)" formControlName="body" name="body" 
       placeholder="Write your article" rows="8"
     ></textarea>
-    @if (getRequiredErrors("body")) {
-      <div class="error">{{ getRequiredErrors("body") }}</div>
-    }
+    <div class="error">{{formValidator.errors('body')}}</div>
 
     <input 
       (keydown)="preventLeadingSpace($event)" formControlName="tags" 
