@@ -11,6 +11,7 @@ import {
 import {BackendErrors} from '@shared/types/auth.types';
 import {NewArticleDetails} from '@shared/types/editor.types';
 import {Article} from '@shared/types/main.types';
+import {PreventLeadingSpace} from '@/app/directives/prevent-leading-space.directive';
 
 @Component({
    selector: 'mc-editor-form',
@@ -19,6 +20,7 @@ import {Article} from '@shared/types/main.types';
       BackendErrorsComponent,
       ButtonSpinnerComponent,
       ReactiveFormsModule,
+      PreventLeadingSpace,
    ],
    templateUrl: './editor-form.component.html',
    styleUrls: [

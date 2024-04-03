@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import {BackendErrorsComponent} from '@shared/components/backend-errors/backend-errors.component';
 import {ButtonSpinnerComponent} from '@shared/components/loaders/button-spinner.component';
+import {PreventLeadingSpace} from '@app/directives/prevent-leading-space.directive';
 
 @Component({
    selector: 'mc-signup-form',
@@ -19,6 +20,7 @@ import {ButtonSpinnerComponent} from '@shared/components/loaders/button-spinner.
       ReactiveFormsModule,
       BackendErrorsComponent,
       ButtonSpinnerComponent,
+      PreventLeadingSpace,
    ],
    templateUrl: './signup-form.component.html',
    styleUrls: ['../../../../shared/styles/forms.styles.scss'],

@@ -13,6 +13,7 @@ import {Comment} from '@shared/types/main.types';
 import {newSignal} from '@app/utils/signal-factory';
 import {CommentsWorker} from '@app/workers/comments.worker';
 import {ButtonSpinnerComponent} from '@shared/components/loaders/button-spinner.component';
+import { PreventLeadingSpace } from '@/app/directives/prevent-leading-space.directive';
 
 @Component({
    selector: 'mc-comments-form',
@@ -22,6 +23,7 @@ import {ButtonSpinnerComponent} from '@shared/components/loaders/button-spinner.
       ReactiveFormsModule,
       RouterLink,
       ButtonSpinnerComponent,
+      PreventLeadingSpace
    ],
    templateUrl: './comments-form.component.html',
    styleUrls: [

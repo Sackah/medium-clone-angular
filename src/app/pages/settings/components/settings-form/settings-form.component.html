@@ -9,29 +9,34 @@
     }
 
     <input 
-      (keydown)="preventLeadingSpace($event)" formControlName="image" 
+      preventLeadingSpace
+      formControlName="image" 
       title="image" type="text"
     >
 
     <input 
-      (keydown)="preventLeadingSpace($event)" formControlName="username" 
+      preventLeadingSpace
+      formControlName="username" 
       placeholder="Username" type="text"
     >
     <div class="error">{{formValidator.errors('username')}}</div>
 
     <textarea 
-      (keydown)="preventLeadingSpace($event)" formControlName="bio" name="bio"
+      preventLeadingSpace
+      formControlName="bio" name="bio"
       placeholder="Short bio about you" rows="8"
     ></textarea>
 
     <input 
-      (keydown)="preventLeadingSpace($event)" formControlName="email" placeholder="Email" 
+      preventLeadingSpace
+      formControlName="email" placeholder="Email" 
       type="email"
     >
     <div class="error">{{formValidator.errors('email')}}</div>
 
     <input 
-      (keydown)="preventLeadingSpace($event)" formControlName="password" placeholder="New Password"
+      preventLeadingSpace
+      formControlName="password" placeholder="New Password"
       type="password"
     >
     <div class="error">{{formValidator.errors('password')}}</div>

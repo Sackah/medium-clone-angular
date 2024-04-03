@@ -11,6 +11,7 @@ import {CommonModule} from '@angular/common';
 import {BackendErrors, LoginUserDetails} from '@shared/types/auth.types';
 import {BackendErrorsComponent} from '../../../../shared/components/backend-errors/backend-errors.component';
 import {RouterLink} from '@angular/router';
+import {PreventLeadingSpace} from '@/app/directives/prevent-leading-space.directive';
 
 @Component({
    selector: 'mc-login-form',
@@ -21,6 +22,7 @@ import {RouterLink} from '@angular/router';
       CommonModule,
       BackendErrorsComponent,
       RouterLink,
+      PreventLeadingSpace,
    ],
    templateUrl: './login-form.component.html',
    styleUrls: ['../../../../shared/styles/forms.styles.scss'],

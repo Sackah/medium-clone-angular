@@ -1,7 +1,7 @@
 <section class="form">
   <form (submit)="handleSubmit()" [formGroup]="form">
     <textarea 
-      (keydown)="preventLeadingSpace($event)" 
+      preventLeadingSpace
       formControlName="body" name="body" 
       placeholder="Write a comment..." rows="8"
     ></textarea>

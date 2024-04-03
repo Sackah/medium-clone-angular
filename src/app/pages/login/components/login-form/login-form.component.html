@@ -9,14 +9,14 @@
     }
 
     <input 
-      (keydown)="preventLeadingSpace($event)" 
+      preventLeadingSpace 
       formControlName="email" placeholder="Email" type="text"
     />
     <div class="error">{{formValidator.errors('email')}}</div>
 
     <input
-     (keydown)="preventLeadingSpace($event)" 
-     formControlName="password" placeholder="Password" type="password"
+      preventLeadingSpace 
+      formControlName="password" placeholder="Password" type="password"
     />
     <div class="error">{{formValidator.errors('password')}}</div>
 
